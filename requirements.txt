@@ -1,0 +1,7 @@
+flask==2.3.3
+flask-cors==4.0.0
+python-dotenv==1.0.0
+langchain==0.0.240
+langchain-openai==0.0.2
+openai==1.0.0
+uuid==1.30
