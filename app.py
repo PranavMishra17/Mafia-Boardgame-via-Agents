@@ -552,8 +552,14 @@ class Game:
         self.discussion_log = []
         return self.get_state()
         
+    # Replace the simulate_discussion method in the Game class
     def simulate_discussion(self, num_rounds=3):
+        logger.info(f"Starting discussion simulation for game {self.id} with {num_rounds} rounds")
         living_players = [p for p in self.players if p.alive]
+        logger.info(f"Living players: {[p.name for p in living_players]}")
+        
+        # Clear previous discussion log
+        self.discussion_log = []
         
         for round_num in range(num_rounds):
             topic = f"What do you all think happened last night? Who seems suspicious to you?"
@@ -562,17 +568,26 @@ class Game:
             elif round_num == 2:
                 topic = "We need to decide who to vote out. Make your final case."
                 
+            logger.info(f"Discussion round {round_num+1}, topic: {topic}")
             self.discussion_log.append(f"--- Discussion Round {round_num+1} ---")
             
             # Each player responds to the topic
             for player in living_players:
                 # Get previous messages to include as context
                 previous_messages = "\n".join(self.discussion_log[-min(5, len(self.discussion_log)):])
-                response = player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", self.get_state())
-                self.discussion_log.append(f"{player.name}: {response}")
+                logger.info(f"Getting response from {player.name} ({player.role})")
                 
-        return self.discussion_log
+                try:
+                    response = player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", self.get_state())
+                    logger.info(f"Response from {player.name}: {response[:50]}...")
+                    self.discussion_log.append(f"{player.name}: {response}")
+                except Exception as e:
+                    logger.error(f"Error getting response from {player.name}: {str(e)}")
+                    self.discussion_log.append(f"{player.name}: I'm thinking about what to say...")
         
+        logger.info(f"Discussion complete, {len(self.discussion_log)} total lines")
+        return self.discussion_log
+
     def process_voting(self):
         self.phase = "voting"
         living_players = [p for p in self.players if p.alive]
@@ -756,48 +771,32 @@ def start_discussion(game_id):
 @app.route('/api/simulate_discussion/<game_id>', methods=['POST'])
 def simulate_discussion(game_id):
     if game_id not in games:
+        logger.error(f"Game {game_id} not found")
         return jsonify({"error": "Game not found"}), 404
         
     game = games[game_id]
     
-    # Clear existing discussion log
-    game.discussion_log = []
-    
-    # Add initial headers for rounds
-    living_players = [p for p in game.players if p.alive]
-    
-    # Start discussion and return immediately - processing will happen async
-    @copy_current_request_context
-    def run_discussion():
-        num_rounds = 3
-        for round_num in range(num_rounds):
-            topic = f"What do you all think happened last night? Who seems suspicious to you?"
-            if round_num == 1:
-                topic = "Let's discuss our suspicions more. Anyone acting strangely?"
-            elif round_num == 2:
-                topic = "We need to decide who to vote out. Make your final case."
-                
-            # Add round header
-            game.discussion_log.append(f"--- Discussion Round {round_num+1} ---")
-            
-            # Each player responds to the topic
-            for player in living_players:
-                # Get previous messages to include as context
-                previous_messages = "\n".join(game.discussion_log[-min(5, len(game.discussion_log)):])
-                response = player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", game.get_state())
-                game.discussion_log.append(f"{player.name}: {response}")
-    
-    # Start discussion in a background thread
-    thread = threading.Thread(target=run_discussion)
-    thread.daemon = True
-    thread.start()
-    
-    return jsonify({
-        "message": "Discussion started",
-        "status": "in_progress"
-    })
+    # Run discussion simulation
+    try:
+        logger.info(f"Starting discussion simulation for game {game_id}")
+        discussion = game.simulate_discussion()
+        logger.info(f"Discussion simulation complete, {len(discussion)} messages")
+        
+        # Return full discussion log
+        return jsonify({
+            "message": "Discussion simulated successfully",
+            "discussion": discussion,
+            "discussion_count": len(discussion)
+        })
+    except Exception as e:
+        logger.error(f"Error simulating discussion: {str(e)}")
+        return jsonify({
+            "error": f"Failed to simulate discussion: {str(e)}",
+            "discussion": []
+        }), 500
 
 # Add an endpoint to get the current discussion state
+# Replace the discussion_status endpoint in app.py with this:
 @app.route('/api/discussion_status/<game_id>', methods=['GET'])
 def discussion_status(game_id):
     if game_id not in games:
@@ -808,9 +807,19 @@ def discussion_status(game_id):
     # Get the current discussion log
     discussion = game.discussion_log
     
+    # Check if it's empty and we're in discussion phase
+    if not discussion and game.phase == "discussion":
+        # If we're in discussion phase but no log yet, it's still in progress
+        in_progress = True
+    else:
+        # If we have discussion log or not in discussion phase, it's not in progress
+        in_progress = game.phase == "discussion" and len(discussion) < 15  # Assuming a complete discussion has at least 15 lines
+    
+    logger.info(f"Discussion status for game {game_id}: {len(discussion)} messages, in_progress={in_progress}")
+    
     return jsonify({
         "discussion": discussion,
-        "in_progress": False
+        "in_progress": in_progress
     })
 
 @app.route('/api/process_voting/<game_id>', methods=['POST'])

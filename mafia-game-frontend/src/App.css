@@ -97,19 +97,6 @@ body {
   gap: 0.75rem;
 }
 
-/* Buttons */
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-  border: 1px solid transparent;
-}
-
 .button.primary {
   background-color: var(--primary);
   color: white;
@@ -240,17 +227,9 @@ body {
   font-size: 0.875rem;
 }
 
-/* Game Setup */
 .setup-card {
   max-width: 1000px;
   margin: 0 auto;
-}
-
-.setup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1.5rem;
 }
 
 .selection-count {
@@ -269,21 +248,6 @@ body {
   gap: 1rem;
 }
 
-.personality-card {
-  width: 18rem;
-  height: 20rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.personality-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.personality-card.selected {
-  border: 4px solid #3b82f6 !important;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
-}
 
 .attributes {
   display: flex;
@@ -359,29 +323,11 @@ body {
   font-weight: 500;
 }
 
-.game-dashboard {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.player-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-}
 
 .player-row:last-child {
   border-bottom: none;
 }
 
-.player-info {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
 
 .player-role {
   font-size: 0.75rem;
@@ -468,10 +414,6 @@ body {
   max-width: 80%;
 }
 
-.player-name {
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-}
 
 .night-action {
   display: flex;
@@ -884,11 +826,6 @@ body {
   font-weight: 500;
 }
 
-.player-dead {
-  background-color: #f1f5f9;
-  color: var(--text-muted);
-  text-decoration: line-through;
-}
 
 .vote-arrow {
   margin-left: 0.75rem;
@@ -965,4 +902,429 @@ body {
 
 .player-row.newly-dead {
   animation: fadeToGray 2s forwards;
+}
+
+
+.voting-columns {
+  display: flex;
+  text-align: center;
+}
+
+.vote-count-column, .voters-column, .votes-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-header {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.vote-row {
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.no-vote {
+  color: var(--text-muted);
+}
+
+.player-dead {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+.game-dashboard {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.game-panels {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.panel-card {
+  flex: 1;
+  min-width: 0;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-content {
+  overflow-y: auto;
+  flex: 1;
+  padding: 1rem;
+}
+
+.voting-table {
+  width: 100%;
+}
+
+.voting-header, .voting-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.voting-header {
+  font-weight: bold;
+}
+
+.vote-col, .player-col, .voted-for-col {
+  padding: 0.25rem;
+}
+
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+.loading-container {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 90%;
+  width: 18rem;
+}
+
+.loading-spinner-large {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.loading-message {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--text);
+  margin: 0;
+}
+
+.button {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s, transform 0.2s, box-shadow 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+.button.loading {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.button.loading:after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  right: 0.75rem;
+  top: calc(50% - 0.5rem);
+}
+
+.personality-card {
+  position: relative;
+  width: 18rem;
+  height: 24rem; /* Increased height for image */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.personality-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.personality-card.selected {
+  border: none;
+  box-shadow: 0 0 0 4px var(--primary), 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.personality-card.selected:before {
+  content: "✓";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--primary);
+  color: white;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.personality-image {
+  height: 8rem;
+  width: 8rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 1rem auto;
+  display: block;
+  border: 4px solid var(--border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.personality-card .card-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.5rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border-top: 1px solid var(--border);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+
+.personality-card:hover .card-footer {
+  transform: translateY(0);
+}
+
+.personality-card .card-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.personality-attribute {
+  margin-bottom: 0.6rem;
+  padding: 0 0.5rem;
+}
+
+.personality-card:hover .customize-button {
+  opacity: 1;
+}
+
+.selected-personalities {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  flex-wrap: wrap;
+  max-width: 400px;
+}
+
+.selected-personality-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.selected-personality-avatar:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--primary-hover);
+}
+
+/* Setup header with selection count and avatars */
+.setup-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.selection-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.attribute-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  opacity: 0.7;
+}
+
+.attribute-bar {
+  flex: 1;
+  height: 0.5rem;
+  background-color: var(--border);
+  border-radius: 1rem;
+  overflow: hidden;
+  margin-left: 0.5rem;
+}
+
+.attribute-fill {
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 1rem;
+  transition: width 0.3s ease;
+}
+
+
+.button-with-loading {
+  position: relative;
+}
+
+.button-with-loading:after {
+  content: "";
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+  right: 0.75rem;
+  top: calc(50% - 0.5rem);
+}
+
+.tooltip-loading {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  z-index: 50;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tooltip-loading:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
+.tooltip-spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s linear infinite;
+}
+
+/* Add to App.css */
+.personality-image-placeholder {
+  height: 8rem;
+  width: 8rem;
+  border-radius: 50%;
+  margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary);
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  border: 4px solid var(--border);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.personality-initial {
+  line-height: 1;
+}
+
+/* Update card styles for new layout */
+.personality-card {
+  width: 300px;
+  height: auto;
+  min-height: 400px;
+  padding-top: 1.5rem;
+  position: relative;
+}
+
+.customize-button {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(59, 130, 246, 0.9);
+  color: white;
+  border-radius: 0.25rem;
+  border: none;
+  cursor: pointer;
+}
+
+.personality-card .card-header {
+  width: 100%;
+  padding: 0.75rem 1rem;
+}
+
+.personality-card .card-content {
+  width: 100%;
+  padding: 0 1rem 1rem;
+}
+
+.image-debug-info {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  max-width: 200px;
+  word-break: break-all;
+  display: none;
+}
+
+.personality-card:hover .image-debug-info {
+  display: block;
 }

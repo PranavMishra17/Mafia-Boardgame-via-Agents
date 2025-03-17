@@ -5,6 +5,41 @@ import './App.css';
 // Should match your Flask server
 const API_URL = 'http://localhost:5000/api';
 
+// Global loading context
+const LoadingContext = React.createContext();
+
+const LoadingProvider = ({ children }) => {
+  const [loading, setLoading] = useState({ show: false, message: "Loading..." });
+  
+  return (
+    <LoadingContext.Provider value={{ loading, setLoading }}>
+      {children}
+      {loading.show && <LoadingOverlay message={loading.message} />}
+    </LoadingContext.Provider>
+  );
+};
+
+// Hook to use the loading context
+const useLoading = () => {
+  const context = React.useContext(LoadingContext);
+  if (!context) {
+    throw new Error('useLoading must be used within a LoadingProvider');
+  }
+  return context;
+};
+
+// Loading overlay component
+const LoadingOverlay = ({ message = "Loading..." }) => {
+  return (
+    <div className="loading-overlay">
+      <div className="loading-container">
+        <div className="loading-spinner-large"></div>
+        <p className="loading-message">{message}</p>
+      </div>
+    </div>
+  );
+};
+
 // Simplified UI components
 const Card = ({ children, className }) => (
   <div className={`card ${className || ''}`}>{children}</div>
@@ -16,15 +51,44 @@ const CardDescription = ({ children }) => <p className="card-description">{child
 const CardContent = ({ children }) => <div className="card-content">{children}</div>;
 const CardFooter = ({ children }) => <div className="card-footer">{children}</div>;
 
-const Button = ({ children, onClick, variant, size, disabled }) => (
-  <button 
-    className={`button ${variant || 'primary'} ${size || 'md'}`} 
-    onClick={onClick}
-    disabled={disabled}
-  >
-    {children}
-  </button>
-);
+
+
+// Replace the Button component with this enhanced version
+const Button = ({ children, onClick, variant, size, disabled, isLoading, loadingText }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+  
+  const handleClick = async (e) => {
+    if (isLoading || disabled) return;
+    
+    // Show loading state
+    setShowTooltip(true);
+    
+    try {
+      await onClick(e);
+    } finally {
+      // Hide loading state
+      setShowTooltip(false);
+    }
+  };
+  
+  return (
+    <div className="button-container" style={{ position: 'relative' }}>
+      {showTooltip && loadingText && (
+        <div className="tooltip-loading">
+          <div className="tooltip-spinner"></div>
+          <span>{loadingText}</span>
+        </div>
+      )}
+      <button 
+        className={`button ${variant || 'primary'} ${size || 'md'} ${isLoading ? 'button-with-loading' : ''}`} 
+        onClick={handleClick}
+        disabled={disabled || isLoading}
+      >
+        {children}
+      </button>
+    </div>
+  );
+};
 
 const Progress = ({ value, className }) => (
   <div className={`progress-container ${className || ''}`}>
@@ -85,9 +149,6 @@ const Icon = ({ name }) => {
   return <span className="icon">{icons[name] || "📌"}</span>;
 };
 
-
-
-
 // API functions
 const fetchPersonalities = async () => {
   try {
@@ -117,8 +178,6 @@ const createGame = async (personalities) => {
 };
 
 const startGame = async (gameId) => {
-
-  
   try {
     const response = await fetch(`${API_URL}/start_game/${gameId}`, {
       method: 'POST',
@@ -128,8 +187,6 @@ const startGame = async (gameId) => {
     console.error('Error starting game:', error);
     return { error: 'Failed to start game' };
   }
-
-  
 };
 
 const processNight = async (gameId) => {
@@ -155,6 +212,8 @@ const resolveNight = async (gameId) => {
     return { error: 'Failed to resolve night' };
   }
 };
+
+
 
 const startDiscussion = async (gameId) => {
   try {
@@ -215,42 +274,90 @@ const resetGame = async (gameId) => {
   }
 };
 
-
-// Replace your PersonalityCard with this
+// Enhanced Personality Card
 const PersonalityCard = ({ personality, details, selected, onSelect, onCustomize }) => {
+  // Image mapping for personalities
+  const personalityImages = {
+    Diplomat: "/static/personalities/diplomat.png",
+    Sheriff: "/static/personalities/sheriff.png",
+    Conspirator: "/static/personalities/conspirator.jpg",
+    Jester: "/static/personalities/jester.jpg",
+    Mastermind: "/static/personalities/mastermind.jpg",
+    Empath: "/static/personalities/empath.png",
+    Wildcard: "/static/personalities/wildcard.jpg",
+    Veteran: "/static/personalities/veteran.png",
+    Innocent: "/static/personalities/innocent.jpg",
+    Manipulator: "/static/personalities/manipulator.jpg"
+  };
+
+  // Debug: log image path
+  const imagePath = personalityImages[personality] || "/static/personalities/default.jpg";
+  
+  // Add image error handling
+  const [imageError, setImageError] = useState(false);
+  
+  const handleImageError = () => {
+    console.error(`Failed to load image for ${personality}: ${imagePath}`);
+    setImageError(true);
+  };
+  
+  // Icon mapping for attributes
+  const attributeIcons = {
+    truthfulness: "✓",
+    aggressiveness: "⚔️",
+    suspicion: "🔍",
+    persuasiveness: "💬",
+    loyalty: "🤝",
+  };
+  
   const handleCardClick = () => {
-    //alert(`Card clicked: ${personality}`);
     onSelect();
   };
   
   return (
     <div 
-      className={`card personality-card ${selected ? 'selected' : ''}`} 
+      className={`personality-card ${selected ? 'selected' : ''}`} 
       onClick={handleCardClick}
     >
+      {/* Customize button in top-left corner */}
+      <button 
+        className="customize-button" 
+        onClick={(e) => { e.stopPropagation(); onCustomize(personality); }}
+      >
+        Customize
+      </button>
+      
+      {/* Show fallback if image fails or use proper image */}
+      {imageError ? (
+        <div className="personality-image-placeholder">
+          <span className="personality-initial">{personality[0]}</span>
+        </div>
+      ) : (
+        <img 
+          src={imagePath}
+          alt={personality}
+          className="personality-image"
+          onError={handleImageError}
+        />
+      )}
+      
       <div className="card-header">
         <h3 className="card-title">{personality}</h3>
         <p className="card-description">{details.description}</p>
       </div>
+      
       <div className="card-content">
         <div className="attributes">
           {Object.entries(details.attributes).map(([attr, value]) => (
-            <div key={attr} className="attribute-row">
+            <div key={attr} className="personality-attribute">
+              <span className="attribute-icon">{attributeIcons[attr] || "•"}</span>
               <span className="attribute-name">{attr}</span>
-              <div className="attribute-value">
-                <Progress value={value * 100} />
+              <div className="attribute-bar">
+                <div className="attribute-fill" style={{ width: `${value * 100}%` }}></div>
               </div>
             </div>
           ))}
         </div>
-      </div>
-      <div className="card-footer">
-        <button 
-          className="button outline sm" 
-          onClick={(e) => { e.stopPropagation(); onCustomize(personality); }}
-        >
-          Customize
-        </button>
       </div>
     </div>
   );
@@ -403,6 +510,19 @@ const GameSetup = ({ onStartGame }) => {
   const [customPersonality, setCustomPersonality] = useState({ name: '', attributes: {} });
   const [showCustomForm, setShowCustomForm] = useState(false);
   
+  const personalityImages = {
+    Diplomat: "/static/personalities/diplomat.png",
+    Sheriff: "/static/personalities/sheriff.png",
+    Conspirator: "/static/personalities/conspirator.jpg",
+    Jester: "/static/personalities/jester.jpg",
+    Mastermind: "/static/personalities/mastermind.jpg",
+    Empath: "/static/personalities/empath.png",
+    Wildcard: "/static/personalities/wildcard.jpg",
+    Veteran: "/static/personalities/veteran.png",
+    Innocent: "/static/personalities/innocent.jpg",
+    Manipulator: "/static/personalities/manipulator.jpg"
+  };
+
   useEffect(() => {
     const loadPersonalities = async () => {
       const data = await fetchPersonalities();
@@ -412,8 +532,58 @@ const GameSetup = ({ onStartGame }) => {
     loadPersonalities();
   }, []);
 
+  useEffect(() => {
+    // Debug image paths
+    const checkImagePaths = async () => {
+      if (Object.keys(personalities).length === 0) return;
+      
+      console.group('Debugging personality images:');
+      
+      // Check for "/static" folder existence
+      try {
+        const staticResponse = await fetch('/static');
+        console.log('Static folder response:', staticResponse.status, staticResponse.ok);
+      } catch (error) {
+        console.error('Error checking static folder:', error);
+      }
+      
+      // Try to fetch each image
+      const personalityNames = Object.keys(personalities);
+      for (const name of personalityNames) {
+        const imagePath = `/static/personalities/${name.toLowerCase()}.jpg`;
+        const pngPath = `/static/personalities/${name.toLowerCase()}.png`;
+        
+        console.log(`Checking ${name} image...`);
+        
+        try {
+          const jpgResponse = await fetch(imagePath);
+          console.log(`${name} JPG:`, jpgResponse.status, jpgResponse.ok);
+        } catch (error) {
+          console.error(`Error fetching ${name} JPG:`, error);
+        }
+        
+        try {
+          const pngResponse = await fetch(pngPath);
+          console.log(`${name} PNG:`, pngResponse.status, pngResponse.ok);
+        } catch (error) {
+          console.error(`Error fetching ${name} PNG:`, error);
+        }
+      }
+      
+      // Check default image
+      try {
+        const defaultResponse = await fetch('/static/personalities/default.jpg');
+        console.log('Default image:', defaultResponse.status, defaultResponse.ok);
+      } catch (error) {
+        console.error('Error fetching default image:', error);
+      }
+      
+      console.groupEnd();
+    };
+    
+    checkImagePaths();
+  }, [personalities]);
 
-  
   const handleSelectPersonality = (personality) => {
     console.log('Clicked personality:', personality);
     console.log('Current selected:', selectedPersonalities);
@@ -432,6 +602,8 @@ const GameSetup = ({ onStartGame }) => {
       });
     }
   };
+  
+
   
   const handleCustomizePersonality = (personality) => {
     setCustomizing(personality);
@@ -463,6 +635,18 @@ const GameSetup = ({ onStartGame }) => {
     setCustomPersonality({ name: '', attributes: {} });
     setShowCustomForm(false);
   };
+
+    // Remove a personality by clicking on its avatar
+    const handleRemovePersonality = (personality, e) => {
+      e.stopPropagation(); // Prevent other handlers from firing
+      setSelectedPersonalities(prev => prev.filter(p => p !== personality));
+    };
+  
+  const handleStartGameClick = async (personalities) => {
+
+      await onStartGame(personalities);
+    
+  };
   
   return (
     <div className="container">
@@ -473,12 +657,34 @@ const GameSetup = ({ onStartGame }) => {
         </CardHeader>
         <CardContent>
           <div className="setup-header">
-            <div className="selection-count">
-              Selected: {selectedPersonalities.length}/6
+            <div className="selection-info">
+              <div className="selection-count">
+                Selected: {selectedPersonalities.length}/6
+              </div>
+              
+              {/* Selected personalities avatars */}
+              <div className="selected-personalities">
+                {selectedPersonalities.map(personality => (
+                  <img 
+                    key={personality}
+                    src={personalityImages[personality] || "/static/personalities/default.jpg"}
+                    alt={personality}
+                    title={`Remove ${personality}`}
+                    className="selected-personality-avatar"
+                    onClick={(e) => handleRemovePersonality(personality, e)}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/static/personalities/default.jpg";
+                    }}
+                  />
+                ))}
+              </div>
             </div>
+            
             <Button 
               disabled={selectedPersonalities.length !== 6} 
-              onClick={() => onStartGame(selectedPersonalities)}
+              onClick={() => handleStartGameClick(selectedPersonalities)}
+              loadingText="Starting game..."
             >
               Start Game
             </Button>
@@ -559,7 +765,9 @@ const GameSetup = ({ onStartGame }) => {
   );
 };
 
-const GamePlay = ({ gameId }) => {
+
+const GamePlay = ({ gameId }) => 
+{
   const [gameState, setGameState] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -567,23 +775,87 @@ const GamePlay = ({ gameId }) => {
   const [nightTarget, setNightTarget] = useState(null);
   const [discussion, setDiscussion] = useState([]);
   const [animation, setAnimation] = useState(null);
-
-  // Add this state variable to the GamePlay component
   const [showRoles, setShowRoles] = useState(true);
-
-  // Add animation stage state to GamePlay component
   const [animationStage, setAnimationStage] = useState('start');
-
-  // Add to GamePlay component to display voting results
   const [voteResults, setVoteResults] = useState({});
-
   const [discussionInProgress, setDiscussionInProgress] = useState(false);
+  const [deadPlayers, setDeadPlayers] = useState([]);
+  const [newlyDead, setNewlyDead] = useState([]);
+  
+  const [debug, setDebug] = useState({
+    apiKeyStatus: "Not checked",
+    agentStatus: {},
+    initialized: false
+  });
 
-  // Add state to track newly dead players
-const [deadPlayers, setDeadPlayers] = useState([]);
-const [newlyDead, setNewlyDead] = useState([]);
+  // Refs
+  const eventsContainerRef = useRef(null);
+  const chatContainerRef = useRef(null);
+  const discussionPollRef = useRef(null);
+  
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  }, [discussion]);
 
-// Update in useEffect after loading game state
+  useEffect(() => {
+    if (eventsContainerRef.current) {
+      eventsContainerRef.current.scrollTop = eventsContainerRef.current.scrollHeight;
+    }
+  }, [gameState?.events]);
+  
+  // Update GamePlay component's loadGameState function
+  const loadGameState = async () => {
+    setLoading(true);
+    try {
+      const state = await getGameState(gameId);
+      setGameState(state);
+      
+      // Debug agent initialization if not done yet
+      if (!debug.initialized) {
+        // Check API keys
+        try {
+          const response = await fetch(`${API_URL}/debug_api_keys`);
+          const keyStatus = await response.json();
+          setDebug(prev => ({
+            ...prev,
+            apiKeyStatus: keyStatus.status === "ok" ? "Valid" : "Invalid or missing",
+            initialized: true
+          }));
+        } catch (err) {
+          setDebug(prev => ({
+            ...prev,
+            apiKeyStatus: "Error checking API keys",
+            initialized: true
+          }));
+        }
+        
+        // Log agent status
+        if (state.players) {
+          const agentStatuses = {};
+          state.players.forEach(player => {
+            agentStatuses[player.name] = {
+              personality: player.personality,
+              role: player.role || "Unknown",
+              status: "Initialized"
+            };
+          });
+          setDebug(prev => ({
+            ...prev,
+            agentStatus: agentStatuses
+          }));
+        }
+      }
+    } catch (err) {
+      setError('Failed to load game state');
+      console.error(err);
+    }
+    setLoading(false);
+  };
+  
+  // Track newly dead players
+// Update with proper dependency array
 useEffect(() => {
   if (gameState && gameState.players) {
     const currentDead = gameState.players.filter(p => !p.alive).map(p => p.name);
@@ -601,266 +873,200 @@ useEffect(() => {
     
     setDeadPlayers(currentDead);
   }
-}, [gameState]);
+}, [gameState]); // Only depend on gameState, not deadPlayers
 
-  // 1. First, check what's in your API response with this browser console log
+// Also check the initial game state load useEffect:
 useEffect(() => {
-  const fetchGameState = async () => {
-    try {
-      const response = await fetch(`${API_URL}/game_state/${gameId}`);
-      const data = await response.json();
-      console.log("Raw API Response:", data);
-      console.log("Player data includes roles:", data.players.some(p => p.role));
-      // Rest of your code
-    } catch (error) {
-      console.error("Error fetching game state:", error);
-    }
-  };
-
-  fetchGameState();
+  loadGameState();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 }, [gameId]);
-
-  // Add debug state
-const [debug, setDebug] = useState({
-  apiKeyStatus: "Not checked",
-  agentStatus: {},
-  initialized: false
-});
-
-// Add this reference and effect for auto-scrolling events
-const eventsContainerRef = useRef(null);
   
-  const chatContainerRef = useRef(null);
-  
+  // Clean up polling on unmount
   useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-    }
-  }, [discussion]);
-
-
-useEffect(() => {
-  if (eventsContainerRef.current) {
-    eventsContainerRef.current.scrollTop = eventsContainerRef.current.scrollHeight;
-  }
-}, [gameState?.events]);
+    return () => {
+      if (discussionPollRef.current) {
+        clearInterval(discussionPollRef.current);
+      }
+    };
+  }, []);
   
-// Update GamePlay component's loadGameState function
-const loadGameState = async () => {
-  setLoading(true);
-  try {
-    const state = await getGameState(gameId);
-    setGameState(state);
-    
-    // Debug agent initialization if not done yet
-    if (!debug.initialized) {
-      // Check API keys
+  // Check API response
+  useEffect(() => {
+    const fetchGameState = async () => {
       try {
-        const response = await fetch(`${API_URL}/debug_api_keys`);
-        const keyStatus = await response.json();
-        setDebug(prev => ({
-          ...prev,
-          apiKeyStatus: keyStatus.status === "ok" ? "Valid" : "Invalid or missing",
-          initialized: true
-        }));
-      } catch (err) {
-        setDebug(prev => ({
-          ...prev,
-          apiKeyStatus: "Error checking API keys",
-          initialized: true
-        }));
+        const response = await fetch(`${API_URL}/game_state/${gameId}`);
+        const data = await response.json();
+        console.log("Raw API Response:", data);
+        console.log("Player data includes roles:", data.players.some(p => p.role));
+      } catch (error) {
+        console.error("Error fetching game state:", error);
       }
-      
-      // Log agent status
-      if (state.players) {
-        const agentStatuses = {};
-        state.players.forEach(player => {
-          agentStatuses[player.name] = {
-            personality: player.personality,
-            role: player.role || "Unknown",
-            status: "Initialized"
-          };
-        });
-        setDebug(prev => ({
-          ...prev,
-          agentStatus: agentStatuses
-        }));
-      }
-    }
-  } catch (err) {
-    setError('Failed to load game state');
-    console.error(err);
-  }
-  setLoading(false);
-};
-  
-  useEffect(() => {
-    loadGameState();
+    };
+
+    fetchGameState();
   }, [gameId]);
   
   const handleStartGame = async () => {
-    setLoading(true);
     try {
       await startGame(gameId);
       await loadGameState();
     } catch (err) {
       setError('Failed to start game');
       console.error(err);
+    } 
+  };
+
+
+  
+  const handleProcessNight = async () => {
+    // Don't use the global loading overlay
+    // setGlobalLoading({ show: true, message: "Processing night actions..." });
+    
+    // Just disable the button directly
+    const nightButton = document.querySelector('.night-button');
+    if (nightButton) {
+      nightButton.disabled = true;
+      nightButton.classList.add('button-loading');
     }
-    setLoading(false);
+    
+    try {
+      // Process mafia action
+      setAnimation('mafia');
+      setAnimationStage('start');
+      const mafiaResult = await processNight(gameId);
+      setNightTarget(mafiaResult.actions.mafia_target);
+      setAnimationStage('complete');
+      
+      // Wait for animation
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      // Process detective action
+      setAnimation('detective');
+      setAnimationStage('start');
+      setNightTarget(mafiaResult.actions.detective_target);
+      setAnimationStage('complete');
+      
+      // Wait for animation
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      // Process doctor action
+      setAnimation('doctor');
+      setAnimationStage('start');
+      setNightTarget(mafiaResult.actions.doctor_target);
+      setAnimationStage('complete');
+      
+      // Wait for animation
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      
+      setAnimation(null);
+      setNightTarget(null);
+      
+      // Resolve night
+      await resolveNight(gameId);
+      await loadGameState();
+    } catch (err) {
+      setError('Failed to process night');
+      console.error(err);
+    } finally {
+      // Don't use global loading here
+      // setGlobalLoading({ show: false });
+      
+      // Re-enable the button directly
+      if (nightButton) {
+        nightButton.disabled = false;
+        nightButton.classList.remove('button-loading');
+      }
+    }
   };
   
- const handleProcessNight = async () => {
-  setLoading(true);
-  
-  // Disable the button
-  const nightButton = document.querySelector('.night-button');
-  if (nightButton) {
-    nightButton.disabled = true;
-    nightButton.classList.add('button-loading');
-  }
-  
-  try {
-    // Process mafia action
-    setAnimation('mafia');
-    setAnimationStage('start');
-    const mafiaResult = await processNight(gameId);
-    setNightTarget(mafiaResult.actions.mafia_target);
-    setAnimationStage('complete');
+  const handleStartDiscussion = async () => {
+    setDiscussionInProgress(true);
     
-    // Wait for animation
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    const discussionButton = document.querySelector('.discussion-button');
+    if (discussionButton) {
+      discussionButton.disabled = true;
+      discussionButton.classList.add('button-loading');
+    }
     
-    // Process detective action
-    setAnimation('detective');
-    setAnimationStage('start');
-    setNightTarget(mafiaResult.actions.detective_target);
-    setAnimationStage('complete');
-    
-    // Wait for animation
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
-    // Process doctor action
-    setAnimation('doctor');
-    setAnimationStage('start');
-    setNightTarget(mafiaResult.actions.doctor_target);
-    setAnimationStage('complete');
-    
-    // Wait for animation
-    await new Promise(resolve => setTimeout(resolve, 5000));
-    
-    setAnimation(null);
-    setNightTarget(null);
-    
-    // Resolve night
-    await resolveNight(gameId);
-    await loadGameState();
-  } catch (err) {
-    setError('Failed to process night');
-    console.error(err);
-  }
-  
-  // Re-enable the button
-  if (nightButton) {
-    nightButton.disabled = false;
-    nightButton.classList.remove('button-loading');
-  }
-  
-  setLoading(false);
-};
-  
-const handleStartDiscussion = async () => {
-  setLoading(true);
-  const discussionButton = document.querySelector('.discussion-button');
-  if (discussionButton) {
-    discussionButton.disabled = true;
-    discussionButton.classList.add('button-loading');
-  }
-  
-  try {
-    await startDiscussion(gameId);
-    
-    // Set up polling to check discussion status
-    const checkDiscussion = setInterval(async () => {
-      const statusResponse = await fetch(`${API_URL}/discussion_status/${gameId}`);
-      const statusData = await statusResponse.json();
+    try {
+      // First call start_discussion endpoint to change the game phase
+      await startDiscussion(gameId);
       
-      if (statusData.discussion && statusData.discussion.length > 0) {
-        setDiscussion(statusData.discussion);
-        if (!statusData.in_progress) {
-          clearInterval(checkDiscussion);
+      // Then call simulate_discussion to generate discussion content
+      const result = await simulateDiscussion(gameId);
+      console.log("Discussion simulation result:", result);
+      
+      // If we got discussion messages, update state immediately
+      if (result.discussion) {
+        setDiscussion(result.discussion);
+      }
+      
+      // Start polling for any additional updates
+      startPollingDiscussion();
+      
+      await loadGameState();
+    } catch (err) {
+      setError('Failed to conduct discussion');
+      console.error(err);
+      
+      // Reset UI state on error
+      setDiscussionInProgress(false);
+      if (discussionButton) {
+        discussionButton.disabled = false;
+        discussionButton.classList.remove('button-loading');
+      }
+    }
+    
+  };
+  
+  // Function to poll for discussion updates
+  const startPollingDiscussion = () => {
+    console.log("Starting discussion polling...");
+    
+    // Clear any existing polling
+    if (discussionPollRef.current) {
+      clearInterval(discussionPollRef.current);
+    }
+    
+    const pollInterval = setInterval(async () => {
+      try {
+        console.log("Polling for discussion updates...");
+        const result = await fetch(`${API_URL}/discussion_status/${gameId}`);
+        const data = await result.json();
+        
+        if (data.discussion && data.discussion.length > 0) {
+          console.log("Received discussion update:", data.discussion.length, "messages");
+          setDiscussion(data.discussion);
+        } else {
+          console.log("No discussion messages in response");
+        }
+        
+        if (!data.in_progress) {
+          console.log("Discussion complete, stopping polling");
+          setDiscussionInProgress(false);
+          clearInterval(discussionPollRef.current);
+          
+          // Re-enable the button
+          const discussionButton = document.querySelector('.discussion-button');
           if (discussionButton) {
             discussionButton.disabled = false;
             discussionButton.classList.remove('button-loading');
           }
+          
+          // Final update to game state
+          await loadGameState();
         }
+      } catch (err) {
+        console.error('Error polling discussion:', err);
       }
-    }, 1000);
+    }, 2000); // Check every 2 seconds
     
-    // Store interval for cleanup
-    discussionPollRef.current = checkDiscussion;
-    
-    await loadGameState();
-  } catch (err) {
-    setError('Failed to conduct discussion');
-    console.error(err);
-    if (discussionButton) {
-      discussionButton.disabled = false;
-      discussionButton.classList.remove('button-loading');
-    }
-  }
-  
-  setLoading(false);
-};
-
-// Function to poll for discussion updates
-const startPollingDiscussion = () => {
-  const pollInterval = setInterval(async () => {
-    try {
-      const result = await fetch(`${API_URL}/discussion_status/${gameId}`);
-      const data = await result.json();
-      
-      setDiscussion(data.discussion || []);
-      
-      if (!data.in_progress) {
-        // Discussion is complete, stop polling
-        setDiscussionInProgress(false);
-        clearInterval(pollInterval);
-        
-        // Re-enable the button
-        const discussionButton = document.querySelector('.discussion-button');
-        if (discussionButton) {
-          discussionButton.disabled = false;
-          discussionButton.classList.remove('button-loading');
-        }
-      }
-    } catch (err) {
-      console.error('Error polling discussion:', err);
-    }
-  }, 1000); // Check every second
-  
-  // Store interval ID for cleanup
-  discussionPollRef.current = pollInterval;
-  
-  // Clean up on unmount
-  return () => clearInterval(pollInterval);
-};
-
-// Add a ref to store the polling interval
-const discussionPollRef = useRef(null);
-
-// Clean up polling on unmount
-useEffect(() => {
-  return () => {
-    if (discussionPollRef.current) {
-      clearInterval(discussionPollRef.current);
-    }
+    // Store interval ID for cleanup
+    discussionPollRef.current = pollInterval;
   };
-}, []);
-
   
   const handleProcessVoting = async () => {
-    setLoading(true);
+    //setGlobalLoading({ show: true, message: "Processing votes..." });
     
     // Disable the button
     const votingButton = document.querySelector('.voting-button');
@@ -876,15 +1082,14 @@ useEffect(() => {
     } catch (err) {
       setError('Failed to process voting');
       console.error(err);
+    } finally {
+      
+      // Re-enable the button
+      if (votingButton) {
+        votingButton.disabled = false;
+        votingButton.classList.remove('button-loading');
+      }
     }
-    
-    // Re-enable the button
-    if (votingButton) {
-      votingButton.disabled = false;
-      votingButton.classList.remove('button-loading');
-    }
-    
-    setLoading(false);
   };
 
   const VotingGraph = ({ votes, players }) => {
@@ -925,9 +1130,9 @@ useEffect(() => {
     );
   };
   
-  
   const handleResetGame = async () => {
     setLoading(true);
+    
     try {
       await resetGame(gameId);
       setDiscussion([]);
@@ -937,30 +1142,22 @@ useEffect(() => {
     } catch (err) {
       setError('Failed to reset game');
       console.error(err);
-    }
+    } 
+     
     setLoading(false);
   };
   
-  if (loading && !gameState) {
-    return <div className="loading">Loading game...</div>;
-  }
-  
-  if (error) {
+
+  if (loading || !gameState) {
     return (
-      <Alert variant="destructive">
-        <Icon name="AlertCircle" />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>{error}</AlertDescription>
-      </Alert>
+      <div className="container">
+        <div className="loading">
+          <div className="loading-spinner-large"></div>
+          <p>Loading game state...</p>
+        </div>
+      </div>
     );
   }
-  
-  if (!gameState) {
-    return <div className="not-found">Game not found</div>;
-  }
-
-
-  
   return (
     <div className="container">
       <div className="game-header">
@@ -984,111 +1181,112 @@ useEffect(() => {
       )}
       
       <div className="game-dashboard">
-                  
-      <Card className="players-card">
-  <CardHeader>
-    <CardTitle>
-      <Icon name="Users" /> Players
-    </CardTitle>
-  </CardHeader>
-  <CardContent>
-    {gameState.players?.map((player) => (
-      <div 
-      key={player.name} 
-      className={`player-row ${!player.alive ? 'dead' : ''} ${newlyDead.includes(player.name) ? 'newly-dead' : ''}`}
-    >
-        <div className="player-info">
-          <span className={`player-name ${!player.alive ? 'dead' : ''}`}>
-            {!player.alive && <Icon name="Skull" />}
-            {player.name}
-          </span>
-          {player.role && (
-            <span className={`player-role role-${player.role.toLowerCase()}`}>
-              {player.role}
-            </span>
-          )}
-        </div>
-        <Badge>{player.personality}</Badge>
-      </div>
-    ))}
-  </CardContent>
-</Card>
+  {/* Layout all three cards in horizontal row */}
+  <div className="game-panels">
+    {/* Players Card - reduced width */}
+    <Card className="panel-card">
+      <CardHeader>
+        <CardTitle><Icon name="Users" /> Players</CardTitle>
+      </CardHeader>
+      <CardContent className="panel-content">
+        {gameState.players?.map((player) => (
+          <div key={player.name} className={`player-row ${!player.alive ? 'dead' : ''}`}>
+            <div className="player-info">
+              {!player.alive && <Icon name="Skull" />}
+              <span>{player.name}</span>
+              {player.role && <span className={`player-role role-${player.role.toLowerCase()}`}>{player.role}</span>}
+            </div>
+            <Badge>{player.personality}</Badge>
+          </div>
+        ))}
+      </CardContent>
+    </Card>
 
-
-{discussionInProgress && (
-  <div className="discussion-status">
-    <div className="loading-spinner"></div>
-    <p>Discussion in progress...</p>
-  </div>
-)}
-
-
-<Card className="events-card">
-  <CardHeader>
-    <CardTitle>
-      <Icon name="AlertCircle" /> Game Events
-    </CardTitle>
-  </CardHeader>
-  <CardContent>
-    <ul className="events-list" ref={eventsContainerRef}>
-      {gameState.events?.map((event, i) => {
-        // Determine event type for styling
-        let eventClass = 'event-game';
-        let eventIcon = null;
-        
-        if (event.includes('Night') && event.includes('begins')) {
-          eventClass = 'event-phase';
-          eventIcon = '🌙';
-        } else if (event.includes('Dawn of Day')) {
-          eventClass = 'event-phase';
-          eventIcon = '☀️';
-        } else if (event.includes('Detective') && event.includes('failed')) {
-          eventClass = 'event-detective-fail';
-          eventIcon = '🔍❌';
-        } else if (event.includes('Detective') && !event.includes('failed')) {
-          eventClass = 'event-detective-success';
-          eventIcon = '🔍✓';
-        } else if (event.includes('killed') || event.includes('dead')) {
-          eventClass = 'event-murder';
-          eventIcon = '☠️';
-        } else if (event.includes('Doctor') && event.includes('saved')) {
-          eventClass = 'event-doctor-save';
-          eventIcon = '💉';
-        } else if (event.includes('exiled')) {
-          eventClass = 'event-exile';
-          eventIcon = '🚫';
-        } else if (event.includes('Game started')) {
-          eventClass = 'event-game';
-          eventIcon = '🎮';
-        }
-        
-        return (
-          <li key={i} className={`event-item ${eventClass}`}>
-            {eventIcon && <span className="event-icon">{eventIcon}</span>}
-            {event}
+    {/* Game Events Card - reduced width */}
+    <Card className="panel-card">
+      <CardHeader>
+        <CardTitle><Icon name="AlertCircle" /> Game Events</CardTitle>
+      </CardHeader>
+      <CardContent className="panel-content">
+        <ul className="events-list" ref={eventsContainerRef}>
+          {gameState.events?.map((event, i) => {
+            let eventClass = 'event-game';
+            let eventIcon = null;
             
-          </li>
+            if (event.includes('Night') && event.includes('begins')) {
+              eventClass = 'event-phase';
+              eventIcon = '🌙';
+            } else if (event.includes('Dawn of Day')) {
+              eventClass = 'event-phase';
+              eventIcon = '☀️';
+            } else if (event.includes('Detective') && event.includes('failed')) {
+              eventClass = 'event-detective-fail';
+              eventIcon = '🔍❌';
+            } else if (event.includes('Detective') && !event.includes('failed')) {
+              eventClass = 'event-detective-success';
+              eventIcon = '🔍✓';
+            } else if (event.includes('killed') || event.includes('dead')) {
+              eventClass = 'event-murder';
+              eventIcon = '☠️';
+            } else if (event.includes('Doctor') && event.includes('saved')) {
+              eventClass = 'event-doctor-save';
+              eventIcon = '💉';
+            } else if (event.includes('exiled')) {
+              eventClass = 'event-exile';
+              eventIcon = '🚫';
+            } else if (event.includes('Game started')) {
+              eventClass = 'event-game';
+              eventIcon = '🎮';
+            }
+            
+            return (
+              <li key={i} className={`event-item ${eventClass}`}>
+                {eventIcon && <span className="event-icon">{eventIcon}</span>}
+                {event}
+              </li>
+            );
+          })}
+        </ul>
+      </CardContent>
+    </Card>
 
-          
-        );
-      })}
-    </ul>
-  </CardContent>
-</Card>
-
-{Object.keys(voteResults).length > 0 && (
-  <Card>
-    <CardHeader>
-      <CardTitle>
-        <Icon name="Vote" /> Voting Results
-      </CardTitle>
-    </CardHeader>
-    <CardContent>
-      <VotingGraph votes={voteResults} players={gameState.players} />
-    </CardContent>
-  </Card>
-)}
-      </div>
+    {/* Voting Results Card */}
+    {Object.keys(voteResults).length > 0 ? (
+      <Card className="panel-card">
+        <CardHeader>
+          <CardTitle><Icon name="Vote" /> Voting Results</CardTitle>
+        </CardHeader>
+        <CardContent className="panel-content">
+          <div className="voting-table">
+            <div className="voting-header">
+              <div className="vote-col">Votes</div>
+              <div className="player-col">Player</div>
+              <div className="voted-for-col">Voted For</div>
+            </div>
+            {gameState.players.map(player => (
+              <div key={player.name} className="voting-row">
+                <div className="vote-col">{Object.values(voteResults).filter(v => v === player.name).length}</div>
+                <div className="player-col">{player.name}</div>
+                <div className="voted-for-col">{voteResults[player.name] || "-"}</div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    ) : (
+      <Card className="panel-card">
+        <CardHeader>
+          <CardTitle><Icon name="Vote" />Voting</CardTitle>
+        </CardHeader>
+        <CardContent className="panel-content">
+          <div className="chat-container" ref={chatContainerRef}>
+            
+          </div>
+        </CardContent>
+      </Card>
+    )}
+  </div>
+</div>
       
       {animation && (
   <Card>
@@ -1108,7 +1306,13 @@ useEffect(() => {
           <CardContent>
             <div className="setup-prompt">
               <p>All players have been assigned personalities. Ready to begin?</p>
-              <Button onClick={handleStartGame}>Begin Game</Button>
+              <Button 
+                onClick={handleStartGame}
+                isLoading={false}
+                loadingText="Starting game..."
+              >
+                Begin Game
+              </Button>
             </div>
           </CardContent>
         </Card>
@@ -1142,9 +1346,14 @@ useEffect(() => {
  <CardContent>
    <div className="dawn-prompt">
      <p>The sun rises on a new day. Time for the town to discuss what happened.</p>
-     <Button className="discussion-button" onClick={handleStartDiscussion}>
-       Begin Discussion
-     </Button>
+     <Button 
+  className="discussion-button" 
+  onClick={handleStartDiscussion}
+  isLoading={false}
+  loadingText="Discussion ongoing..."
+>
+  Begin Discussion
+</Button>
    </div>
  </CardContent>
 </Card>
@@ -1165,37 +1374,60 @@ useEffect(() => {
     <p>Discussion in progress...</p>
   </div>
 )}
-    <div className="chat-container" ref={chatContainerRef}>
-      {discussion.map((line, i) => {
-        if (line.startsWith('---')) {
-          return <div key={i} className="discussion-section">{line}</div>;
-        }
-        
-        const colonIndex = line.indexOf(':');
-        if (colonIndex > 0) {
-          const playerName = line.substring(0, colonIndex);
-          const message = line.substring(colonIndex + 1).trim();
-          const player = gameState.players?.find(p => p.name === playerName);
-          const isDead = player && !player.alive;
-          
-          return <ChatBubble 
-            key={i} 
-            player={playerName} 
-            message={message} 
-            isDead={isDead} 
-            personality={player?.personality}
-          />;
-        }
-        
-        return <div key={i}>{line}</div>;
-      })}
+{/* Replace the discussion rendering code inside the chat-container in your JSX */}
+<div className="chat-container" ref={chatContainerRef}>
+  {discussion.length === 0 && discussionInProgress ? (
+    <div className="discussion-empty-state">
+      <p>Waiting for players to begin discussion...</p>
     </div>
+  ) : (
+    discussion.map((line, i) => {
+      if (!line || line.trim() === '') {
+        return null;
+      }
+      
+      if (line.startsWith('---')) {
+        return <div key={i} className="discussion-section">{line}</div>;
+      }
+      
+      const colonIndex = line.indexOf(':');
+      if (colonIndex > 0) {
+        const playerName = line.substring(0, colonIndex).trim();
+        const message = line.substring(colonIndex + 1).trim();
+        const player = gameState.players?.find(p => p.name === playerName);
+        const isDead = player && !player.alive;
+        
+        return <ChatBubble 
+          key={i} 
+          player={playerName} 
+          message={message} 
+          isDead={isDead} 
+          personality={player?.personality}
+        />;
+      }
+      
+      return <div key={i} className="system-message">{line}</div>;
+    })
+  )}
+  
+  {discussionInProgress && (
+    <div className="discussion-status">
+      <div className="loading-spinner"></div>
+      <p>Discussion in progress...</p>
+    </div>
+  )}
+</div>
   </CardContent>
   <CardFooter>
     {gameState.phase === 'discussion' && (
-      <Button className="voting-button" onClick={handleProcessVoting}>
-        Proceed to Voting
-      </Button>
+      <Button 
+  className="voting-button" 
+  onClick={handleProcessVoting}
+  isLoading={false}
+  loadingText="Processing votes..."
+>
+  Proceed to Voting
+</Button>
     )}
   </CardFooter>
 </Card>
@@ -1212,6 +1444,7 @@ useEffect(() => {
 
 };
 
+
 const App = () => {
   const [gameId, setGameId] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
@@ -1222,12 +1455,16 @@ const App = () => {
       if (result.game_id) {
         setGameId(result.game_id);
         setGameStarted(true);
+      } else {
+        console.error("Failed to create game:", result);
       }
-    } catch (error) {
-      console.error('Error starting game:', error);
+    } catch (err) {
+      console.error('Error starting game:', err);
     }
   };
+
   
+
   return (
     <div className="app">
       <header className="app-header">
@@ -1250,11 +1487,16 @@ const App = () => {
         </div>
       </footer>
     </div>
-
-    
   );
-
-  
 };
 
-export default App;
+// Wrap the entire app with LoadingProvider
+const AppWithLoading = () => {
+  return (
+    <LoadingProvider>
+      <App />
+    </LoadingProvider>
+  );
+};
+
+export default AppWithLoading;
