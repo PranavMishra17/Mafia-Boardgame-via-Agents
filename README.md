@@ -92,11 +92,12 @@ AZURE_OPENAI_ENDPOINT=your_endpoint
 
 5. Start the backend server:
 ```bash
-python app.py
+flask run
 ```
 
 6. Start the frontend development server:
 ```bash
+cd mafia-game-frontend
 npm start
 ```
 
