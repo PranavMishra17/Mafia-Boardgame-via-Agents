@@ -434,7 +434,7 @@ class Player:
             return random.choice(player_names)  # Fallback to random choice
 
 class Game:
-    def __init__(self, game_id, personalities):
+    def __init__(self, game_id, personalities, has_human_player=False):
         self.id = game_id
         self.players = []
         self.phase = "setup"
@@ -446,15 +446,23 @@ class Game:
             "detective_target": None,
             "doctor_target": None
         }
+        self.has_human_player = has_human_player
         
         # Create players with selected personalities
-        for i, personality in enumerate(personalities):
-            player_name = f"Player_{i+1}"
-            self.players.append(Player(player_name, personality))
-            
-        # Assign roles
-        self.assign_roles()
+        player_offset = 0
+        if has_human_player:
+            # Create human player first
+            self.players.append(Player("Player_1", "Human"))
+            player_offset = 1
         
+        # Then add AI personalities with proper offset
+        for i, personality in enumerate(personalities):
+            player_name = f"Player_{i+1+player_offset}"
+            self.players.append(Player(player_name, personality))
+                
+            # Assign roles
+            self.assign_roles()
+            
     def assign_roles(self):
         # Shuffle players
         random.shuffle(self.players)
@@ -552,42 +560,175 @@ class Game:
         self.discussion_log = []
         return self.get_state()
         
-    # Replace the simulate_discussion method in the Game class
+    # Complete rewrite of simulate_discussion method
     def simulate_discussion(self, num_rounds=3):
-        logger.info(f"Starting discussion simulation for game {self.id} with {num_rounds} rounds")
-        living_players = [p for p in self.players if p.alive]
-        logger.info(f"Living players: {[p.name for p in living_players]}")
-        
-        # Clear previous discussion log
+        logger.info(f"Starting discussion for game {self.id}")
         self.discussion_log = []
+        living_players = [p for p in self.players if p.alive]
         
-        for round_num in range(num_rounds):
-            topic = f"What do you all think happened last night? Who seems suspicious to you?"
-            if round_num == 1:
-                topic = "Let's discuss our suspicions more. Anyone acting strangely?"
-            elif round_num == 2:
-                topic = "We need to decide who to vote out. Make your final case."
+        # Only add the first round header and wait for players to respond in sequence
+        round_header = "--- Discussion Round 1 ---"
+        self.discussion_log.append(round_header)
+        
+        # Start with the first player and let the polling system handle the rest
+        self.current_speaker_index = 0
+        self.current_round = 1
+        
+        # If first player is human, add waiting marker
+        if self.has_human_player and living_players[0].name == "Player_1":
+            self.discussion_log.append("WAITING_FOR_HUMAN_INPUT")
+            return
+        
+        # Otherwise, get first AI player response
+        self._get_next_ai_response()
+        return
+
+    # New method to handle sequential responses
+    def _get_next_ai_response(self):
+        living_players = [p for p in self.players if p.alive]
+        
+        # If we've gone through all players in current round
+        if self.current_speaker_index >= len(living_players):
+            # Move to next round if not at round 3 yet
+            if self.current_round < 3:
+                self.current_round += 1
+                self.current_speaker_index = 0
+                round_header = f"--- Discussion Round {self.current_round} ---"
+                self.discussion_log.append(round_header)
                 
-            logger.info(f"Discussion round {round_num+1}, topic: {topic}")
-            self.discussion_log.append(f"--- Discussion Round {round_num+1} ---")
+                # If first player of new round is human
+                if self.has_human_player and living_players[0].name == "Player_1":
+                    self.discussion_log.append("WAITING_FOR_HUMAN_INPUT")
+                    return
+            else:
+                # Discussion complete
+                logger.info("Discussion complete")
+                return
+        
+        # Get current player
+        current_player = living_players[self.current_speaker_index]
+        
+        # If current player is human, add waiting marker
+        if self.has_human_player and current_player.name == "Player_1":
+            self.discussion_log.append("WAITING_FOR_HUMAN_INPUT")
+            self.current_speaker_index += 1
+            return
+        
+        # Get appropriate topic for current round
+        topic = "What do you all think happened last night? Who seems suspicious to you?"
+        if self.current_round == 2:
+            topic = "Let's discuss our suspicions more. Anyone acting strangely?"
+        elif self.current_round == 3:
+            topic = "We need to decide who to vote out. Make your final case."
+        
+        # Get context for AI response
+        previous_messages = "\n".join(self.discussion_log[-min(5, len(self.discussion_log)):])
+        logger.info(f"Getting response from {current_player.name} ({current_player.role})")
+        
+        try:
+            response = current_player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", self.get_state())
+            logger.info(f"Response from {current_player.name}: {response[:50]}...")
+            self.discussion_log.append(f"{current_player.name}: {response}")
+        except Exception as e:
+            logger.error(f"Error getting response from {current_player.name}: {str(e)}")
+            self.discussion_log.append(f"{current_player.name}: I'm thinking about what to say...")
+        
+        # Move to next player
+        self.current_speaker_index += 1
+        
+        # Process next player with a small delay
+        time.sleep(0.2)
+        self._get_next_ai_response()
+    
+    # Make sure to add the continue_discussion_from method to the Game class if you haven't already
+    def continue_discussion_from(self, current_round, current_position):
+        """Continue discussion from a specific point after human input"""
+        living_players = [p for p in self.players if p.alive]
             
-            # Each player responds to the topic
+        # Add each player's response for current round, EXCEPT human
+        for player in living_players:
+            # If human player, add placeholder and STOP - don't continue to next players
+            if self.has_human_player and player.name == "Player_1":
+                self.discussion_log.append("WAITING_FOR_HUMAN_INPUT")
+                return  # Critical: Return here to pause discussion
+
+        # Calculate which players have already spoken in this round
+        spoken_players = set()
+        for i in range(current_position, len(self.discussion_log)):
+            line = self.discussion_log[i]
+            if ":" in line:
+                player_name = line.split(":")[0].strip()
+                spoken_players.add(player_name)
+        
+        # Get remaining players for this round
+        remaining_players = [p for p in living_players if p.name not in spoken_players]
+        topic = "Let's continue our discussion. Who seems suspicious to you?"
+        
+        # Each remaining player responds for this round
+        for player in remaining_players:
+            # Skip human player
+            if self.has_human_player and player.name == "Player_1":
+                continue
+                
+            # Get previous messages for context
+            previous_messages = "\n".join(self.discussion_log[-min(5, len(self.discussion_log)):])
+            logger.info(f"Getting response from {player.name} ({player.role})")
+            
+            try:
+                response = player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", self.get_state())
+                logger.info(f"Response from {player.name}: {response[:50]}...")
+                
+                # Add response to log
+                message = f"{player.name}: {response}"
+                self.discussion_log.append(message)
+                
+                # Small delay
+                time.sleep(0.2)
+            except Exception as e:
+                logger.error(f"Error getting response from {player.name}: {str(e)}")
+                self.discussion_log.append(f"{player.name}: I'm thinking about what to say...")
+                time.sleep(0.2)
+        
+        # Continue with next rounds if this round is complete
+        if current_round < 3:
+            # Add next round header
+            next_round = current_round + 1
+            round_header = f"--- Discussion Round {next_round} ---"
+            self.discussion_log.append(round_header)
+            time.sleep(0.5)
+            
+            # Set topic for next round
+            if next_round == 2:
+                topic = "Let's discuss our suspicions more. Anyone acting strangely?"
+            else:
+                topic = "We need to decide who to vote out. Make your final case."
+            
+            # Each player responds for the next round
             for player in living_players:
-                # Get previous messages to include as context
+                # Skip human player - will be prompted by frontend
+                if self.has_human_player and player.name == "Player_1":
+                    self.discussion_log.append("WAITING_FOR_HUMAN_INPUT")
+                    return  # Stop here and wait for human input
+                    
+                # Get previous messages for context
                 previous_messages = "\n".join(self.discussion_log[-min(5, len(self.discussion_log)):])
                 logger.info(f"Getting response from {player.name} ({player.role})")
                 
                 try:
                     response = player.generate_response(f"{topic}\n\nPrevious messages:\n{previous_messages}", self.get_state())
                     logger.info(f"Response from {player.name}: {response[:50]}...")
-                    self.discussion_log.append(f"{player.name}: {response}")
+                    
+                    # Add response to log
+                    message = f"{player.name}: {response}"
+                    self.discussion_log.append(message)
+                    
+                    # Small delay
+                    time.sleep(0.2)
                 except Exception as e:
                     logger.error(f"Error getting response from {player.name}: {str(e)}")
                     self.discussion_log.append(f"{player.name}: I'm thinking about what to say...")
-        
-        logger.info(f"Discussion complete, {len(self.discussion_log)} total lines")
-        return self.discussion_log
-
+                    time.sleep(0.2)
+    
     def process_voting(self):
         self.phase = "voting"
         living_players = [p for p in self.players if p.alive]
@@ -651,8 +792,10 @@ def index():
 def get_personalities():
     return jsonify(PERSONALITIES)
 
-@app.route('/api/create_game', methods=['POST'])
-def create_game():
+
+
+#@app.route('/api/create_game', methods=['POST'])
+#def create_game():
     data = request.json
     personalities = data.get('personalities', [])
     
@@ -717,20 +860,34 @@ def mask_string(s):
         return "****"
     return s[:4] + "*" * (len(s) - 8) + s[-4:]
 
+# Modify process_night function to handle human night actions
 @app.route('/api/process_night/<game_id>', methods=['POST'])
 def process_night(game_id):
     if game_id not in games:
         return jsonify({"error": "Game not found"}), 404
         
     game = games[game_id]
-    if game.phase != "night":
-        return jsonify({"error": "Not currently night phase"}), 400
-        
-    night_actions = game.process_night()
     
+    # Skip AI decisions for roles already chosen by human
+    for player in game.players:
+        if not player.alive:
+            continue
+            
+        if game.has_human_player and player.name == "Player_1":
+            # Skip human player - they'll use human_night_action endpoint
+            continue
+            
+        if player.role == "Mafia" and not game.night_actions["mafia_target"]:
+            game.night_actions["mafia_target"] = player.make_night_decision(game.get_state())
+        elif player.role == "Detective" and not game.night_actions["detective_target"]:
+            game.night_actions["detective_target"] = player.make_night_decision(game.get_state())
+        elif player.role == "Doctor" and not game.night_actions["doctor_target"]:
+            game.night_actions["doctor_target"] = player.make_night_decision(game.get_state())
+    
+    logger.info(f"Night actions: {game.night_actions}")
     return jsonify({
         "message": "Night actions processed",
-        "actions": night_actions
+        "actions": game.night_actions
     })
 
 @app.route('/api/resolve_night/<game_id>', methods=['POST'])
@@ -768,6 +925,7 @@ def start_discussion(game_id):
         }
     })
 
+
 @app.route('/api/simulate_discussion/<game_id>', methods=['POST'])
 def simulate_discussion(game_id):
     if game_id not in games:
@@ -776,27 +934,26 @@ def simulate_discussion(game_id):
         
     game = games[game_id]
     
-    # Run discussion simulation
-    try:
-        logger.info(f"Starting discussion simulation for game {game_id}")
-        discussion = game.simulate_discussion()
-        logger.info(f"Discussion simulation complete, {len(discussion)} messages")
-        
-        # Return full discussion log
-        return jsonify({
-            "message": "Discussion simulated successfully",
-            "discussion": discussion,
-            "discussion_count": len(discussion)
-        })
-    except Exception as e:
-        logger.error(f"Error simulating discussion: {str(e)}")
-        return jsonify({
-            "error": f"Failed to simulate discussion: {str(e)}",
-            "discussion": []
-        }), 500
+    # Start a background thread to run the discussion simulation
+    @copy_current_request_context
+    def run_discussion_in_background():
+        logger.info(f"Starting discussion simulation in background thread for game {game_id}")
+        try:
+            game.simulate_discussion()
+            logger.info(f"Background discussion simulation complete for game {game_id}")
+        except Exception as e:
+            logger.error(f"Error in background discussion simulation: {str(e)}")
+    
+    # Launch the background thread
+    thread = threading.Thread(target=run_discussion_in_background)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({
+        "message": "Discussion simulation started in background",
+        "status": "in_progress"
+    })
 
-# Add an endpoint to get the current discussion state
-# Replace the discussion_status endpoint in app.py with this:
 @app.route('/api/discussion_status/<game_id>', methods=['GET'])
 def discussion_status(game_id):
     if game_id not in games:
@@ -807,19 +964,69 @@ def discussion_status(game_id):
     # Get the current discussion log
     discussion = game.discussion_log
     
-    # Check if it's empty and we're in discussion phase
-    if not discussion and game.phase == "discussion":
-        # If we're in discussion phase but no log yet, it's still in progress
-        in_progress = True
-    else:
-        # If we have discussion log or not in discussion phase, it's not in progress
-        in_progress = game.phase == "discussion" and len(discussion) < 15  # Assuming a complete discussion has at least 15 lines
+    # Calculate progress information
+    living_players = [p for p in game.players if p.alive]
+    total_players = len(living_players)
+    total_rounds = 3
+    expected_messages = total_players * total_rounds + total_rounds # Player messages + round headers
     
-    logger.info(f"Discussion status for game {game_id}: {len(discussion)} messages, in_progress={in_progress}")
+    # Count messages from each player to track who's "speaking" next
+    player_counts = {}
+    current_round = 1
+    for line in discussion:
+        if line.startswith("---") and "Round" in line:
+            try:
+                current_round = int(line.split("Round")[1].strip().split()[0])
+            except:
+                pass
+        elif ":" in line:
+            player_name = line.split(":")[0].strip()
+            if player_name not in player_counts:
+                player_counts[player_name] = 1
+            else:
+                player_counts[player_name] += 1
+    
+    # Determine who might be speaking next
+    next_speaker = None
+    if discussion and total_players > 0:
+        for player in living_players:
+            # If player hasn't spoken in the current round
+            count = player_counts.get(player.name, 0)
+            if count < current_round:
+                next_speaker = player.name
+                break
+    
+    # Check if discussion is still in progress
+    thread_active = any(t.name.startswith("Thread-") and t.is_alive() for t in threading.enumerate())
+    waiting_for_human = "WAITING_FOR_HUMAN_INPUT" in discussion
+    
+    # Determine if discussion is in progress based on thread status and message count
+    if game.phase == "discussion" and (thread_active or len(discussion) < expected_messages or waiting_for_human):
+        in_progress = True
+        # Safely calculate progress percentage
+        if expected_messages > 0:
+            progress_percent = min(100, int((len(discussion) / expected_messages) * 100))
+        else:
+            progress_percent = 0
+    else:
+        in_progress = False
+        progress_percent = 100
+    
+    # Debug information
+    logger.info(f"Discussion status: {len(discussion)}/{expected_messages} messages, " +
+                f"in_progress={in_progress}, thread_active={thread_active}, " +
+                f"next_speaker={next_speaker}, progress={progress_percent}%, " +
+                f"waiting_for_human={waiting_for_human}")
     
     return jsonify({
         "discussion": discussion,
-        "in_progress": in_progress
+        "in_progress": in_progress,
+        "progress": progress_percent,
+        "total_expected": expected_messages,
+        "current_count": len(discussion),
+        "next_speaker": next_speaker,
+        "current_round": current_round,
+        "waiting_for_human": waiting_for_human
     })
 
 @app.route('/api/process_voting/<game_id>', methods=['POST'])
@@ -890,6 +1097,172 @@ def reset_game(game_id):
         "message": "Game reset successfully",
         "game_id": game_id
     })
+
+####################################################################################################################################
+# Human player endpoints
+
+####################################################################################################################################
+
+@app.route('/api/human_night_action/<game_id>', methods=['POST'])
+def human_night_action(game_id):
+    if game_id not in games:
+        return jsonify({"error": "Game not found"}), 404
+        
+    game = games[game_id]
+    data = request.json
+    role = data.get('role')
+    target = data.get('target')
+    
+    if not role or not target:
+        return jsonify({"error": "Missing role or target"}), 400
+    
+    # Update night actions based on the role
+    if role == "Mafia":
+        game.night_actions["mafia_target"] = target
+    elif role == "Detective":
+        game.night_actions["detective_target"] = target
+    elif role == "Doctor":
+        game.night_actions["doctor_target"] = target
+    else:
+        return jsonify({"error": "Invalid role for night action"}), 400
+    
+    logger.info(f"Human player with role {role} chose {target}")
+    
+    return jsonify({
+        "message": f"Human player night action set: {role} targeting {target}",
+        "status": "success"
+    })
+
+# Rewrite human_discussion endpoint
+@app.route('/api/human_discussion/<game_id>', methods=['POST'])
+def human_discussion(game_id):
+    if game_id not in games:
+        return jsonify({"error": "Game not found"}), 404
+        
+    game = games[game_id]
+    data = request.json
+    message = data.get('message')
+    
+    if not message:
+        return jsonify({"error": "Missing message"}), 400
+    
+    # Remove waiting marker
+    try:
+        placeholder_index = game.discussion_log.index("WAITING_FOR_HUMAN_INPUT")
+        game.discussion_log.pop(placeholder_index)
+    except ValueError:
+        logger.warning("No waiting marker found")
+    
+    # Add human message
+    game.discussion_log.append(f"Player_1: {message}")
+    logger.info(f"Human player added message: {message[:50]}...")
+    
+    # Continue with next AI responses
+    game._get_next_ai_response()
+    
+    return jsonify({
+        "message": "Human message added",
+        "status": "success"
+    })
+
+@app.route('/api/human_vote/<game_id>', methods=['POST'])
+def human_vote(game_id):
+    if game_id not in games:
+        return jsonify({"error": "Game not found"}), 404
+        
+    game = games[game_id]
+    data = request.json
+    target = data.get('target')
+    
+    if not target:
+        return jsonify({"error": "Missing target"}), 400
+    
+    # Record the human player's vote
+    # We'll assume Player_1 is always the human player
+    human_player = next((p for p in game.players if p.name == "Player_1"), None)
+    
+    if not human_player:
+        return jsonify({"error": "Human player not found"}), 400
+    
+    # Update votes dictionary (create one if it doesn't exist)
+    if not hasattr(game, 'votes'):
+        game.votes = {}
+    
+    game.votes["Player_1"] = target
+    logger.info(f"Human player voted for {target}")
+    
+    return jsonify({
+        "message": f"Human player vote recorded for {target}",
+        "status": "success"
+    })
+
+# Modify existing endpoints to handle human player
+
+@app.route('/api/create_game', methods=['POST'])
+def create_game():
+    data = request.json
+    personalities = data.get('personalities', [])
+    is_human_player = data.get('isHumanPlayer', False)
+    
+    # If human player is selected, we need only 5 AI personalities
+    required_count = 5 if is_human_player else 6
+    
+    if len(personalities) != required_count:
+        return jsonify({"error": f"Please select exactly {required_count} personalities"}), 400
+        
+    game_id = str(uuid.uuid4())
+    games[game_id] = Game(game_id, personalities, is_human_player)
+    
+    return jsonify({
+        "game_id": game_id,
+        "message": "Game created successfully"
+    })
+
+# Add a continue_discussion endpoint for the human player flow
+@app.route('/api/continue_discussion/<game_id>', methods=['POST'])
+def continue_discussion(game_id):
+    if game_id not in games:
+        return jsonify({"error": "Game not found"}), 404
+        
+    game = games[game_id]
+    
+    # Remove the waiting placeholder if it exists
+    game.discussion_log = [msg for msg in game.discussion_log if msg != "WAITING_FOR_HUMAN_INPUT"]
+    
+    # Continue the discussion simulation in the background
+    @copy_current_request_context
+    def continue_in_background():
+        logger.info(f"Continuing discussion simulation in background thread for game {game_id}")
+        try:
+            # Get current round and position
+            current_round = 1
+            current_position = 0
+            
+            for i, line in enumerate(game.discussion_log):
+                if line.startswith("--- Discussion Round"):
+                    try:
+                        current_round = int(line.split("Round")[1].strip().split()[0])
+                    except:
+                        pass
+                    current_position = i
+            
+            # Continue with AI player responses for the current round
+            game.continue_discussion_from(current_round, current_position)
+            logger.info(f"Continued discussion simulation complete for game {game_id}")
+        except Exception as e:
+            logger.error(f"Error in continued discussion simulation: {str(e)}")
+    
+    # Launch the background thread
+    thread = threading.Thread(target=continue_in_background)
+    thread.daemon = True
+    thread.start()
+    
+    return jsonify({
+        "message": "Discussion continuation started",
+        "status": "in_progress"
+    })
+
+####################################################################################################################################
 
 if __name__ == '__main__':
     app.run(debug=True)

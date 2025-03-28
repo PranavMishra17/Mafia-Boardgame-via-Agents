@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 
 // API URL - change to match your Flask server
@@ -50,6 +50,40 @@ const CardTitle = ({ children }) => <h3 className="card-title">{children}</h3>;
 const CardDescription = ({ children }) => <p className="card-description">{children}</p>;
 const CardContent = ({ children }) => <div className="card-content">{children}</div>;
 const CardFooter = ({ children }) => <div className="card-footer">{children}</div>;
+
+
+const HumanPlayerCard = ({ selected, onSelect }) => {
+  return (
+    <div 
+      className={`personality-card human-card ${selected ? 'selected' : ''}`} 
+      onClick={onSelect}
+    >
+      <img 
+        src="/static/personalities/human-player.png"
+        alt="Play Yourself"
+        className="personality-image"
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = "/static/personalities/default.jpg";
+        }}
+      />
+      
+      <div className="card-header">
+        <h3 className="card-title">Play Yourself</h3>
+        <p className="card-description">Join the game as a human player and participate in discussions and voting.</p>
+      </div>
+      
+      <div className="card-content">
+        <div className="human-card-features">
+          <div className="feature-item">✓ Play as Mafia, Detective, Doctor, etc.</div>
+          <div className="feature-item">✓ Participate in discussions</div>
+          <div className="feature-item">✓ Make night actions</div>
+          <div className="feature-item">✓ Vote to exile suspects</div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 
 
@@ -163,12 +197,15 @@ const fetchPersonalities = async () => {
   }
 };
 
-const createGame = async (personalities) => {
+const createGame = async (personalities, isHumanPlayer = false) => {
   try {
     const response = await fetch(`${API_URL}/create_game`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ personalities })
+      body: JSON.stringify({ 
+        personalities,
+        isHumanPlayer 
+      })
     });
     return await response.json();
   } catch (error) {
@@ -404,21 +441,314 @@ const CustomizePersonalityModal = ({ personality, details, onSave, onCancel }) =
   );
 };
 
+const getScaledProfileImage = (src, size = 40) => {
+  // Create a wrapper to scale images properly
+  return `${src}?width=${size}&height=${size}`;
+};
+
 const ChatBubble = ({ player, message, isDead, personality }) => {
-  const getInitial = () => {
-    if (!personality) return player[0];
-    return personality[0];
+  // Get the personality image
+  const personalityImages = {
+    Diplomat: "/static/personalities/diplomat.png",
+    Sheriff: "/static/personalities/sheriff.png",
+    Conspirator: "/static/personalities/conspirator.jpg",
+    Jester: "/static/personalities/jester.jpg",
+    Mastermind: "/static/personalities/mastermind.jpg",
+    Empath: "/static/personalities/empath.png",
+    Wildcard: "/static/personalities/wildcard.jpg",
+    Veteran: "/static/personalities/veteran.png",
+    Innocent: "/static/personalities/innocent.jpg",
+    Manipulator: "/static/personalities/manipulator.jpg"
+  };
+  
+  const [imageError, setImageError] = useState(false);
+  const imagePath = personality ? personalityImages[personality] : null;
+  
+  const handleImageError = () => {
+    console.error(`Failed to load image for ${personality}`);
+    setImageError(true);
   };
   
   return (
     <div className={`chat-bubble ${isDead ? 'dead' : ''}`}>
-      <div className={`avatar avatar-${personality || 'Unknown'}`}>
-        {getInitial()}
+      <div className="chat-avatar">
+        {!imageError && imagePath ? (
+          <img 
+            src={imagePath}
+            alt={personality}
+            className="chat-profile-pic"
+            onError={handleImageError}
+            width="40"
+            height="40"
+          />
+        ) : (
+          <div className={`avatar avatar-${personality || 'Unknown'}`}>
+            {personality ? personality[0] : player[0]}
+          </div>
+        )}
       </div>
       <div className="message">
-        <div className="player-name">{player}</div>
+        <div className="message-header">
+          <span className="player-name">{player}</span>
+          <span className="personality-badge">{personality}</span>
+        </div>
         <div className="message-text">{message}</div>
       </div>
+    </div>
+  );
+};
+
+// 3. Enhanced Player Row with profile pictures
+const PlayerRow = ({ player, newlyDead, isHumanPlayer, isHumanPlayerView, evilPartner }) => {
+  // Only show roles to Player_1 if they are evil and this player is their partner
+  const shouldShowRole = !isHumanPlayer || 
+                        (isHumanPlayerView && player.name === "Player_1") || 
+                        (isHumanPlayerView && evilPartner && player.name === evilPartner);
+  
+  const personalityImages = {
+    Diplomat: "/static/personalities/diplomat.png",
+    Sheriff: "/static/personalities/sheriff.png",
+    Conspirator: "/static/personalities/conspirator.jpg",
+    Jester: "/static/personalities/jester.jpg",
+    Mastermind: "/static/personalities/mastermind.jpg",
+    Empath: "/static/personalities/empath.png",
+    Wildcard: "/static/personalities/wildcard.jpg",
+    Veteran: "/static/personalities/veteran.png",
+    Innocent: "/static/personalities/innocent.jpg",
+    Manipulator: "/static/personalities/manipulator.jpg",
+    Human: "/static/personalities/human-player.png" // Add Human personality image
+  };
+  
+  const [imageError, setImageError] = useState(false);
+  const imagePath = player.personality ? personalityImages[player.personality] : null;
+  
+  const handleImageError = () => {
+    console.error(`Failed to load image for ${player.personality}`);
+    setImageError(true);
+  };
+  
+  // Add class for evil partner highlight
+  const isEvilPartner = isHumanPlayerView && evilPartner && player.name === evilPartner;
+  
+  return (
+    <div className={`player-row ${!player.alive ? 'dead' : ''} ${newlyDead && newlyDead.includes(player.name) ? 'newly-dead' : ''} ${isEvilPartner ? 'evil-partner' : ''}`}>
+      <div className="player-info">
+        <div className="player-pic-container">
+          {!imageError && imagePath ? (
+            <img 
+              src={imagePath}
+              alt={player.personality}
+              className="player-profile-pic"
+              onError={handleImageError}
+              width="40" 
+              height="40"
+            />
+          ) : (
+            <div className="player-pic-fallback">
+              {player.personality ? player.personality[0] : player.name[0]}
+            </div>
+          )}
+        </div>
+        
+        <div className="player-details">
+          <div className={`player-name ${!player.alive ? 'dead' : ''}`}>
+            {!player.alive && <Icon name="Skull" />}
+            <span>{player.name}</span>
+            {player.role && shouldShowRole && 
+              <span className={`player-role role-${player.role.toLowerCase()}`}>{player.role}</span>
+            }
+            {player.role && !shouldShowRole && 
+              <span className="player-role hidden-role">???</span>
+            }
+            {player.name === "Player_1" && isHumanPlayerView && 
+              <span className="your-turn-badge">You</span>
+            }
+          </div>
+        </div>
+      </div>
+      <Badge>{player.personality}</Badge>
+    </div>
+  );
+};
+
+const CollapsibleDiscussion = ({ discussion, gameState }) => {
+  // Group discussions by round
+  const [expandedRounds, setExpandedRounds] = useState({});
+  const [allExpanded, setAllExpanded] = useState(true);
+  
+  // Parse discussion into rounds
+  const discussionByRound = useMemo(() => {
+    const rounds = {};
+    let currentRound = null;
+    let roundMessages = [];
+    
+    discussion.forEach(line => {
+      if (line.startsWith('---')) {
+        // New round
+        if (currentRound && roundMessages.length) {
+          rounds[currentRound] = roundMessages;
+        }
+        
+        // Extract round number
+        const match = line.match(/Round (\d+)/);
+        currentRound = match ? parseInt(match[1]) : Object.keys(rounds).length + 1;
+        roundMessages = [line];
+      } else if (currentRound !== null) {
+        roundMessages.push(line);
+      } else {
+        // Messages before any round marker
+        roundMessages.push(line);
+      }
+    });
+    
+    // Add the last round
+    if (currentRound && roundMessages.length) {
+      rounds[currentRound] = roundMessages;
+    } else if (roundMessages.length) {
+      rounds[1] = roundMessages;
+    }
+    
+    return rounds;
+  }, [discussion]);
+  
+  // Initialize expanded state for new rounds
+  useEffect(() => {
+    const newExpandedState = {};
+    Object.keys(discussionByRound).forEach(round => {
+      if (expandedRounds[round] === undefined) {
+        // Auto-collapse completed rounds except the most recent
+        const isLatestRound = parseInt(round) === Object.keys(discussionByRound).length;
+        newExpandedState[round] = isLatestRound;
+      } else {
+        newExpandedState[round] = expandedRounds[round];
+      }
+    });
+    setExpandedRounds(newExpandedState);
+  }, [discussionByRound]);
+  
+  const toggleRound = (round) => {
+    setExpandedRounds(prev => ({
+      ...prev,
+      [round]: !prev[round]
+    }));
+  };
+  
+  const toggleAllRounds = () => {
+    const newState = !allExpanded;
+    const newExpandedState = {};
+    
+    Object.keys(discussionByRound).forEach(round => {
+      newExpandedState[round] = newState;
+    });
+    
+    setAllExpanded(newState);
+    setExpandedRounds(newExpandedState);
+  };
+  
+  return (
+    <div className="collapsible-discussion">
+      <div className="discussion-controls">
+        <button 
+          className="toggle-all-button"
+          onClick={toggleAllRounds}
+        >
+          {allExpanded ? 'Collapse All' : 'Expand All'}
+        </button>
+      </div>
+      
+      {Object.entries(discussionByRound).map(([round, messages]) => (
+        <div key={round} className="discussion-round-container">
+          <div 
+            className="discussion-round-header"
+            onClick={() => toggleRound(round)}
+          >
+            <h4>Discussion Round {round}</h4>
+            <span className="toggle-indicator">
+              {expandedRounds[round] ? '▼' : '►'}
+            </span>
+          </div>
+          
+          {expandedRounds[round] && (
+            <div className="discussion-round-content">
+              {messages.map((line, i) => {
+                if (!line || line.trim() === '') {
+                  return null;
+                }
+                
+                if (line.startsWith('---')) {
+                  return <div key={i} className="discussion-section">{line}</div>;
+                }
+                
+                const colonIndex = line.indexOf(':');
+                if (colonIndex > 0) {
+                  const playerName = line.substring(0, colonIndex).trim();
+                  const message = line.substring(colonIndex + 1).trim();
+                  const player = gameState.players?.find(p => p.name === playerName);
+                  const isDead = player && !player.alive;
+                  
+                  return <ChatBubble 
+                    key={i} 
+                    player={playerName} 
+                    message={message} 
+                    isDead={isDead} 
+                    personality={player?.personality}
+                  />;
+                }
+                
+                return <div key={i} className="system-message">{line}</div>;
+              })}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// 5. Update the Typing Indicator to use profile pics too
+const TypingIndicator = ({ playerName, personality }) => {
+  const personalityImages = {
+    Diplomat: "/static/personalities/diplomat.png",
+    Sheriff: "/static/personalities/sheriff.png",
+    Conspirator: "/static/personalities/conspirator.jpg",
+    Jester: "/static/personalities/jester.jpg",
+    Mastermind: "/static/personalities/mastermind.jpg",
+    Empath: "/static/personalities/empath.png",
+    Wildcard: "/static/personalities/wildcard.jpg",
+    Veteran: "/static/personalities/veteran.png",
+    Innocent: "/static/personalities/innocent.jpg",
+    Manipulator: "/static/personalities/manipulator.jpg"
+  };
+  
+  const [imageError, setImageError] = useState(false);
+  const imagePath = personality ? personalityImages[personality] : null;
+  
+  const handleImageError = () => {
+    setImageError(true);
+  };
+  
+  return (
+    <div className="currently-typing">
+      {!imageError && imagePath ? (
+        <img 
+          src={imagePath}
+          alt={personality}
+          className="typing-profile-pic"
+          onError={handleImageError}
+          width="32"
+          height="32"
+        />
+      ) : (
+        <div className={`avatar avatar-${personality || 'Unknown'}`}>
+          {personality ? personality[0] : playerName[0]}
+        </div>
+      )}
+      <div className="typing-indicator">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <span>{playerName} is typing...</span>
     </div>
   );
 };
@@ -509,6 +839,8 @@ const GameSetup = ({ onStartGame }) => {
   const [customizing, setCustomizing] = useState(null);
   const [customPersonality, setCustomPersonality] = useState({ name: '', attributes: {} });
   const [showCustomForm, setShowCustomForm] = useState(false);
+  // Add isHumanPlayer state
+  const [isHumanPlayer, setIsHumanPlayer] = useState(false);
   
   const personalityImages = {
     Diplomat: "/static/personalities/diplomat.png",
@@ -603,8 +935,6 @@ const GameSetup = ({ onStartGame }) => {
     }
   };
   
-
-  
   const handleCustomizePersonality = (personality) => {
     setCustomizing(personality);
   };
@@ -619,6 +949,16 @@ const GameSetup = ({ onStartGame }) => {
     }));
     setCustomizing(null);
   };
+
+    // Handle human player selection
+    const handleSelectHumanPlayer = () => {
+      if (isHumanPlayer) {
+        setIsHumanPlayer(false);
+      } else {
+        // If selecting human player, add it to first position
+        setIsHumanPlayer(true);
+      }
+    };
   
   const handleAddCustomPersonality = () => {
     if (customPersonality.name.trim() === '') return;
@@ -642,10 +982,12 @@ const GameSetup = ({ onStartGame }) => {
       setSelectedPersonalities(prev => prev.filter(p => p !== personality));
     };
   
-  const handleStartGameClick = async (personalities) => {
+  // Modify handleStartGameClick to include human player info
+  const handleStartGameClick = async () => {
+    const gamePersonalities = selectedPersonalities.slice();
 
-      await onStartGame(personalities);
-    
+    // If human player is selected, we only need 5 other personalities
+    await onStartGame(gamePersonalities, isHumanPlayer);
   };
   
   return (
@@ -658,9 +1000,9 @@ const GameSetup = ({ onStartGame }) => {
         <CardContent>
           <div className="setup-header">
             <div className="selection-info">
-              <div className="selection-count">
-                Selected: {selectedPersonalities.length}/6
-              </div>
+            <div className="selection-count">
+              Selected: {isHumanPlayer ? selectedPersonalities.length + 1 : selectedPersonalities.length}/6
+            </div>
               
               {/* Selected personalities avatars */}
               <div className="selected-personalities">
@@ -682,8 +1024,8 @@ const GameSetup = ({ onStartGame }) => {
             </div>
             
             <Button 
-              disabled={selectedPersonalities.length !== 6} 
-              onClick={() => handleStartGameClick(selectedPersonalities)}
+              disabled={isHumanPlayer ? selectedPersonalities.length !== 5 : selectedPersonalities.length !== 6} 
+              onClick={handleStartGameClick}
               loadingText="Starting game..."
             >
               Start Game
@@ -739,6 +1081,11 @@ const GameSetup = ({ onStartGame }) => {
           )}
           
           <div className="personalities-grid">
+            {/* Add Human Player card at the first position */}
+            <HumanPlayerCard 
+              selected={isHumanPlayer}
+              onSelect={handleSelectHumanPlayer}
+            />
             {Object.entries(personalities).map(([personality, details]) => (
               <PersonalityCard
                 key={personality}
@@ -766,7 +1113,7 @@ const GameSetup = ({ onStartGame }) => {
 };
 
 
-const GamePlay = ({ gameId }) => 
+const GamePlay = ({ gameId, isHumanPlayer }) => 
 {
   const [gameState, setGameState] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -781,12 +1128,18 @@ const GamePlay = ({ gameId }) =>
   const [discussionInProgress, setDiscussionInProgress] = useState(false);
   const [deadPlayers, setDeadPlayers] = useState([]);
   const [newlyDead, setNewlyDead] = useState([]);
+  const [data, setData] = useState(null); // Add this line
+
+  const [humanRole, setHumanRole] = useState(null);
+  const [waitingForHuman, setWaitingForHuman] = useState(false);
+  const [evilPartner, setEvilPartner] = useState(null);
   
   const [debug, setDebug] = useState({
     apiKeyStatus: "Not checked",
     agentStatus: {},
     initialized: false
   });
+
 
   // Refs
   const eventsContainerRef = useRef(null);
@@ -811,6 +1164,25 @@ const GamePlay = ({ gameId }) =>
     try {
       const state = await getGameState(gameId);
       setGameState(state);
+
+      // If human player, set their role
+      if (isHumanPlayer && state.players) {
+        const humanPlayer = state.players.find(p => p.name === "Player_1");
+        if (humanPlayer) {
+          setHumanRole(humanPlayer.role);
+          
+          // If evil role, find partner
+          if (humanPlayer.role === "Mafia" || humanPlayer.role === "Bad Guy") {
+            const partner = state.players.find(p => 
+              p.name !== "Player_1" && 
+              (p.role === "Mafia" || p.role === "Bad Guy")
+            );
+            if (partner) {
+              setEvilPartner(partner.name);
+            }
+          }
+        }
+      }
       
       // Debug agent initialization if not done yet
       if (!debug.initialized) {
@@ -915,8 +1287,6 @@ useEffect(() => {
       console.error(err);
     } 
   };
-
-
   
   const handleProcessNight = async () => {
     // Don't use the global loading overlay
@@ -978,9 +1348,282 @@ useEffect(() => {
       }
     }
   };
+
+  // Add this function to your GamePlay component
+// Fixed handleHumanDiscussion function
+const handleHumanDiscussion = async (message) => {
+  try {
+    console.log("Submitting human message:", message);
+    
+    // Send message to server
+    const response = await fetch(`${API_URL}/human_discussion/${gameId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message })
+    });
+    
+    const result = await response.json();
+    console.log("Human discussion result:", result);
+    
+    // Don't reset waiting state here
+    // Instead, let the polling function handle the state based on server response
+    
+    // Restart polling immediately to get AI responses
+    startPollingDiscussion();
+  } catch (err) {
+    setError('Failed to send message');
+    console.error(err);
+    
+    // Resume polling even on error
+    startPollingDiscussion();
+  }
+};
+  // Handle human night action
+  const handleHumanNightAction = async (targetPlayer) => {
+    try {
+      // Custom API endpoint for human player night action
+      const response = await fetch(`${API_URL}/human_night_action/${gameId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          role: humanRole,
+          target: targetPlayer
+        })
+      });
+      
+      const result = await response.json();
+      
+      // Continue with AI night actions
+      handleProcessNight();
+    } catch (err) {
+      setError('Failed to process human night action');
+      console.error(err);
+    }
+  };
+
+  // 4. Night Actions component for human player
+  const HumanNightAction = ({ gameState, role, onSelection }) => {
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    
+    // Get all living players except the human
+    const players = gameState.players.filter(p => p.alive && p.name !== "Player_1");
+    
+    const getRoleActionText = () => {
+      switch(role) {
+        case "Mafia": return "Choose a player to eliminate:";
+        case "Detective": return "Choose a player to investigate:";
+        case "Doctor": return "Choose a player to protect:";
+        default: return "Choose a player:";
+      }
+    };
+    
+    const handlePlayerSelect = (player) => {
+      setSelectedPlayer(player);
+      setShowConfirm(true);
+    };
+    
+    const handleConfirm = () => {
+      if (selectedPlayer) {
+        onSelection(selectedPlayer.name);
+      }
+    };
+    
+    const handleCancel = () => {
+      setSelectedPlayer(null);
+      setShowConfirm(false);
+    };
+    
+    return (
+      <div className="human-night-action">
+        <h3 className="action-title">{getRoleActionText()}</h3>
+        
+        {!showConfirm ? (
+          <div className="player-selection-grid">
+            {players.map(player => (
+              <div 
+                key={player.name}
+                className="player-selection-card"
+                onClick={() => handlePlayerSelect(player)}
+              >
+                <div className="player-pic-container">
+                  <img 
+                    src={`/static/personalities/${player.personality.toLowerCase()}.jpg`}
+                    alt={player.personality}
+                    className="player-profile-pic"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/static/personalities/default.jpg";
+                    }}
+                  />
+                </div>
+                <div className="player-name">{player.name}</div>
+                <div className="player-personality">{player.personality}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="confirm-selection">
+            <p>Are you sure you want to {role === "Mafia" ? "eliminate" : role === "Detective" ? "investigate" : "protect"} {selectedPlayer.name}?</p>
+            <div className="confirm-buttons">
+              <Button variant="outline" onClick={handleCancel}>Cancel</Button>
+              <Button onClick={handleConfirm}>Confirm</Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const HumanDiscussionInput = ({ onSubmit }) => {
+    const [message, setMessage] = useState("");
+    const maxLength = 500;
+    
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      if (message.trim().length > 0) {
+        // Pass the message to parent handler
+        onSubmit(message);
+        setMessage("");
+      }
+    };
+    
+    return (
+      <div className="human-discussion-input">
+        <h3>Your Turn to Speak</h3>
+        <form onSubmit={handleSubmit}>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            maxLength={maxLength}
+            placeholder="Type your message..."
+            rows={4}
+            className="discussion-textarea"
+            autoFocus
+          />
+          <div className="character-count">
+            {message.length}/{maxLength} characters
+          </div>
+          <button 
+          type="submit" 
+          className="button primary md"
+          disabled={message.trim().length === 0}
+        >
+          Send Message
+        </button>
+      </form>
+    </div>
+  );
+};
+
+  // 6. Human Voting Component
+  const HumanVoting = ({ gameState, onVote }) => {
+    const [selectedPlayer, setSelectedPlayer] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    
+    // Get all living players except the human
+    const players = gameState.players.filter(p => p.alive && p.name !== "Player_1");
+    
+    const handlePlayerSelect = (player) => {
+      setSelectedPlayer(player);
+      setShowConfirm(true);
+    };
+    
+    const handleConfirm = () => {
+      if (selectedPlayer) {
+        onVote(selectedPlayer.name);
+      }
+    };
+    
+    const handleCancel = () => {
+      setSelectedPlayer(null);
+      setShowConfirm(false);
+    };
+    
+    return (
+      <div className="human-voting">
+        <h3 className="voting-title">Cast Your Vote</h3>
+        
+        {!showConfirm ? (
+          <div className="player-selection-grid">
+            {players.map(player => (
+              <div 
+                key={player.name}
+                className="player-selection-card"
+                onClick={() => handlePlayerSelect(player)}
+              >
+                <div className="player-pic-container">
+                  <img 
+                    src={`/static/personalities/${player.personality.toLowerCase()}.jpg`}
+                    alt={player.personality}
+                    className="player-profile-pic"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/static/personalities/default.jpg";
+                    }}
+                  />
+                </div>
+                <div className="player-name">{player.name}</div>
+                <div className="player-personality">{player.personality}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="confirm-selection">
+            <p>Are you sure you want to vote for {selectedPlayer.name}?</p>
+            <div className="confirm-buttons">
+              <Button variant="outline" onClick={handleCancel}>Cancel</Button>
+              <Button onClick={handleConfirm}>Confirm Vote</Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  // Handle human discussion input
+  // Fix 2: Add continueDiscussion function 
+  const continueDiscussion = async () => {
+    try {
+      // Signal to the server to continue with AI discussions after human input
+      const response = await fetch(`${API_URL}/continue_discussion/${gameId}`, {
+        method: 'POST',
+      });
+      const result = await response.json();
+      console.log("Continue discussion result:", result);
+      
+      // Continue polling for updates
+      startPollingDiscussion();
+    } catch (err) {
+      setError('Failed to continue discussion');
+      console.error(err);
+    }
+  };
+  // Handle human voting
+  const handleHumanVote = async (targetPlayer) => {
+    try {
+      // Custom API endpoint for human vote
+      const response = await fetch(`${API_URL}/human_vote/${gameId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ target: targetPlayer })
+      });
+      
+      const result = await response.json();
+      
+      // Continue with AI voting
+      handleProcessVoting();
+    } catch (err) {
+      setError('Failed to process human vote');
+      console.error(err);
+    }
+  };
+
   
   const handleStartDiscussion = async () => {
+    console.log('Starting discussion...');
     setDiscussionInProgress(true);
+    setDiscussion([]); // Clear any previous discussion
     
     const discussionButton = document.querySelector('.discussion-button');
     if (discussionButton) {
@@ -990,24 +1633,23 @@ useEffect(() => {
     
     try {
       // First call start_discussion endpoint to change the game phase
-      await startDiscussion(gameId);
+      console.log('Calling start_discussion endpoint...');
+      const startResult = await startDiscussion(gameId);
+      console.log('Start discussion result:', startResult);
       
-      // Then call simulate_discussion to generate discussion content
-      const result = await simulateDiscussion(gameId);
-      console.log("Discussion simulation result:", result);
+      // Then trigger the discussion simulation in background
+      console.log('Calling simulate_discussion endpoint...');
+      const simulateResult = await simulateDiscussion(gameId);
+      console.log('Simulate discussion result:', simulateResult);
       
-      // If we got discussion messages, update state immediately
-      if (result.discussion) {
-        setDiscussion(result.discussion);
-      }
-      
-      // Start polling for any additional updates
+      // Start polling for discussion updates immediately
+      console.log('Starting polling for discussion updates...');
       startPollingDiscussion();
       
       await loadGameState();
     } catch (err) {
       setError('Failed to conduct discussion');
-      console.error(err);
+      console.error('Error in handleStartDiscussion:', err);
       
       // Reset UI state on error
       setDiscussionInProgress(false);
@@ -1016,120 +1658,275 @@ useEffect(() => {
         discussionButton.classList.remove('button-loading');
       }
     }
-    
   };
   
-  // Function to poll for discussion updates
-  const startPollingDiscussion = () => {
-    console.log("Starting discussion polling...");
-    
-    // Clear any existing polling
-    if (discussionPollRef.current) {
-      clearInterval(discussionPollRef.current);
-    }
-    
-    const pollInterval = setInterval(async () => {
-      try {
-        console.log("Polling for discussion updates...");
-        const result = await fetch(`${API_URL}/discussion_status/${gameId}`);
-        const data = await result.json();
-        
-        if (data.discussion && data.discussion.length > 0) {
-          console.log("Received discussion update:", data.discussion.length, "messages");
-          setDiscussion(data.discussion);
-        } else {
-          console.log("No discussion messages in response");
-        }
-        
-        if (!data.in_progress) {
-          console.log("Discussion complete, stopping polling");
-          setDiscussionInProgress(false);
-          clearInterval(discussionPollRef.current);
-          
-          // Re-enable the button
-          const discussionButton = document.querySelector('.discussion-button');
-          if (discussionButton) {
-            discussionButton.disabled = false;
-            discussionButton.classList.remove('button-loading');
-          }
-          
-          // Final update to game state
-          await loadGameState();
-        }
-      } catch (err) {
-        console.error('Error polling discussion:', err);
-      }
-    }, 2000); // Check every 2 seconds
-    
-    // Store interval ID for cleanup
-    discussionPollRef.current = pollInterval;
-  };
-  
-  const handleProcessVoting = async () => {
-    //setGlobalLoading({ show: true, message: "Processing votes..." });
-    
-    // Disable the button
-    const votingButton = document.querySelector('.voting-button');
-    if (votingButton) {
-      votingButton.disabled = true;
-      votingButton.classList.add('button-loading');
-    }
-    
-    try {
-      const result = await processVoting(gameId);
-      setVoteResults(result.votes || {});
-      await loadGameState();
-    } catch (err) {
-      setError('Failed to process voting');
-      console.error(err);
-    } finally {
-      
-      // Re-enable the button
-      if (votingButton) {
-        votingButton.disabled = false;
-        votingButton.classList.remove('button-loading');
-      }
-    }
+  const isHumanTurnToSpeak = (discussionLog) => {
+    // Look for the "WAITING_FOR_HUMAN_INPUT" placeholder in the discussion log
+    return discussionLog.some(msg => msg === "WAITING_FOR_HUMAN_INPUT");
   };
 
-  const VotingGraph = ({ votes, players }) => {
-    if (!votes || Object.keys(votes).length === 0) return null;
+
+// Enhanced polling function with better debug
+const startPollingDiscussion = () => {
+  console.log("Starting discussion polling with continuous updates");
   
-    return (
-      <div className="voting-graph">
-        <h3 className="voting-title">Voting Results</h3>
-        <div className="voting-container">
-          <div className="voters-column">
-            {players.map(player => (
-              <div key={`voter-${player.name}`} className="voter-row">
-                <div className={`player-node ${!player.alive ? 'player-dead' : ''}`}>
-                  {player.name}
-                </div>
-                {votes[player.name] && (
-                  <div className="vote-arrow">
-                    ➡️
-                  </div>
-                )}
-              </div>
-            ))}
+  if (discussionPollRef.current) {
+    clearInterval(discussionPollRef.current);
+  }
+  
+  let lastMessageCount = 0;
+  
+  const pollInterval = setInterval(async () => {
+    try {
+      const result = await fetch(`${API_URL}/discussion_status/${gameId}`);
+      const responseData = await result.json();
+      
+      // Check for human input marker
+      const isHumanInput = responseData.waiting_for_human;
+      
+      // Update UI with latest messages regardless of human input state
+      if (responseData.discussion) {
+        // Filter out WAITING_FOR_HUMAN_INPUT markers
+        const cleanedDiscussion = responseData.discussion.filter(
+          msg => msg !== "WAITING_FOR_HUMAN_INPUT"
+        );
+        
+        // Always update display with available messages
+        setDiscussion(cleanedDiscussion);
+        setData(responseData);
+        
+        // Log only when new messages arrive
+        if (cleanedDiscussion.length > lastMessageCount) {
+          console.log(`New messages: ${cleanedDiscussion.length - lastMessageCount}`);
+          lastMessageCount = cleanedDiscussion.length;
+          
+          // Auto-scroll
+          if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+          }
+        }
+      }
+      
+      // Handle human input state
+      if (isHumanInput) {
+        setWaitingForHuman(true);
+        clearInterval(discussionPollRef.current);
+        discussionPollRef.current = null;
+        return;
+      }
+      
+      // Check if discussion complete
+      if (!responseData.in_progress) {
+        setDiscussionInProgress(false);
+        clearInterval(discussionPollRef.current);
+        discussionPollRef.current = null;
+        
+        // Re-enable discussion button
+        const button = document.querySelector('.discussion-button');
+        if (button) {
+          button.disabled = false;
+          button.classList.remove('button-loading');
+        }
+        
+        await loadGameState();
+      }
+    } catch (err) {
+      console.error('Error polling:', err);
+    }
+  }, 1000);
+  
+  discussionPollRef.current = pollInterval;
+};
+// Add this component to the React code
+const DiscussionProgress = ({ current, total }) => {
+  const percent = Math.min(100, Math.round((current / total) * 100));
+  
+  return (
+    <div className="discussion-progress">
+      <div className="progress-text">Discussion in progress: {percent}%</div>
+      <div className="progress-container">
+        <div className="progress-bar" style={{ width: `${percent}%` }}></div>
+      </div>
+    </div>
+  );
+};
+
+// Complete fixed Discussion section JSX
+const DiscussionSectionJSX = () => (
+  <Card>
+    <CardHeader>
+      <CardTitle>
+        <Icon name="MessageSquare" /> Town Discussion
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      {discussionInProgress && data && data.progress < 100 && (
+        <DiscussionProgress 
+          current={data.current_count} 
+          total={data.total_expected}
+          nextSpeaker={data.next_speaker}
+        />
+      )}
+      
+      <div className="chat-container" ref={chatContainerRef}>
+        {discussion.length === 0 && discussionInProgress ? (
+          <div className="discussion-empty-state">
+            <p>Waiting for players to begin discussion...</p>
           </div>
-          <div className="targets-column">
-            {players.map(player => (
-              <div key={`target-${player.name}`} className="target-row">
-                <div className={`player-node ${!player.alive ? 'player-dead' : ''}`}>
-                  {player.name}
-                </div>
-                <div className="vote-count">
-                  {Object.values(votes).filter(target => target === player.name).length} votes
-                </div>
-              </div>
-            ))}
+        ) : (
+          discussion.map((line, i) => {
+            if (!line || line.trim() === '') {
+              return null;
+            }
+            
+            if (line.startsWith('---')) {
+              return <div key={i} className="discussion-section">{line}</div>;
+            }
+            
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > 0) {
+              const playerName = line.substring(0, colonIndex).trim();
+              const message = line.substring(colonIndex + 1).trim();
+              const player = gameState.players?.find(p => p.name === playerName);
+              const isDead = player && !player.alive;
+              
+              return <ChatBubble 
+                key={i} 
+                player={playerName} 
+                message={message} 
+                isDead={isDead} 
+                personality={player?.personality}
+              />;
+            }
+            
+            return <div key={i} className="system-message">{line}</div>;
+          })
+        )}
+        
+        {discussionInProgress && data && data.next_speaker && (
+          <TypingIndicator 
+            playerName={data.next_speaker} 
+            personality={gameState.players?.find(p => p.name === data.next_speaker)?.personality}
+          />
+        )}
+        
+        {discussionInProgress && (!data || data.progress < 100) && (
+          <div className="discussion-status">
+            <div className="loading-spinner"></div>
+            <p>Discussion in progress...</p>
           </div>
+        )}
+      </div>
+    </CardContent>
+    <CardFooter>
+      {gameState.phase === 'discussion' && (
+        <Button 
+          className="voting-button" 
+          onClick={handleProcessVoting}
+          isLoading={false}
+          loadingText="Processing votes..."
+        >
+          Proceed to Voting
+        </Button>
+      )}
+    </CardFooter>
+  </Card>
+);
+
+// Fixed Players Card content
+// Update the Players Card in GamePlay component
+const PlayersCardContent = () => (
+  <CardContent className="panel-content">
+    {gameState.players?.map((player) => (
+      <PlayerRow 
+        key={player.name} 
+        player={player} 
+        newlyDead={newlyDead}
+        isHumanPlayer={isHumanPlayer}
+        isHumanPlayerView={isHumanPlayer && humanRole !== null}
+        evilPartner={evilPartner}
+      />
+    ))}
+  </CardContent>
+);
+  
+  
+const handleProcessVoting = async () => {
+  const votingButton = document.querySelector('.voting-button');
+  if (votingButton) {
+    votingButton.disabled = true;
+    votingButton.classList.add('button-loading');
+  }
+  
+  try {
+    const result = await processVoting(gameId);
+    console.log("Voting results:", result);
+    
+    // Parse votes correctly
+    if (result.votes) {
+      // Calculate votes received by each player
+      const voteCounts = {};
+      
+      // Initialize vote counts for all players
+      gameState.players.forEach(player => {
+        voteCounts[player.name] = 0;
+      });
+      
+      // Count votes for each target
+      Object.values(result.votes).forEach(target => {
+        if (target && voteCounts.hasOwnProperty(target)) {
+          voteCounts[target]++;
+        }
+      });
+      
+      // Store both the individual votes and the vote counts
+      setVoteResults({
+        individualVotes: result.votes || {},
+        voteCounts: voteCounts
+      });
+    }
+    
+    await loadGameState();
+  } catch (err) {
+    setError('Failed to process voting');
+    console.error(err);
+  } finally {
+    if (votingButton) {
+      votingButton.disabled = false;
+      votingButton.classList.remove('button-loading');
+    }
+  }
+};
+
+// Update the VotingGraph component to display correctly
+const VotingGraph = ({ voteResults, players }) => {
+  if (!voteResults || !voteResults.individualVotes || Object.keys(voteResults.individualVotes).length === 0) return null;
+  
+  const { individualVotes, voteCounts } = voteResults;
+  
+  return (
+    <div className="voting-graph">
+      <h3 className="voting-title">Voting Results</h3>
+      <div className="voting-table">
+        <div className="voting-header">
+          <div className="vote-col">Votes</div>
+          <div className="player-col">Player</div>
+          <div className="voted-for-col">Voted For</div>
+        </div>
+        <div className="voting-rows-container">
+          {players.map(player => (
+            <div key={player.name} className="voting-row">
+              <div className="vote-col">{voteCounts[player.name] || 0}</div>
+              <div className="player-col">{player.name}</div>
+              <div className="voted-for-col">{individualVotes[player.name] || "-"}</div>
+            </div>
+          ))}
         </div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
+
   const handleResetGame = async () => {
     setLoading(true);
     
@@ -1146,8 +1943,8 @@ useEffect(() => {
      
     setLoading(false);
   };
-  
 
+  // Loading state
   if (loading || !gameState) {
     return (
       <div className="container">
@@ -1158,6 +1955,10 @@ useEffect(() => {
       </div>
     );
   }
+  
+  // Safer phase check
+  const currentPhase = gameState?.phase || "loading";
+  
   return (
     <div className="container">
       <div className="game-header">
@@ -1190,14 +1991,7 @@ useEffect(() => {
       </CardHeader>
       <CardContent className="panel-content">
         {gameState.players?.map((player) => (
-          <div key={player.name} className={`player-row ${!player.alive ? 'dead' : ''}`}>
-            <div className="player-info">
-              {!player.alive && <Icon name="Skull" />}
-              <span>{player.name}</span>
-              {player.role && <span className={`player-role role-${player.role.toLowerCase()}`}>{player.role}</span>}
-            </div>
-            <Badge>{player.personality}</Badge>
-          </div>
+          <PlayerRow key={player.name} player={player} newlyDead={newlyDead} />
         ))}
       </CardContent>
     </Card>
@@ -1252,39 +2046,26 @@ useEffect(() => {
 
     {/* Voting Results Card */}
     {Object.keys(voteResults).length > 0 ? (
-      <Card className="panel-card">
-        <CardHeader>
-          <CardTitle><Icon name="Vote" /> Voting Results</CardTitle>
-        </CardHeader>
-        <CardContent className="panel-content">
-          <div className="voting-table">
-            <div className="voting-header">
-              <div className="vote-col">Votes</div>
-              <div className="player-col">Player</div>
-              <div className="voted-for-col">Voted For</div>
-            </div>
-            {gameState.players.map(player => (
-              <div key={player.name} className="voting-row">
-                <div className="vote-col">{Object.values(voteResults).filter(v => v === player.name).length}</div>
-                <div className="player-col">{player.name}</div>
-                <div className="voted-for-col">{voteResults[player.name] || "-"}</div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    ) : (
-      <Card className="panel-card">
-        <CardHeader>
-          <CardTitle><Icon name="Vote" />Voting</CardTitle>
-        </CardHeader>
-        <CardContent className="panel-content">
-          <div className="chat-container" ref={chatContainerRef}>
-            
-          </div>
-        </CardContent>
-      </Card>
-    )}
+  <Card className="panel-card">
+    <CardHeader>
+      <CardTitle><Icon name="Vote" /> Voting Results</CardTitle>
+    </CardHeader>
+    <CardContent className="panel-content">
+      <VotingGraph voteResults={voteResults} players={gameState.players} />
+    </CardContent>
+  </Card>
+) : (
+  <Card className="panel-card">
+    <CardHeader>
+      <CardTitle><Icon name="Vote" />Voting</CardTitle>
+    </CardHeader>
+    <CardContent className="panel-content">
+      <div className="chat-container" ref={chatContainerRef}>
+        {/* Chat content */}
+      </div>
+    </CardContent>
+  </Card>
+)}
   </div>
 </div>
       
@@ -1318,23 +2099,29 @@ useEffect(() => {
         </Card>
       )}
       
-      {gameState.phase === 'night' && !animation && (
-        <Card>
-  <CardHeader>
-    <CardTitle>
-      <Icon name="Moon" /> Night Phase
-    </CardTitle>
-  </CardHeader>
-  <CardContent>
-    <div className="night-prompt">
-      <p>Night has fallen. The Mafia, Detective, and Doctor will make their moves...</p>
-      <Button className="night-button" onClick={handleProcessNight}>
-        Process Night Actions
-      </Button>
-    </div>
-  </CardContent>
-</Card>
+{gameState.phase === 'night' && !animation && (
+  <Card>
+    <CardHeader>
+      <CardTitle><Icon name="Moon" /> Night Phase</CardTitle>
+    </CardHeader>
+    <CardContent>
+      {isHumanPlayer && humanRole && (humanRole === "Mafia" || humanRole === "Detective" || humanRole === "Doctor") ? (
+        <HumanNightAction
+          gameState={gameState}
+          role={humanRole}
+          onSelection={handleHumanNightAction}
+        />
+      ) : (
+        <div className="night-prompt">
+          <p>Night has fallen. The Mafia, Detective, and Doctor will make their moves...</p>
+          <Button className="night-button" onClick={handleProcessNight}>
+            Process Night Actions
+          </Button>
+        </div>
       )}
+    </CardContent>
+  </Card>
+)}
       
       {gameState.phase === 'dawn' && (
  <Card>
@@ -1360,79 +2147,69 @@ useEffect(() => {
       )}
       
       {(gameState.phase === 'discussion' || discussion.length > 0) && (
-        <Card>
-  <CardHeader>
-    <CardTitle>
-      <Icon name="MessageSquare" /> Town Discussion
-    </CardTitle>
-  </CardHeader>
-  <CardContent>
-
-  {discussionInProgress && (
-  <div className="discussion-status">
-    <div className="loading-spinner"></div>
-    <p>Discussion in progress...</p>
-  </div>
-)}
-{/* Replace the discussion rendering code inside the chat-container in your JSX */}
-<div className="chat-container" ref={chatContainerRef}>
+  <Card>
+    <CardHeader>
+      <CardTitle>
+        <Icon name="MessageSquare" /> Town Discussion
+      </CardTitle>
+    </CardHeader>
+    <CardContent>
+      {discussionInProgress && data && data.progress < 100 && (
+        <DiscussionProgress 
+          current={data.current_count} 
+          total={data.total_expected}
+          nextSpeaker={data.next_speaker}
+        />
+      )}
+      
+      <div className="chat-container" ref={chatContainerRef}>
   {discussion.length === 0 && discussionInProgress ? (
     <div className="discussion-empty-state">
       <p>Waiting for players to begin discussion...</p>
     </div>
   ) : (
-    discussion.map((line, i) => {
-      if (!line || line.trim() === '') {
-        return null;
-      }
+    <>
+      <CollapsibleDiscussion 
+        discussion={discussion} 
+        gameState={gameState}
+      />
       
-      if (line.startsWith('---')) {
-        return <div key={i} className="discussion-section">{line}</div>;
-      }
-      
-      const colonIndex = line.indexOf(':');
-      if (colonIndex > 0) {
-        const playerName = line.substring(0, colonIndex).trim();
-        const message = line.substring(colonIndex + 1).trim();
-        const player = gameState.players?.find(p => p.name === playerName);
-        const isDead = player && !player.alive;
-        
-        return <ChatBubble 
-          key={i} 
-          player={playerName} 
-          message={message} 
-          isDead={isDead} 
-          personality={player?.personality}
-        />;
-      }
-      
-      return <div key={i} className="system-message">{line}</div>;
-    })
+      {waitingForHuman && (
+        <HumanDiscussionInput onSubmit={handleHumanDiscussion} />
+      )}
+    </>
+  )}
+  )
+  
+  {discussionInProgress && !waitingForHuman && data && data.next_speaker && (
+    <TypingIndicator 
+      playerName={data.next_speaker} 
+      personality={gameState.players?.find(p => p.name === data.next_speaker)?.personality}
+    />
   )}
   
-  {discussionInProgress && (
+  {discussionInProgress && !waitingForHuman && (!data || data.progress < 100) && (
     <div className="discussion-status">
       <div className="loading-spinner"></div>
       <p>Discussion in progress...</p>
     </div>
   )}
 </div>
-  </CardContent>
-  <CardFooter>
-    {gameState.phase === 'discussion' && (
-      <Button 
-  className="voting-button" 
-  onClick={handleProcessVoting}
-  isLoading={false}
-  loadingText="Processing votes..."
->
-  Proceed to Voting
-</Button>
-    )}
-  </CardFooter>
-</Card>
-
+    </CardContent>
+    <CardFooter>
+      {gameState.phase === 'discussion' && (
+        <Button 
+          className="voting-button" 
+          onClick={handleProcessVoting}
+          isLoading={false}
+          loadingText="Processing votes..."
+        >
+          Proceed to Voting
+        </Button>
       )}
+    </CardFooter>
+  </Card>
+)}
       
       {gameState.game_over && (
         <div className="game-over-actions">
@@ -1449,21 +2226,25 @@ const App = () => {
   const [gameId, setGameId] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
   
-  const handleStartGame = async (personalities) => {
-    try {
-      const result = await createGame(personalities);
-      if (result.game_id) {
-        setGameId(result.game_id);
-        setGameStarted(true);
-      } else {
-        console.error("Failed to create game:", result);
-      }
-    } catch (err) {
-      console.error('Error starting game:', err);
-    }
-  };
+  const [isHumanPlayer, setIsHumanPlayer] = useState(false);
 
-  
+
+// Update the handleStartGame function in App.js
+const handleStartGame = async (personalities, isHuman = false) => {
+  try {
+    console.log(`Creating game with ${personalities.length} personalities, human player: ${isHuman}`);
+    const result = await createGame(personalities, isHuman);
+    if (result.game_id) {
+      setGameId(result.game_id);
+      setIsHumanPlayer(isHuman);
+      setGameStarted(true);
+    } else {
+      console.error("Failed to create game:", result);
+    }
+  } catch (err) {
+    console.error('Error starting game:', err);
+  }
+};
 
   return (
     <div className="app">
@@ -1477,7 +2258,7 @@ const App = () => {
         {!gameStarted ? (
           <GameSetup onStartGame={handleStartGame} />
         ) : (
-          <GamePlay gameId={gameId} />
+          <GamePlay gameId={gameId} isHumanPlayer={isHumanPlayer} />
         )}
       </main>
       
