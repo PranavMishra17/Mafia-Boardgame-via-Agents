@@ -247,12 +247,43 @@ def generate_reports(args, config: Dict[str, Any], logger: logging.Logger) -> No
                 with open(eval_file, 'r') as f:
                     evals.append(json.load(f))
             
-            # Create aggregated data
-            aggregated = {}
-            
-            # TODO: Implement more comprehensive aggregation
-            # For now, just use a placeholder
-            aggregated["sample_size"] = len(evals)
+            # Extract metrics from evaluations
+            metrics = ["task_score", "coordination_score", "communication_score", "planning_score", "overall_score"]
+            aggregated = {"sample_size": len(evals)}
+
+            # Track win information
+            good_wins = 0
+            evil_wins = 0
+
+            # Process each evaluation
+            for eval_data in evals:
+                global_eval = eval_data.get("global_evaluation", {})
+                winner = global_eval.get("winner")
+                
+                if winner == "Good":
+                    good_wins += 1
+                elif winner == "Evil":
+                    evil_wins += 1
+                    
+                # Collect metrics
+                for metric in metrics:
+                    value = global_eval.get(metric, 0)
+                    
+                    # Update min/max/avg
+                    if f"min_{metric}" not in aggregated or value < aggregated[f"min_{metric}"]:
+                        aggregated[f"min_{metric}"] = value
+                        
+                    if f"max_{metric}" not in aggregated or value > aggregated[f"max_{metric}"]:
+                        aggregated[f"max_{metric}"] = value
+                        
+                    aggregated[f"sum_{metric}"] = aggregated.get(f"sum_{metric}", 0) + value
+
+            # Calculate averages and win rates
+            for metric in metrics:
+                aggregated[f"avg_{metric}"] = aggregated.get(f"sum_{metric}", 0) / len(evals) if evals else 0
+
+            aggregated["good_win_rate"] = good_wins / len(evals) if evals else 0
+            aggregated["evil_win_rate"] = evil_wins / len(evals) if evals else 0
             
             # Generate report
             report_path = report_gen.generate_comparative_report(aggregated)

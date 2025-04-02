@@ -1,0 +1,10 @@
+{
+  "score": 3,
+  "explanation": "The players demonstrate a moderate level of communication effectiveness. There is some sharing of observations and suspicions, but the reasoning is often vague or speculative. While there is an attempt to analyze the situation and question others, the discussion lacks clear alignment among the good team members, and there is no strong progression toward consensus. Players are engaging in strategic discussion, but it is somewhat scattered and emotional, which hinders effective decision-making. Deception detection is present but not particularly sharp, as accusations are based more on tone and behavior than concrete evidence.",
+  "key_strategies": [
+    "Questioning others' motives and actions (e.g., Player_5 questioning Player_2's quickness to lead)",
+    "Analyzing the implications of the Bad Guy's death (e.g., Player_1 and Player_3 speculating on Mafia tactics)",
+    "Observing emotional cues and behavior (e.g., Player_6 noting Player_3's nervousness and Player_2's defensiveness)",
+    "Encouraging others to provide reasoning (e.g., Player_1 asking for specifics from Player_5 and Player_2)"
+  ]
+}

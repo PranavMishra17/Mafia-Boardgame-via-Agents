@@ -401,8 +401,18 @@ class Game:
                     for player in self.players:
                         if not player.is_human and player.thoughts_log:
                             player.save_thoughts(self.id, self.round, self.thoughts_dir)
-                            
-                    return voting_results
+
+                    # Ensure we always return a proper result dictionary
+                    if voting_results is None:
+                        voting_results = {
+                            "votes": {},
+                            "exiled": None,
+                            "exiled_role": None,
+                            "game_over": False,
+                            "winner": None
+                        }
+                                                
+        return voting_results
         
     def check_game_over(self) -> Tuple[bool, Optional[str]]:
         """Check if the game is over.

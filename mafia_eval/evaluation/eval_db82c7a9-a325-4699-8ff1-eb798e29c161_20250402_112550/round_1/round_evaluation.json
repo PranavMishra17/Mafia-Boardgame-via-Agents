@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication in this round shows some strengths, such as players sharing observations and questioning each other\u2019s motives. However, the discussion lacks clear progression toward consensus, and there is limited strategic alignment among the good team members. While suspicions are raised, reasoning is often vague or speculative, and players focus more on accusing each other than building a coherent case. Deception detection is weak, as players do not effectively challenge inconsistencies or lies. Evil team members (if present) may be subtly deflecting attention, but this is not clearly identified by the good team.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

@@ -1,0 +1,63 @@
+{
+  "id": "879f2d62-fb9e-4ea0-9aec-b406bd4a738b",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_4 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_4 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: *Looks around nervously* What *really* happened last night? Huh? Isn\u2019t it odd that Player_1 was so quiet? Like, why didn\u2019t they speak up sooner? And Player_6\u2026 you weren\u2019t acting weird before, but now? Why so calm after Player_4 died? Isn\u2019t that\u2026 suspicious? Or is it just me?\nPlayer_5: *Leaning forward confidently* I think Player_3 raises some valid points. Player_1 has been unusually quiet, which feels off. And Player_6\u2019s calmness\u2014almost too calculated, wouldn\u2019t you say? It\u2019s like they\u2019re trying to blend in while the chaos unfolds. I\u2019d keep an eye on both of them. What do *you* think, Player_2? You\u2019ve been pretty reserved too.\nPlayer_1: *Leaning in calmly* Everyone\u2019s observations are interesting, though I think we should be cautious about jumping to conclusions without evidence. Suspicion based on demeanor can be misleading\u2014people react differently under pressure. \n\nPlayer_3 and Player_5, you\u2019ve pointed fingers, but what about your own actions last night? Player_6, do you have anything to say about staying calm? Let\u2019s hear from everyone before we decide.\nPlayer_6: *Speaking gently, with a thoughtful tone* \n\nI understand why my calmness might feel odd, especially after what happened to Player_4. But I promise, I\u2019m just trying to stay focused and read the room. I\u2019ve noticed Player_3 seems a little nervous\u2014almost like their emotions are bubbling over\u2014and Player_5 feels very confident, maybe too confident? It\u2019s worth paying attention to how people are reacting emotionally. \n\nWhat about you, Player_2? You\u2019ve been quiet\u2014how are you feeling about this?\nPlayer_2: *Slams hand on table* Enough dancing around! Let\u2019s cut through the fog. Player_3, you\u2019re acting jumpy, throwing out accusations left and right\u2014classic deflection. Got something to hide? And Player_5, backing them up so quickly? Feels coordinated to me. \n\nPlayer_6\u2019s calmness isn\u2019t alarming; it\u2019s your chaos that\u2019s suspicious. Explain yourselves, both of you. What exactly did you do last night?\n--- Discussion Round 2 ---\nPlayer_3: *Leans forward, eyes darting nervously around the group* Me? Acting jumpy? Really? Isn\u2019t that exactly what someone trying to frame me would say? Why are you so quick to turn this on me, Player_2? Are you hiding something? And Player_6... staying calm while Player_4 was killed? Isn\u2019t that a little *too* suspicious? Who stays calm after something like that? \n\nAnd Player_1\u2014playing it safe, trying to avoid attention\u2014why aren\u2019t you pointing fingers? What\u2019s your angle? What did *you* do last night? How do we know you didn\u2019t kill Player_4?\nPlayer_5: *Leaning back with a calm yet assertive demeanor* \n\nAlright, let\u2019s take a step back. Player_2 seems awfully eager to stir the pot, throwing accusations at Player_3 and myself without any real evidence. That kind of aggression feels more like deflection than genuine concern, don\u2019t you think? And Player_6, staying calm is one thing, but when someone\u2019s too composed after a murder, it raises questions. \n\nLet me ask you both\u2014Player_2 and Player_6\u2014what did *you* do last night? Why should we trust you?\nPlayer_1: *Speaking calmly, with a thoughtful tone* \n\nAlright, everyone, let\u2019s not lose sight of the bigger picture. We need clarity, not chaos. Player_3, I understand why you might feel cornered, but jumping to point fingers at me doesn\u2019t help your case. If I were trying to avoid attention, I wouldn\u2019t be speaking up now, would I?\n\nPlayer_2, your sudden aggression feels off to me\u2014why the rush to accuse multiple people without solid reasoning? And Player_6, your calm demeanor does stand out, but I don\u2019t want to jump to conclusions just yet. Let\u2019s hear from everyone\u2014what did you notice last night?\nPlayer_6: *Looking around the group with a soft, empathetic tone* \n\nI can feel how tense and uneasy everyone is\u2014it\u2019s understandable given what happened. Player_2, you seem frustrated, maybe even a little overwhelmed, and Player_3, your nerves are practically jumping off the table. I don\u2019t blame you both for being defensive, but the way you\u2019re turning on each other feels more emotional than logical.\n\nAs for me, I was focused on keeping someone safe last night. I won\u2019t share who, because I don\u2019t want to make them a target, but I did what I could to protect. Let\u2019s slow down and think carefully instead of letting emotions cloud judgment\u2014who\u2019s truly acting out of character?\nPlayer_2: *Leaning forward, voice firm* Enough dancing around. Player_6 claims to have \"protected\" someone last night\u2014how convenient. If you're the Doctor, prove it. Who did you save? Or are you just trying to dodge suspicion? \n\nAnd Player_3, your nervous energy isn't helping your case. Accusing everyone like that reeks of desperation. What\u2019s your role? Speak up now, or we\u2019ll assume the worst. \n\n*Pointing at the group* I\u2019m a Citizen, and I\u2019m here to sort this mess out. Let\u2019s get some real answers!",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "949a28fe-efd1-4009-a85f-bdaf713b94b1",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "30767578-1080-49f2-80d6-667766228b3f",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "9fe47308-7156-4b2b-ac16-cb039c4739ad",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "7d6ea7fb-2fd8-49f4-a88d-09a02ad4de0a",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "a909864f-676e-4318-b2a0-d39133f7508c",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "6b8bc232-c5b7-4c79-a572-f85c92bc8a4a",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

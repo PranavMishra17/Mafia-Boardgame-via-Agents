@@ -1,0 +1,63 @@
+{
+  "id": "d5b81bbb-93f5-4e1b-80f3-0e7c1760f383",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Doctor) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_2: Let\u2019s cut to the chase. Player_6 was the Doctor\u2014that\u2019s a major loss for us. We need answers, fast. Player_4, you\u2019ve been quiet. What\u2019s your role, and what did you do last night? Speak up. Suspicious silence doesn\u2019t sit well with me.\nPlayer_3: Player_3: *Nervously* Oh, oh, I mean, isn't it weird how Player_2 jumped straight to questioning Player_4? Like, why the urgency? Are you trying to shift the attention away from yourself? And Player_6\u2014the Doctor\u2014why them specifically? Could it be someone knew they'd protect the wrong person? Who's playing games here?\nPlayer_4: Player_4: Whoa, whoa, slow your roll, Player_2! Suspicious silence? More like dramatic pause. I\u2019m just savoring the chaos, like a fine wine. But fine, you want answers? Last night, I was busy failing at my job. Detective here\u2014*badges self with invisible sticker*\u2014and I came up empty. No Mafia ID\u2019d. So, either someone\u2019s playing sneaky, or I need a new magnifying glass. \n\nPlayer_3, though\u2014your nervous twitching is a *dead giveaway.* Or are you auditioning for a crime drama?\nPlayer_1: *Calmly* Alright, let\u2019s take a step back and breathe. Tensions are running high, understandably. If Player_4 is truly the Detective and came up empty, we\u2019re at a disadvantage, but that doesn\u2019t mean we should rush into accusations. \n\nPlayer_3, your nervousness is notable, but it could just be the pressure. And Player_2, your directness is helpful, but it might also come off as deflective. Let\u2019s hear more from everyone before jumping to conclusions\u2014what about you, Player_5? What\u2019s your take?\nPlayer_5: *Confidently* Ah, classic chaos\u2014music to my ears. Here\u2019s my take: Player_4 conveniently claims Detective after the Doctor is out of the picture. If that\u2019s true, they\u2019re critical to protect, but if it\u2019s a lie, it\u2019s a clever smokescreen. \n\nPlayer_2\u2019s urgency feels calculated, like someone trying to steer the narrative early. And Player_3\u2019s nervous fumbling? Could be guilt or just the weight of false accusations. I\u2019d say we dig deeper into Player_4\u2019s supposed \"Detective\" claim. What exactly did you do last night? Who did you investigate?",
+  "points": {
+    "good_team": 0,
+    "evil_team": 2
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "85d3e39c-d9c2-4515-ab0c-6629a1a0a5fc",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "965f9fa1-c2ea-41df-b5d8-bb00e76b9f52",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "299cb812-36ad-4f0c-9a6a-89bf3240928a",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c181ffbe-5748-49cd-891d-95e89f252f38",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Doctor",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "0c859de7-19d9-42ed-a6f2-3fa0a83bc208",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "0cbf9703-e26d-4ff6-9fe3-795d130dd70f",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

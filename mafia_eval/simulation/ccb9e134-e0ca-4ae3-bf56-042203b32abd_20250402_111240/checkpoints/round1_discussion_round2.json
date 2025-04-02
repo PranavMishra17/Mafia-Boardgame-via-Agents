@@ -1,0 +1,63 @@
+{
+  "id": "ccb9e134-e0ca-4ae3-bf56-042203b32abd",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: Well, isn't it strange how Player_6, someone who seemed completely harmless, ends up dead? Why them? Could it be someone trying to throw us off\u2014someone sneaky, calculated? *Why* would the Mafia avoid targeting someone louder? Player_1, you\u2019ve been awfully quiet... hiding something? Or am I just imagining connections where there aren\u2019t any?\nPlayer_2: Player_1 being quiet *is* suspicious, but let\u2019s not overlook Player_4 either. You\u2019ve been chiming in a little too conveniently, always agreeing but offering no real input. Defensive much? I don\u2019t like it. Explain your night or I\u2019ll have to start asking tougher questions.\nPlayer_5: Player_5 (You): *Interesting theories, everyone. But let\u2019s not get too hasty.* Player_4, you *have* been playing it safe\u2014why not speak up more? And Player_1, silence can be strategic, but it\u2019s also glaring right now.  \n\nI\u2019m watching closely, and one of you isn\u2019t as innocent as you\u2019re trying to appear. Care to share what you were up to last night?\nPlayer_1: Player_1: *Let\u2019s slow down here, everyone.* I understand the suspicion\u2014silence can look shady\u2014but I\u2019ve been carefully observing. Rushing into accusations without proof only helps the Mafia hide. \n\nPlayer_3, your theory is intriguing, but it seems like you\u2019re trying to redirect attention a bit too quickly. Could it be deflection? And Player_2, you\u2019ve been quite assertive\u2014what\u2019s driving your confidence? Let\u2019s hear everyone\u2019s thoughts calmly before jumping to conclusions.\nPlayer_4: \"Alright, folks, let\u2019s not play a game of 'pin the blame on the quiet guy' just yet! Maybe Player_1 was just busy perfecting their poker face, or they fell asleep mid-game\u2014who knows? As for me, I spent the night dreaming of donuts and dodging accusations. \n\nBut Player_2, you're throwing shade faster than a tree in summer\u2014feeling guilty, perhaps? And Player_3, your theory sounds like a detective novel, but are you the author or the culprit? Let\u2019s spill the tea; who\u2019s got the receipts?\"\n--- Discussion Round 2 ---\nPlayer_3: \"Ah, receipts, Player_4? Funny you\u2019d mention that\u2014deflecting much? Why so eager to dodge and joke around? Nervous about something? And Player_1, calmly observing? Or calmly *plotting*? Who just 'observes' while chaos unfolds? Suspicious, don\u2019t you think? \n\nAlso, Player_2, you\u2019re pretty assertive, sure, but maybe it's because you're sniffing out the truth, not hiding it. Could it be that Player_4 and Player_1 are trying to team up here? Coincidence... or conspiracy?\"\nPlayer_2: \"Enough chit-chat, folks. Let\u2019s get to the bottom of this. Player_4, you\u2019re throwing jokes around like confetti\u2014classic diversion tactic. What are you hiding? And Player_1, your 'careful observing' feels more like calculated silence. \n\nHere\u2019s my take: one of you is trying way too hard to stay under the radar. Spill it\u2014what were you doing last night? Innocent people don\u2019t stay this quiet or playful when lives are on the line.\"\nPlayer_5: \"Interesting how quickly some of you are pointing fingers without concrete evidence. Nervous energy from Player_4 and Player_2, perhaps? Jokes and aggression can both be masks for guilt. \n\nPlayer_3, though, you've been subtly stirring the pot without committing\u2014are you testing waters or hiding something? Let\u2019s focus. Who\u2019s been acting out of character since Player_6\u2019s death?\"\nPlayer_1: \"Alright, everyone, let\u2019s take a breath. We need to focus on patterns, not just accusations. Player_4\u2019s humor could be a deflection, but it could also just be their way of coping with pressure. Player_2\u2019s assertiveness might be genuine frustration\u2014or a way to control the narrative. And Player_3, you're quick to stir suspicion but not quick to offer much clarity.\n\nLet\u2019s think carefully here. Who benefits most from this chaos? We need logic, not just noise.\"\nPlayer_4: \"Wow, I\u2019m getting called out more than my internet provider during peak hours. Alright, alright\u2014Player_3, you\u2019re throwing around accusations like spaghetti at a wall. Are you hoping something sticks or just hungry for drama? \n\nAnd Player_2, you\u2019re right, I joke when I\u2019m nervous. But nervous isn\u2019t guilty\u2014it\u2019s just my default setting! As for last night, I was sleeping soundly, dreaming of a town where people didn\u2019t throw shade at comedians. What about *your* night, hmm?\"",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "47b2fb6a-deed-40d1-9b7a-a19873174758",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "f2ef4a4a-7cfb-49d1-a115-4227222d3ab2",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "b28de838-6c6d-4064-b85d-265b4eab310d",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "34b3ab23-289c-4871-a91a-34c683d1a96f",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "06b4be39-1b34-4b16-b67b-19ed03fd0210",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "e763ce93-cc46-4d9c-a3c8-681b1f928151",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

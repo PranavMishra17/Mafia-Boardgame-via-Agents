@@ -1,0 +1,63 @@
+{
+  "id": "db82c7a9-a325-4699-8ff1-eb798e29c161",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: *shifty eyes* I mean... don't you think it's weird that Player_6 got killed? Like, why them? Was someone trying to silence them? Did they know something? *nervous laugh* And Player_1... you\u2019ve been awfully quiet. What\u2019s that about? Coincidence or... something else?\nPlayer_5: *calm, calculating tone* Interesting observation, Player_3. But let's think strategically\u2014Player_6 was likely chosen because they posed no immediate threat. Maybe the Mafia wanted to sow confusion rather than targeting someone obvious. \n\nAs for Player_1 being quiet... it *is* suspicious. But isn\u2019t it also convenient for Player_3 to throw accusations so quickly? Maybe they\u2019re deflecting attention. What do you all think?\nPlayer_1: *calmly, with a thoughtful tone* I understand why my quietness might seem suspicious, but I\u2019ve been observing, trying to make sense of everything. I think Player_5 makes a good point\u2014Player_3\u2019s quick accusation could be a deflection tactic. \n\nLet\u2019s not rush to conclusions, though. Player_3, why do you think Player_6 was targeted specifically? And Player_5, do you have any theories about who could benefit most from this choice?\nPlayer_4: *smirks* Well, Player_6 definitely didn\u2019t die from their karaoke skills\u2014trust me, I\u2019ve heard better shower concerts. But seriously, Player_3 throwing accusations faster than I eat pizza? Suspicious. And Player_1 being quieter than my aunt\u2019s cat during thunderstorms? Also suspicious. \n\nBut hey, maybe the Mafia just wanted to keep us guessing. Or they were scared of Player_6\u2019s board game prowess! What do you think, Player_5\u2014strategy or just chaos?\nPlayer_2: Alright, everyone, enough tiptoeing around. Let\u2019s cut through the noise. Player_3, you\u2019re coming out swinging pretty fast for someone who\u2019s \u201cjust observing.\u201d Deflection much? And Player_1, you\u2019re sitting back quietly, claiming to be thoughtful, but silence doesn\u2019t clear you. Speak up\u2014what do *you* know?\n\nPlayer_5, you\u2019re playing neutral, but your strategic tone doesn\u2019t fool me. If you\u2019re innocent, prove it\u2014who do you suspect? Too many vague answers, not enough action. Let\u2019s get to the truth.",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "2f52d3ad-ffe1-42e2-979c-5c1793283f56",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c9e46107-8bb0-44cd-bc82-e1f55f7a1247",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "fb282fc4-9148-444d-98bc-e82251d8bae9",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "3986e946-0433-4423-a487-2072c5a155f3",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "226e8163-15c7-4658-b2b6-37118f5d3f35",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "aacb3731-3eb6-48af-b9f4-3eb6d034414e",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

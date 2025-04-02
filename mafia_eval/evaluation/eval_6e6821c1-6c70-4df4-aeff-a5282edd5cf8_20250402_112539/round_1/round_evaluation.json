@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication in this round shows some strengths, such as active participation and attempts to share observations. However, it lacks structured reasoning and alignment among players. While accusations and rebuttals are exchanged, they are largely emotional and speculative rather than grounded in evidence. Good team members do not seem to be working cohesively, and there is limited strategic discussion or progression toward consensus. Deception detection is weak, as players focus more on tone and behavior than inconsistencies or logical gaps.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

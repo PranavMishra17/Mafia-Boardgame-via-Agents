@@ -1,0 +1,27 @@
+{
+  "game_id": "4c5ef21b-2e25-4486-a9fe-b7ace248f540",
+  "evaluation_name": "eval_4c5ef21b-2e25-4486-a9fe-b7ace248f540_20250402_112141",
+  "round_evaluations": {
+    "1": {
+      "round_num": 1,
+      "communication_score": 0.5,
+      "communication_feedback": "The players demonstrate some effort to share information and engage in strategic discussion, but the communication lacks structure and clarity. While suspicions are raised and accusations are made, reasoning is often vague or based on weak premises (e.g., calmness or quietness being equated with guilt). There is limited alignment among the good team members, and the discussion feels scattered rather than focused on building consensus. Players do attempt to detect deception, but their methods are inconsistent and overly reliant on subjective impressions rather than logical deduction.",
+      "planning_score": 0.0,
+      "planning_feedback": "Error in evaluation.",
+      "coordination_score": 0.25
+    }
+  },
+  "global_evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.25,
+    "communication_score": 0.5,
+    "planning_score": 0.0,
+    "winner": "Evil",
+    "good_team_points": 0,
+    "evil_team_points": 7,
+    "task_completion_rate": 0.0,
+    "good_team_survival_rate": 0.5,
+    "rounds_played": 1,
+    "overall_score": 0.125
+  }
+}

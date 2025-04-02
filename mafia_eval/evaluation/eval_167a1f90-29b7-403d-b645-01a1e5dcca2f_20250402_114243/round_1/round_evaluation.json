@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The players demonstrate some effort to share information and engage in strategic discussion, but the communication lacks focus and alignment. While suspicions are raised, reasoning is often vague or emotionally charged rather than logical. There is little evidence of good team members working together effectively, and the discussion lacks clear progression toward consensus on who to vote out. Deception detection is minimal, as accusations are based more on behavior than concrete evidence.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

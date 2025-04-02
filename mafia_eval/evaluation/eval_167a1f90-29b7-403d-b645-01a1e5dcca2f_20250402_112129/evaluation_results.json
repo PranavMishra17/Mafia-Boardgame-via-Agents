@@ -1,0 +1,27 @@
+{
+  "game_id": "167a1f90-29b7-403d-b645-01a1e5dcca2f",
+  "evaluation_name": "eval_167a1f90-29b7-403d-b645-01a1e5dcca2f_20250402_112129",
+  "round_evaluations": {
+    "1": {
+      "round_num": 1,
+      "communication_score": 0.5,
+      "communication_feedback": "The communication in this round shows some effort to share suspicions and engage in discussion, but it lacks clear reasoning and alignment. Players are quick to accuse each other without providing substantial evidence or logical arguments. While there is some attempt to gather information, the conversation is dominated by emotional reactions and humor, which detracts from strategic decision-making. There is little progression toward consensus, and good players do not seem to effectively detect lies or inconsistencies.",
+      "planning_score": 0.0,
+      "planning_feedback": "Error in evaluation.",
+      "coordination_score": 0.25
+    }
+  },
+  "global_evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.25,
+    "communication_score": 0.5,
+    "planning_score": 0.0,
+    "winner": "Evil",
+    "good_team_points": 0,
+    "evil_team_points": 8,
+    "task_completion_rate": 0.0,
+    "good_team_survival_rate": 0.5,
+    "rounds_played": 1,
+    "overall_score": 0.125
+  }
+}

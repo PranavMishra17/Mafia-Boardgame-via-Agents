@@ -1,0 +1,63 @@
+{
+  "id": "db82c7a9-a325-4699-8ff1-eb798e29c161",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "2f52d3ad-ffe1-42e2-979c-5c1793283f56",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c9e46107-8bb0-44cd-bc82-e1f55f7a1247",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "fb282fc4-9148-444d-98bc-e82251d8bae9",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "3986e946-0433-4423-a487-2072c5a155f3",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "226e8163-15c7-4658-b2b6-37118f5d3f35",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "aacb3731-3eb6-48af-b9f4-3eb6d034414e",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

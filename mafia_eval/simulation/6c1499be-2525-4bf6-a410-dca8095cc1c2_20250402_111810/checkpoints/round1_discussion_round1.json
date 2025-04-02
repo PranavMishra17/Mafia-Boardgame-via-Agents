@@ -1,0 +1,63 @@
+{
+  "id": "6c1499be-2525-4bf6-a410-dca8095cc1c2",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nDoctor successfully saved Player_3.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_6: *softly, with a thoughtful tone* \"I feel like Player_3 must be relieved after being saved last night. That was close. But... I can't help but notice Player_2 seems a bit quiet. Maybe they're trying to keep a low profile? How are you feeling about all this, Player_2?\"\nPlayer_1: *calmly, with a measured tone* \"I think Player_6 raises an interesting point. Player_2 has been quieter than usual, and that can sometimes signal hesitation or hiding something. But I also wonder\u2014how did the Doctor know to save Player_3? Could there be more to that choice? It might be worth hearing from Player_3 too.\"\nPlayer_4: *grinning and leaning back casually* \"Well, well, sounds like Player_2's got a case of the 'silent treatment'\u2014classic Mafia move, or just a terrible Wi-Fi connection? Hard to tell these days. And Player_3 being saved\u2014what a lucky duck! But you know, they say when you dodge death, it makes you quack suspiciously louder. So, Player_3, any new life perspectives after your brush with danger?\"\nPlayer_5: *leans forward confidently, a calculating look in my eyes* \"Interesting points all around. Player_3 being saved does make me curious\u2014were they a target because someone knows something about them? Or was it just a random choice? As for Player_2, quiet doesn't always mean guilty, but it does make me wonder. Player_6 is quick to push that narrative, though. Could be an attempt to deflect attention... What do you think, Player_6? Why focus on Player_2 so early?\"\nPlayer_3: *eyes darting nervously* \"Whoa, whoa, whoa, hold up\u2014why is everyone so fascinated with me being saved? Are we really saying the Doctor just magically knew I was in danger? Or does someone here know more than they\u2019re letting on? *Looks around suspiciously* Could the Mafia have slipped up, targeting me because I\u2019m onto something? And Player_2, why so quiet? Guilt eating you alive, or just a strategy to seem harmless? I mean, how can we trust anyone here?!\"\nPlayer_2: *snaps back sharply* \"Alright, everyone, calm down! First off, Player_6, you're fishing way too hard by calling me out for being quiet\u2014I've been observing, not hiding. That\u2019s strategy, not guilt. Second, Player_3, you\u2019ve got a lot of nervous energy for someone who just got saved. Care to explain why you think the Mafia targeted you? Got something you\u2019re hiding? And Player_1, you\u2019re real curious about the Doctor\u2019s choice\u2014maybe because you know more than you should? Spill it, all of you!\"",
+  "points": {
+    "good_team": 2,
+    "evil_team": 0
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "fe14fd06-1be0-4101-8a73-4d45e0c4f3cc",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c1d04605-d56f-4c0c-86ea-9dd313866170",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "685cce70-4a80-4d54-a892-44db947aae0a",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "0a97154d-7ee2-46fe-a3b7-1b0cbd912f2e",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "a58f4cb8-7459-44c1-8f6c-e55e200dc5e5",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "61fe8e88-2daf-4081-931e-f24ae40f279e",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

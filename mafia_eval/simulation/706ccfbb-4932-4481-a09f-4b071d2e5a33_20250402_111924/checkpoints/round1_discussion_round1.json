@@ -1,0 +1,63 @@
+{
+  "id": "706ccfbb-4932-4481-a09f-4b071d2e5a33",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nDoctor successfully saved Player_3.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_2: Listen up, everyone. First, let's focus on facts. Detective failed last night, which means they either picked a Citizen or someone\u2019s hiding their role too well. But the Doctor saved Player_3\u2014why? Either they were targeted or someone tipped the Doctor off. Player_3, care to explain why you were a target? Or are you hiding something? Spill it.\nPlayer_4: Hoo boy, Player_2 coming in hot with the interrogation! Maybe they're auditioning for an HBO crime drama. But seriously, Player_3, you do have some explaining to do\u2014are you secretly the town's Beyonc\u00e9, getting all the attention? Or is someone just really bad at picking targets? Either way, I\u2019m keeping my clown nose on for now, but something smells funny... and it\u2019s not my joke!\nPlayer_3: Player_2, Player_4, why are you both so eager to point fingers at me? What\u2019s your angle here? Are you trying to shift the attention off yourselves? Maybe *you\u2019re* the ones hiding something! Why would I be targeted\u2014unless someone thought I was important to the town? And now this sudden focus on me... Coincidence? Or calculated? What do *you* have to say about your nights?\nPlayer_1: Let\u2019s take a step back here, everyone. It\u2019s too early to jump to conclusions without evidence. Sure, Player_3 being saved might mean they were targeted\u2014but it could also be a lucky guess by the Doctor. We don\u2019t know for sure. \n\nPlayer_2 and Player_4, why focus so heavily on Player_3? It feels a little like deflection. Can we hear more about your nights before we start pointing fingers? Let\u2019s stay calm and work through this together.\nPlayer_6: You know, I\u2019m feeling a lot of tension in the room right now\u2014especially around Player_3. Player_2 and Player_4 seem really fixated on them, and Player_3 feels defensive, which makes sense given the spotlight. But I can't shake the feeling that someone\u2019s trying to stir the pot here.\n\nPlayer_2, why are you so quick to question Player_3? And Player_4, you\u2019re deflecting with humor\u2014what\u2019s your role? Let\u2019s try to understand each other\u2019s emotions and motives before jumping to conclusions. I feel like someone\u2019s hiding something.\nPlayer_5: Player_3 being saved is definitely interesting, but the real question is: who benefits from stirring this drama? Player_2 and Player_4 are pushing hard on Player_3, almost too hard. That feels calculated. \n\nPlayer_2, you seem overly focused on Detective mechanics, and Player_4, your jokes are conveniently distracting. Are either of you trying to cover something up? Let's hear more about your nights\u2014what did you *really* do?",
+  "points": {
+    "good_team": 2,
+    "evil_team": 0
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "a2c7d70b-ab3d-4dd4-9641-d5f633bb97e6",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "fbd647ca-e50f-4584-a09b-d889b4fda28d",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "a58332aa-8a3d-4b42-9da5-ff9004efb98c",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c475581b-40ac-475c-b3e1-38d4f232059c",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "29983d73-5a85-446a-bef6-427470e7652c",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "73523b2a-9142-4c38-8cc2-78190402627b",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "task_score": 1.0,
+  "coordination_score": 0.25,
+  "communication_score": 0.5,
+  "planning_score": 0.0,
+  "winner": "Good",
+  "good_team_points": 7,
+  "evil_team_points": 1,
+  "task_completion_rate": 1.0,
+  "good_team_survival_rate": 1.0,
+  "rounds_played": 1,
+  "overall_score": 0.625
+}

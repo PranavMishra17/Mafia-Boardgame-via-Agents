@@ -1,0 +1,63 @@
+{
+  "id": "167a1f90-29b7-403d-b645-01a1e5dcca2f",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Doctor) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: It's a tragic loss losing Player_6 so early. I think we should focus on gathering information calmly. Did anyone notice unusual behavior or have any clues from their role? Let's piece this together step by step.\nPlayer_5: Player_5: Losing Player_6 is tough, especially since they were the Doctor. Here's the thing\u2014Player_4 was awfully quiet last night. Sometimes silence speaks louder than words. What were you up to, Player_4? Anything you'd like to share?\nPlayer_3: Player_3: Why is Player_5 pointing fingers so quickly at Player_4? Isn't that... suspicious? Deflecting, maybe? And Player_1, why so calm and collected\u2014trying to steer the group subtly? Could be a strategy, no? *nervously glances around* What if they both know something they're not telling us? What are they hiding?\nPlayer_4: Player_4: Whoa, whoa, hold your horses! My silence last night wasn't suspicious\u2014it was beauty sleep, folks. Gotta keep my sense of humor sharp for moments like this!  \n\nBut hey, Player_5, you're quick to point fingers. Are you a detective or just auditioning for the role of lead drama queen? And Player_3, your nervous glances are louder than popcorn at a horror movie. Spill the tea, my friends\u2014what were *you* up to last night?\nPlayer_2: Alright, enough dancing around. Let's focus. Player_5, you're awfully eager to accuse Player_4 right out of the gate. Why the rush? Guilty conscience or trying to stir the pot? And Player_3, your nervous energy is setting off alarms\u2014why so jumpy? Speak plainly, everyone. We need answers now.",
+  "points": {
+    "good_team": 0,
+    "evil_team": 2
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "e654ce78-d249-44e1-a22f-23817d1b4852",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "844c275f-185a-4ecd-a4d1-cbacdd799f9a",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "35a406b9-2c0d-4509-b0e4-cd48cbb5e94f",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "855c2251-471d-412f-ac2a-b482daae6856",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Doctor",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "de0dcf79-2bb5-4277-a8f9-a8fe89eef6b3",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "7d8f3b2b-9f51-40f2-a1bc-f049a11cbbd3",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "4592bc87-a286-4cb4-a078-9ce71230839a",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: *shifty eyes* I mean, isn't it weird how Player_1 is just... quiet? Too quiet, maybe? Like, why would someone stay so under the radar if they weren\u2019t hiding something? Or\u2014or could it be Player_5? They were acting all... I don\u2019t know, overly helpful yesterday. Who does that unless they\u2019re trying to look innocent? Or am I just overthinking this? What do you all think?\nPlayer_4: Oh, Player_3, coming in hot with the Sherlock vibes, huh? I mean, Player_1 being quiet could just mean they're plotting their next move... or maybe their Wi-Fi is lagging. Or maybe Player_5 is just naturally helpful\u2014you know, like the person who holds the door open and then regrets it when ten people walk through? \n\nBut hey, *why* are you throwing so much shade, Player_3? Feeling guilty about something? Or just woke up on the wrong side of the strategy? \ud83d\ude0f\nPlayer_1: Player_3, you\u2019re throwing a lot of names out there, but let\u2019s not rush to conclusions. I think it\u2019s fair to question behavior, but we need evidence, not just vibes. \n\nPlayer_4, I see your point\u2014sometimes quietness is just quietness. But why are you deflecting attention back onto Player_3 so quickly? Could you be trying to steer us away from something? Let's calmly break down everyone\u2019s actions last night.\nPlayer_5: Player_5: Well, I agree we need to break this down carefully. Player_3, you came out swinging with accusations, which *could* be a tactic to deflect suspicion. But Player_4, you were quick to bounce it back to Player_3\u2014feels a little like scrambling for cover.  \n\nAnd Player_1, staying neutral is smart, but maybe *too* smart? If we\u2019re hunting for Mafia, sitting on the sidelines won\u2019t cut it. Let\u2019s hear specifics from all of you\u2014what did you notice or do last night?\nPlayer_2: Alright, listen up. Player_3 is throwing out accusations faster than I can keep track\u2014classic tactic to confuse us and muddy the waters. Suspicious. Player_4 being all snarky and deflective? Also suspicious. And Player_1, staying neutral and quiet? Could be a strategy to dodge attention.\n\n*Everyone*, I want to hear clear answers: What did you do last night? No vague excuses, no dodging questions. Let's get to the bottom of this, now.\n--- Discussion Round 2 ---\nPlayer_3: Oh, oh, so now I\u2019m the \u201caccuser\u201d because I\u2019m actually *trying* to figure this out? Isn\u2019t that what we\u2019re *supposed* to do? Why is Player_4 suddenly so defensive, huh? Are you trying to hide something? And Player_1, all this calm neutrality\u2014doesn\u2019t that seem a bit *too* calculated? Like, are you just sitting back, waiting for everyone else to tear each other apart?\n\nAnd Player_5, you\u2019re calling me out for \u201cswinging accusations,\u201d but aren\u2019t you doing the exact same thing? Is this some kind of reverse psychology trick? What if *you\u2019re* the one confusing us? What did you actually DO last night, huh?\nPlayer_4: Player_4: Whoa, whoa, Player_3, slow your roll! You're tossing accusations like confetti at a party\u2014and I love a good party, but this one's feeling a little sketchy. \n\nAs for me, last night? I *slept* like a baby. No funny business here, unless you count dreaming about pizza. But seriously, Player_3, your hyperactive finger-pointing feels like you're trying to juggle suspicion off yourself. What's up with that?\nPlayer_1: Alright, everyone, let's take a breath here. Tensions are high, but we need clarity, not chaos. \n\nPlayer_3, your eagerness to accuse is noted\u2014it could be genuine, or it could be deflection. Player_4, you're quick to deflect back, and while your humor is appreciated, it doesn't erase suspicion. Player_5 and Player_2 are pressing hard for answers, which is fair, but we need specifics.\n\nHere's my question: What did each of you *do* last night? Were you active, or did you simply lay low? Let's focus on actions, not just words.\nPlayer_5: Player_5 (Me): Alright, everyone, let\u2019s cut through this web of accusations. Last night, I was *active*\u2014but not in the way you might think. I stayed alert for potential danger, and I can confidently say I made a decision that helped this group. \n\nPlayer_3, your scattershot accusations do feel like a smokescreen. Player_4, deflecting with humor is charming, but it doesn\u2019t clear you. And Player_1\u2019s calm, neutral stance? Could be strategy, could be genuine. \n\nPlayer_2, though\u2014your laser focus on grilling others might be protective, or it might be an attempt to control the narrative. What\u2019s your angle? Let\u2019s hear specifics from everyone.\nPlayer_2: Alright, listen up, everyone. Player_3\u2019s scattershot accusations are suspicious, yes, but don't let Player_4\u2019s humor distract us either\u2014that\u2019s classic deflection. And Player_1, sitting back like the voice of reason? Could be calculated to avoid scrutiny. \n\nPlayer_5 claims to have \"helped\" the group last night without giving specifics\u2014sounds like bluffing to me. I'll ask again: What exactly did *each* of you do last night? No vague answers. If you\u2019re innocent, prove it. Let\u2019s get to the bottom of this.",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "488ecd56-4213-4b1c-ab42-3083304c4359",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e1a4195b-d3b2-4e0a-a080-ada6569fe540",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "c08b2b8e-9e57-4d5e-a46e-c462306cbb46",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e25b1767-ff1a-41f4-81b0-c2c990ec9822",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "5f45b620-8381-4cb3-80b8-632d5a7f7898",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "358de1b8-1d71-4581-8a95-6c1c37f23ada",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

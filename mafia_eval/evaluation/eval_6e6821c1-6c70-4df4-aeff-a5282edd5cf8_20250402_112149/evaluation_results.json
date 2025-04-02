@@ -1,0 +1,27 @@
+{
+  "game_id": "6e6821c1-6c70-4df4-aeff-a5282edd5cf8",
+  "evaluation_name": "eval_6e6821c1-6c70-4df4-aeff-a5282edd5cf8_20250402_112149",
+  "round_evaluations": {
+    "1": {
+      "round_num": 1,
+      "communication_score": 0.5,
+      "communication_feedback": "The communication in this round shows some strengths, such as players actively engaging with each other and questioning behaviors. However, there are notable weaknesses: accusations are made without substantial evidence, and the discussion lacks clear progression toward consensus. While players share observations and suspicions, the reasoning behind their claims is often vague or emotionally driven rather than logical. Alignment among good team members is weak, as they are not working together to systematically analyze the situation. Strategic discussion is present but scattered, and deception detection is limited, with players focusing more on surface-level behaviors than inconsistencies in statements.",
+      "planning_score": 0.0,
+      "planning_feedback": "Error in evaluation.",
+      "coordination_score": 0.25
+    }
+  },
+  "global_evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.25,
+    "communication_score": 0.5,
+    "planning_score": 0.0,
+    "winner": "Evil",
+    "good_team_points": 0,
+    "evil_team_points": 7,
+    "task_completion_rate": 0.0,
+    "good_team_survival_rate": 0.5,
+    "rounds_played": 1,
+    "overall_score": 0.125
+  }
+}

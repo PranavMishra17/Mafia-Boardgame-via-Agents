@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The discussion demonstrates moderate communication effectiveness. Players share some observations and suspicions, but the reasoning is often vague or speculative. While there is some effort to align decisions and analyze motives, the conversation lacks a clear progression toward consensus. Good players show limited ability to detect deception or inconsistencies, and the discussion occasionally veers into humor or deflection, which dilutes the strategic focus.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

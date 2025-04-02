@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication in this round shows some strengths, such as players sharing observations and engaging in strategic discussion about the murder of Player_4. However, there are notable weaknesses: the reasoning behind accusations is not fully explained, and the group struggles to align their decisions or progress toward consensus. While there is some attempt to detect deception, it lacks depth and logical follow-through.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

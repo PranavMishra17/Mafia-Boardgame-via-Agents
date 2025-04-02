@@ -1,0 +1,63 @@
+{
+  "id": "6e6821c1-6c70-4df4-aeff-a5282edd5cf8",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_5 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_5 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: *shifty glance around the group* Oh, suspicious? Are you kidding me? *laughs nervously* How do we even know who to trust here? I mean, Player_2... you were awfully quiet last night, weren\u2019t you? *raises an eyebrow* What were you doing while poor Player_5 was taken out? Coincidence? Or something more? Huh?\nPlayer_1: Hmm, Player_3, that's quite an accusation right off the bat. Let\u2019s not rush to conclusions without evidence, though. It's possible Player_2 was quiet because they were observing, not acting. I think we should hear from everyone first before pointing fingers. What did you all notice last night?\nPlayer_2: Alright, listen here. I was quiet last night because I was focused\u2014observing, not scheming. Meanwhile, Player_3 seems awfully jumpy, throwing accusations without evidence. Classic deflection tactic. Why so defensive, Player_3? Got something to hide? Everyone else, speak up\u2014where were you, and what did you notice? Let\u2019s get to the bottom of this.\nPlayer_4: Oh boy, things are heating up faster than a microwave burrito! Alright, let's break it down: Player_3 is throwing shade at Player_2, while Player_2 is tossing it right back like a hot potato. Meanwhile, Player_1's playing Switzerland over there\u2014neutral, cool, and collected.\n\nAs for me, I was busy not dying last night, thank you very much. But between Player_3's nervous chuckles and Player_2's sharp rebuttal, I gotta say, someone\u2019s acting like they\u2019ve got ants in their pants. Just saying! What were *you* up to, Player_6? You\u2019ve been quiet as a mime so far. Spill the beans!\nPlayer_6: Oh wow, Player_4, you're right\u2014things are getting intense already. I was just taking it all in, trying to feel out the energy in the room. Honestly, Player_3 seems a little... unsettled? Nervous, maybe? And Player_2 feels defensive, but maybe that\u2019s justified given the heat they\u2019re under.\n\nBut Player_1\u2014your calm neutrality stands out to me. Are you genuinely observing, or are you staying quiet to avoid attention? I\u2019d love to hear more from you.",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "b6a2bb26-2203-4c97-897b-453456501130",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "6ab3291c-9243-4474-94bd-001262b44ca9",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "547c75f4-9ebc-4175-9103-3237274ce9fa",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "16f7d83a-1272-44af-ac4e-434ef113e728",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "da2d6cd5-14bd-445a-8947-743a8a08392e",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "b4ca4bd0-d25c-486f-9d1f-d621c690adf8",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

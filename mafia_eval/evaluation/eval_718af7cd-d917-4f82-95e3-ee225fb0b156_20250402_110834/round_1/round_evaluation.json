@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication in this round shows some strengths, such as players sharing observations and engaging in strategic discussion. However, there are notable weaknesses, including a lack of clear alignment among good team members and limited progression toward consensus. Players are questioning each other and raising suspicions, but the reasoning behind accusations is not always fully explained, and the discussion feels fragmented rather than collaborative. Deception detection is present but not particularly strong, as players focus more on emotional cues than logical inconsistencies.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

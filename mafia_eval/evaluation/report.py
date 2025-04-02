@@ -467,7 +467,7 @@ class ReportGenerator:
         plt.savefig(os.path.join(save_dir, 'metric_comparison_chart.png'), bbox_inches='tight')
         plt.close()
     
-    def _create_win_rate_chart(self, aggregated_data: Dict[str, Any], save_dir: str, report_dir: str, round_evals: Dict[int, Dict[str, Any]], global_eval: Dict[str, Any]) -> None:
+    def _create_win_rate_chart(self, aggregated_data: Dict[str, Any], save_dir: str) -> None:
         """Create a chart showing win rates.
         
         Args:
@@ -478,41 +478,34 @@ class ReportGenerator:
         good_win_rate = aggregated_data.get("good_win_rate", 0)
         evil_win_rate = aggregated_data.get("evil_win_rate", 0)
         
-        # Create figure
-        plt.figure(figsize=(8, 6))
-        
-        labels = ['Good Team', 'Evil Team']
-        sizes = [good_win_rate, evil_win_rate]
-        colors = ['#66b3ff', '#ff9999']
-        explode = (0.1, 0)  # explode the 1st slice (Good Team)
-        
-        plt.pie(sizes, explode=explode, labels=labels, colors=colors,
-                autopct='%1.1f%%', shadow=True, startangle=90)
-        plt.axis('equal')  # Equal aspect ratio ensures the pie chart is circular
-        plt.title('Win Rate Distribution')
+        # Check for zero values to avoid division errors
+        if good_win_rate == 0 and evil_win_rate == 0:
+            # Create empty chart with message
+            plt.figure(figsize=(8, 6))
+            plt.text(0.5, 0.5, "No win rate data available", 
+                    horizontalalignment='center', verticalalignment='center',
+                    transform=plt.gca().transAxes, fontsize=14)
+            plt.axis('off')
+        else:
+            # Create figure
+            plt.figure(figsize=(8, 6))
+            
+            labels = ['Good Team', 'Evil Team']
+            sizes = [good_win_rate, evil_win_rate]
+            colors = ['#66b3ff', '#ff9999']
+            explode = (0.1, 0) if good_win_rate > 0 else (0, 0.1)
+            
+            plt.pie(sizes, explode=explode, labels=labels, colors=colors,
+                    autopct='%1.1f%%', shadow=True, startangle=90)
+            plt.axis('equal')  # Equal aspect ratio ensures the pie chart is circular
+            plt.title('Win Rate Distribution')
         
         # Save figure
         plt.savefig(os.path.join(save_dir, 'win_rate_chart.png'), bbox_inches='tight')
         plt.close()
-        self._create_round_metrics_chart(round_evals, save_dir)
-        self._create_score_radar_chart(global_eval, save_dir)
-        
-        html_path = os.path.join(report_dir, "report.html")
-        logger.info(f"Generated game report at {html_path}")
-        return html_path
     
-    def generate_comparative_report(self, 
-                                 aggregated_data: Dict[str, Any],
-                                 report_name: Optional[str] = None) -> str:
-        """Generate a comparative report across multiple evaluations.
-        
-        Args:
-            aggregated_data: Aggregated evaluation data
-            report_name: Custom name for the report
-            
-        Returns:
-            Path to the generated report
-        """
+    def generate_comparative_report(self, aggregated_data: Dict[str, Any], report_name: Optional[str] = None) -> str:
+        """Generate a comparative report across multiple evaluations."""
         if report_name is None:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             report_name = f"comparative_report_{timestamp}"
@@ -524,8 +517,12 @@ class ReportGenerator:
         html_content = self._create_comparative_html_report(aggregated_data)
         html_path = os.path.join(report_dir, "report.html")
         
-        with open(html_path, 'w') as f:
+        with open(html_path, 'w', encoding='utf-8') as f:
             f.write(html_content)
             
         # Create visualization figures
-        self._create_
+        self._create_metric_comparison_chart(aggregated_data, report_dir)
+        self._create_win_rate_chart(aggregated_data, report_dir)
+        
+        logger.info(f"Generated comparative report at {html_path}")
+        return html_path

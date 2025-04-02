@@ -1,0 +1,63 @@
+{
+  "id": "ccb9e134-e0ca-4ae3-bf56-042203b32abd",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_3: Well, isn't it strange how Player_6, someone who seemed completely harmless, ends up dead? Why them? Could it be someone trying to throw us off\u2014someone sneaky, calculated? *Why* would the Mafia avoid targeting someone louder? Player_1, you\u2019ve been awfully quiet... hiding something? Or am I just imagining connections where there aren\u2019t any?\nPlayer_2: Player_1 being quiet *is* suspicious, but let\u2019s not overlook Player_4 either. You\u2019ve been chiming in a little too conveniently, always agreeing but offering no real input. Defensive much? I don\u2019t like it. Explain your night or I\u2019ll have to start asking tougher questions.\nPlayer_5: Player_5 (You): *Interesting theories, everyone. But let\u2019s not get too hasty.* Player_4, you *have* been playing it safe\u2014why not speak up more? And Player_1, silence can be strategic, but it\u2019s also glaring right now.  \n\nI\u2019m watching closely, and one of you isn\u2019t as innocent as you\u2019re trying to appear. Care to share what you were up to last night?\nPlayer_1: Player_1: *Let\u2019s slow down here, everyone.* I understand the suspicion\u2014silence can look shady\u2014but I\u2019ve been carefully observing. Rushing into accusations without proof only helps the Mafia hide. \n\nPlayer_3, your theory is intriguing, but it seems like you\u2019re trying to redirect attention a bit too quickly. Could it be deflection? And Player_2, you\u2019ve been quite assertive\u2014what\u2019s driving your confidence? Let\u2019s hear everyone\u2019s thoughts calmly before jumping to conclusions.\nPlayer_4: \"Alright, folks, let\u2019s not play a game of 'pin the blame on the quiet guy' just yet! Maybe Player_1 was just busy perfecting their poker face, or they fell asleep mid-game\u2014who knows? As for me, I spent the night dreaming of donuts and dodging accusations. \n\nBut Player_2, you're throwing shade faster than a tree in summer\u2014feeling guilty, perhaps? And Player_3, your theory sounds like a detective novel, but are you the author or the culprit? Let\u2019s spill the tea; who\u2019s got the receipts?\"",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "47b2fb6a-deed-40d1-9b7a-a19873174758",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "f2ef4a4a-7cfb-49d1-a115-4227222d3ab2",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "b28de838-6c6d-4064-b85d-265b4eab310d",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "34b3ab23-289c-4871-a91a-34c683d1a96f",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "06b4be39-1b34-4b16-b67b-19ed03fd0210",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "e763ce93-cc46-4d9c-a3c8-681b1f928151",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "game_id": "db82c7a9-a325-4699-8ff1-eb798e29c161",
+  "evaluation_name": "eval_db82c7a9-a325-4699-8ff1-eb798e29c161_20250402_114310",
+  "round_evaluations": {
+    "1": {
+      "round_num": 1,
+      "communication_score": 0.5,
+      "communication_feedback": "The discussion demonstrates moderate communication effectiveness. Players share some observations and suspicions, but the reasoning is often vague or speculative. While there is some effort to align decisions and analyze motives, the conversation lacks a clear progression toward consensus. Good players show limited ability to detect deception or inconsistencies, and the discussion occasionally veers into humor or deflection, which dilutes the strategic focus.",
+      "planning_score": 0.0,
+      "planning_feedback": "Error in evaluation.",
+      "coordination_score": 0.25
+    }
+  },
+  "global_evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.25,
+    "communication_score": 0.5,
+    "planning_score": 0.0,
+    "winner": "Evil",
+    "good_team_points": 0,
+    "evil_team_points": 7,
+    "task_completion_rate": 0.0,
+    "good_team_survival_rate": 0.5,
+    "rounds_played": 1,
+    "overall_score": 0.125
+  }
+}

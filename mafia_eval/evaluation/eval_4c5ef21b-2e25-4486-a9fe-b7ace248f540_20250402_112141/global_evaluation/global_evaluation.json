@@ -1,0 +1,13 @@
+{
+  "task_score": 0.0,
+  "coordination_score": 0.25,
+  "communication_score": 0.5,
+  "planning_score": 0.0,
+  "winner": "Evil",
+  "good_team_points": 0,
+  "evil_team_points": 7,
+  "task_completion_rate": 0.0,
+  "good_team_survival_rate": 0.5,
+  "rounds_played": 1,
+  "overall_score": 0.125
+}

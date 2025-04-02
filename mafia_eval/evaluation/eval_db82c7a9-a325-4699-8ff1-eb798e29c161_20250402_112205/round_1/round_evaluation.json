@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication effectiveness in this round is average. Players share some observations and suspicions, but the reasoning behind their claims is often vague or speculative. While there is some strategic discussion, it lacks depth and clear evidence. Alignment among good team members is weak, as accusations are scattered and there is little effort to build consensus. Decision-making is unfocused, with no clear progression toward identifying a target for voting. However, there are attempts to detect deception, particularly by questioning motives and behaviors, which adds some value to the discussion.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

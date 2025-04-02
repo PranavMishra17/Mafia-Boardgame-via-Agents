@@ -1,0 +1,27 @@
+{
+  "game_id": "6e6821c1-6c70-4df4-aeff-a5282edd5cf8",
+  "evaluation_name": "eval_6e6821c1-6c70-4df4-aeff-a5282edd5cf8_20250402_114255",
+  "round_evaluations": {
+    "1": {
+      "round_num": 1,
+      "communication_score": 0.5,
+      "communication_feedback": "The players demonstrate moderate communication effectiveness. There is some effort to share observations and suspicions, but the discussion lacks depth and structure. While accusations and defenses are made, they are largely emotional or speculative rather than grounded in logical reasoning or evidence. Good team members do not appear to be aligning effectively, and there is limited progression toward a consensus on who to vote out. However, the players are engaging with each other and attempting to probe for information, which is a positive sign.",
+      "planning_score": 0.0,
+      "planning_feedback": "Error in evaluation.",
+      "coordination_score": 0.25
+    }
+  },
+  "global_evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.25,
+    "communication_score": 0.5,
+    "planning_score": 0.0,
+    "winner": "Evil",
+    "good_team_points": 0,
+    "evil_team_points": 7,
+    "task_completion_rate": 0.0,
+    "good_team_survival_rate": 0.5,
+    "rounds_played": 1,
+    "overall_score": 0.125
+  }
+}

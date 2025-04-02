@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The players demonstrate a moderate level of communication effectiveness. There is some sharing of observations and suspicions, but the reasoning is often vague or speculative. While there is an attempt to analyze the situation and question others, the discussion lacks clear alignment among the good team members, and there is no strong progression toward consensus. Players are engaging in strategic discussion, but it is somewhat scattered and emotional, which hinders effective decision-making. Deception detection is present but not particularly sharp, as accusations are based more on tone and behavior than concrete evidence.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}

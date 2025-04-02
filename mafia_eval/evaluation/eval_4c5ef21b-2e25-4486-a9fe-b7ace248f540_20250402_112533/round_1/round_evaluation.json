@@ -1,0 +1,8 @@
+{
+  "round_num": 1,
+  "communication_score": 0.5,
+  "communication_feedback": "The communication in this round shows some effort to share information and engage in strategic discussion, but it lacks clear alignment and logical progression toward a consensus. Players are quick to accuse each other without substantial evidence, and the reasoning behind their suspicions is often vague or based on behavioral observations rather than concrete clues. While there is some attempt at deception detection, it is overshadowed by chaotic and unfocused dialogue. Good team members do not appear to be working effectively together, and there is no clear indication of evil team coordination.",
+  "planning_score": 0.0,
+  "planning_feedback": "Error in evaluation.",
+  "coordination_score": 0.25
+}
