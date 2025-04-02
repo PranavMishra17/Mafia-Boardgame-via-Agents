@@ -1,0 +1,63 @@
+{
+  "id": "c73a3968-fe7b-455d-be42-53698e683ec3",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Doctor) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: Hmm, last night was unfortunate with Player_6 gone. It's tough to say who seems suspicious right now. I think we should focus on who might have had a reason to target the Doctor. Maybe someone was worried they'd save the wrong person? What do you all think?\nPlayer_3: Player_3: *nervously glancing around* \"Well, isn't it strange? Why Player_6, huh? Was it someone trying to take out a known helper, or was it... I don't know... a cover-up? Player_2, where were you last night? Can we really trust you? Or... wait, could it be Player_4? Why so quiet?\"\nPlayer_4: *snorts with laughter* \"Why me, Player_3? What, do I look like a scalpel-wielding killer to you? I\u2019m more of a rubber chicken kinda guy. But hey, since you\u2019re pointing fingers, what were YOU up to last night, huh? Practicing your \u2018innocent face\u2019 in the mirror?\"  \n\n*leans in dramatically* \"I mean, don\u2019t get me wrong, I *do* have a killer sense of humor, but that\u2019s as far as it goes. Let\u2019s hear your alibi, funny guy.\"\nPlayer_2: Alright, everyone, enough dancing around. Let\u2019s get to it. Player_3, you\u2019re deflecting hard\u2014first throwing shade at me, then at Player_4. Suspicious much? What were *you* doing last night? \n\nAnd Player_4, jokes won\u2019t save us here. This isn\u2019t a comedy club. Did you, or didn\u2019t you have anything to do with Player_6\u2019s death? Speak up or stay guilty.\nPlayer_5: *smiles and leans back slightly* \"Interesting dynamics already. Player_3, you do seem a little rattled\u2014throwing accusations left and right like you're hoping something sticks. And Player_4, while your humor *is* entertaining, it\u2019s not exactly helping us narrow things down. \n\nPlayer_2, though\u2014calm, collected, and sharp with the finger-pointing... almost *too* smooth, if you ask me. What\u2019s your game? Where were you last night? Let\u2019s hear it.\"",
+  "points": {
+    "good_team": 0,
+    "evil_team": 2
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "df51ba92-98df-4126-a961-e9824472d04e",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "367b18d7-77ed-4272-bff8-65e5fb062dd8",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "3a7fce89-8b3c-4d82-ad2e-66e0475acf56",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "f57dfc48-c17e-44a1-97b2-1f9701617256",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Doctor",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "57bfec78-bd03-4a01-85bf-e453a4a48e51",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "7d1fa874-9ed4-49e9-a1d5-0fb65b73646c",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

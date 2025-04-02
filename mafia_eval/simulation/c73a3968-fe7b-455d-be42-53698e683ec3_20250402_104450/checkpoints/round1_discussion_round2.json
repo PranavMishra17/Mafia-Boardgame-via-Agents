@@ -1,0 +1,63 @@
+{
+  "id": "c73a3968-fe7b-455d-be42-53698e683ec3",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Doctor) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: Hmm, last night was unfortunate with Player_6 gone. It's tough to say who seems suspicious right now. I think we should focus on who might have had a reason to target the Doctor. Maybe someone was worried they'd save the wrong person? What do you all think?\nPlayer_3: Player_3: *nervously glancing around* \"Well, isn't it strange? Why Player_6, huh? Was it someone trying to take out a known helper, or was it... I don't know... a cover-up? Player_2, where were you last night? Can we really trust you? Or... wait, could it be Player_4? Why so quiet?\"\nPlayer_4: *snorts with laughter* \"Why me, Player_3? What, do I look like a scalpel-wielding killer to you? I\u2019m more of a rubber chicken kinda guy. But hey, since you\u2019re pointing fingers, what were YOU up to last night, huh? Practicing your \u2018innocent face\u2019 in the mirror?\"  \n\n*leans in dramatically* \"I mean, don\u2019t get me wrong, I *do* have a killer sense of humor, but that\u2019s as far as it goes. Let\u2019s hear your alibi, funny guy.\"\nPlayer_2: Alright, everyone, enough dancing around. Let\u2019s get to it. Player_3, you\u2019re deflecting hard\u2014first throwing shade at me, then at Player_4. Suspicious much? What were *you* doing last night? \n\nAnd Player_4, jokes won\u2019t save us here. This isn\u2019t a comedy club. Did you, or didn\u2019t you have anything to do with Player_6\u2019s death? Speak up or stay guilty.\nPlayer_5: *smiles and leans back slightly* \"Interesting dynamics already. Player_3, you do seem a little rattled\u2014throwing accusations left and right like you're hoping something sticks. And Player_4, while your humor *is* entertaining, it\u2019s not exactly helping us narrow things down. \n\nPlayer_2, though\u2014calm, collected, and sharp with the finger-pointing... almost *too* smooth, if you ask me. What\u2019s your game? Where were you last night? Let\u2019s hear it.\"\n--- Discussion Round 2 ---\nPlayer_1: *raises hands calmly* \"Alright, let\u2019s not tear each other apart just yet. We need clarity, not chaos. I agree that Player_3\u2019s rapid accusations feel a bit scattered, but that could just be nerves rather than guilt. Player_4\u2019s humor, while entertaining, doesn\u2019t exactly clear them either\u2014avoiding the question can be just as telling as answering it.\n\nPlayer_2, you\u2019re sharp and composed, but Player_5 has a point\u2014how about you share your night actions first? Let\u2019s gather everyone\u2019s perspectives before jumping to conclusions.\"\nPlayer_3: *scratches head nervously* \"Oh, sure, sure, everyone\u2019s looking at me now, huh? Classic! Why is it always the nervous one they target? What, you think I\u2019m hiding something? Why would I even do that? That\u2019s exactly what a guilty person *wouldn\u2019t* do, right? \n\nBut hey, Player_2\u2014why so calm under pressure? Isn\u2019t that a little... calculated? And Player_4, cracking jokes when someone\u2019s dead? Who does that? Are you trying to distract us? This game is full of shadows, I\u2019m just trying to find the light!\"\nPlayer_4: *leans back and grins* \"Whoa, whoa, whoa, everybody\u2014let\u2019s not turn this into a roast battle, alright? I\u2019m just here to keep the mood light. Player_3, you\u2019re acting like you just got caught sneaking cookies at midnight. Relax, buddy, or your guilt\u2019s gonna grow legs and start dancing.\n\nAs for me? I was busy investigating, and let me tell you\u2014my night was as uneventful as a snail race. No Mafia sightings, sadly. But hey, Player_2, you\u2019re awfully quick to point fingers. Got something you\u2019re trying to hide under that calm demeanor?\"\nPlayer_2: *leans forward, eyes narrowing* Alright, everyone wants to know about my night? Fine. I stayed put, kept my head down, and observed. That\u2019s what a good Citizen does. No funny business, no lies.\n\nBut let's talk about Player_3\u2014you're flailing like a fish out of water. Nervous energy, rapid accusations, trying to deflect... classic signs of guilt. And Player_4, \"uneventful night,\" huh? Conveniently vague. Time to get serious\u2014what exactly were you *investigating*?\nPlayer_5: *leans forward with a calm but calculating tone* \"Alright, let's break this down. Player_3 is clearly rattled, throwing accusations like confetti. Could be nerves, but could also be a guilty conscience trying to misdirect. Player_4's humor is a decent smokescreen, but that 'investigation' claim is hollow\u2014what were you actually doing, Player_4?\n\nAnd Player_2, you're composed, but that 'observing' excuse feels oddly safe. Almost too safe. If you're innocent, prove it. We're running out of time, and we need clarity\u2014not vague answers.\"",
+  "points": {
+    "good_team": 0,
+    "evil_team": 2
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "df51ba92-98df-4126-a961-e9824472d04e",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "367b18d7-77ed-4272-bff8-65e5fb062dd8",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "3a7fce89-8b3c-4d82-ad2e-66e0475acf56",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "f57dfc48-c17e-44a1-97b2-1f9701617256",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Doctor",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "id": "57bfec78-bd03-4a01-85bf-e453a4a48e51",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "7d1fa874-9ed4-49e9-a1d5-0fb65b73646c",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

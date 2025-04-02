@@ -1,0 +1,74 @@
+{
+  "game_id": "4c5ef21b-2e25-4486-a9fe-b7ace248f540",
+  "rounds_played": 1,
+  "winner": "Evil",
+  "points": {
+    "good_team": 0,
+    "evil_team": 7
+  },
+  "events": [
+    "Game started. Round 1.",
+    "Player_6 (Citizen) was killed during the night.",
+    "Dawn of Day 1:",
+    "Detective failed to identify the Mafia.",
+    "Player_6 was found dead.",
+    "Player_4 (Detective) was exiled from the city.",
+    "Game Over! Evil team wins!"
+  ],
+  "players": [
+    {
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": false,
+      "is_human": false
+    },
+    {
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    }
+  ],
+  "metrics": {
+    "good_team_survival_rate": 0.5,
+    "evil_team_survival_rate": 1.0,
+    "detective_survived": false,
+    "doctor_survived": true,
+    "mafia_survived": true,
+    "bad_guy_survived": true
+  },
+  "evaluation": {
+    "task_score": 0.0,
+    "coordination_score": 0.4
+  }
+}

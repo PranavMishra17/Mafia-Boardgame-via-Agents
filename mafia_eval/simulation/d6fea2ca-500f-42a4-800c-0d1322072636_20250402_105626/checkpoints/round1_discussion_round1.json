@@ -1,0 +1,63 @@
+{
+  "id": "d6fea2ca-500f-42a4-800c-0d1322072636",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_2: Alright, listen up! Here\u2019s what I think\u2014Player_6 was taken out because they probably got too close to the truth. Whoever\u2019s responsible is trying to silence us. \n\nPlayer_3, you\u2019ve been awfully quiet so far. What were you up to last night? And Player_1, you look way too calm for someone innocent. Explain yourselves!\nPlayer_5: Player_5: Interesting theory, Player_2. But let's not overlook Player_4\u2014staying in the shadows is a classic move for someone hiding something.  \n\nPlayer_3, I agree with Player_2. You\u2019ve been oddly quiet. If you\u2019re innocent, why not speak up? And Player_1, calmness can be a mask. Care to share what you\u2019ve been doing?\nPlayer_3: Player_3: Quiet? Me? Or is that just what *they* want you to think? Isn\u2019t it convenient how Player_2 is steering the conversation, pointing fingers at me and Player_1 right away? Why so eager, Player_2? Hiding something? \n\nAnd Player_5, you\u2019re quick to jump on board with Player_2\u2019s theory\u2014are you two working together? Coincidence? Or conspiracy? What if you\u2019re both Mafia?\nPlayer_4: Player_4: Whoa, whoa, slow your roll, detectives! Sounds like we\u2019ve got a finger-pointing championship happening here. I mean, I\u2019d accuse someone too, but my fingers are busy holding snacks. \ud83c\udf7f \n\nBut since we\u2019re all throwing shade, Player_3\u2019s \u201cIsn\u2019t that what *they* want you to think?\u201d defense feels like it came straight out of the Suspicious Playbook, Chapter 1. And Player_2, you\u2019re steering this convo like you\u2019re auditioning for a crime drama. \ud83e\udd14 Care to explain?\nPlayer_1: Alright, let's take a deep breath, everyone. I think we're jumping to conclusions too quickly without solid evidence. \n\nPlayer_2, you're driving the accusations\u2014why focus on Player_3 and me so intensely? Could that be a diversion? And Player_3, your defense feels a bit reactive, which could be genuine or strategic. \n\nLet's hear from everyone calmly\u2014what were your thoughts or actions last night? The truth often slips out when we listen carefully.",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "95223091-5790-4c89-b61b-9ffb787b1cd8",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "1544bbaf-2be5-40b1-a299-a90915258fd6",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "b976061c-1fab-4422-8b90-eafb91438650",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "677ce791-a9f9-4e32-af91-8e94f1b4867b",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "d6acfc39-17b7-4743-aead-4d5fd1fded65",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "2b85b2e5-168c-46db-9975-dbd4f8363c97",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    }
+  ]
+}

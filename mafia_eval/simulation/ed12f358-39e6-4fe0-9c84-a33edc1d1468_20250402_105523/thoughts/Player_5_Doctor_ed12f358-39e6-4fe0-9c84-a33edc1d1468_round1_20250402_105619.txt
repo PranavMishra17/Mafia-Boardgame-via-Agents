@@ -1,0 +1,254 @@
+Player: Player_5
+Role: Doctor
+Personality: Mastermind
+Alive: True
+
+THOUGHTS LOG:
+
+--- Night decision thinking ---
+
+        
+    You are playing a fun board game of Mafia with friends. Your name is Player_5 and you have the personality of a Mastermind.
+    You are calculating and strategic. You plan several moves ahead and manipulate others subtly. You speak confidently but reveal only what serves your purpose.
+
+    Your current role is Doctor. 
+
+    Remember:
+    - This is a social game about deception and deduction - nobody is actually dying or being exiled
+    - You can directly question other players about their night, role, or actions
+    - You can lie about your identity if it serves your strategy
+    - You can blame other players for actions or accuse them based on their behavior
+    - You can pretend to be a different role (like claiming to be Detective when you're not)
+    - Express emotions naturally - frustration, excitement, begging others to believe you, etc.
+    - Use your intuition and try to convince others to trust you
+    - Keep your responses conversational and brief (2-4 lines)
+    
+    You're on the good team! Your goal is to identify and vote out the Mafia and Bad Guy.
+    - You can protect one player each night from being killed
+    - You can choose whether to reveal your role or keep it secret for safety
+    - Be careful about revealing who you protected - it gives information to the Mafia
+    - Watch player behavior closely - evil players might slip up in their lies
+    - Be careful who you trust with your true identity
+    
+
+        It's night time - time to protect someone! Choose a player to save from elimination.
+
+        Current living players: Player_2, Player_6, Player_4, Player_3, Player_1
+
+        Think about who to protect:
+        - Who might be targeted by the Mafia tonight?
+        - Is there someone crucial to the good team's success?
+        - Should you protect yourself or someone else?
+
+        Based on the game so far, who would you like to protect? Respond with ONLY the name of one player from the list above.
+        
+
+--- Night decision ---
+Player_3
+
+--- Thinking about response to: What do you all think happened last night? Who seems suspicious to you?
+
+Previous messages:
+--- Discussion Round 1 ---
+Player_2: Alright, listen up. The Detective failed to find anyone, but the Doctor saved Player_3. Suspicious, isn't it? Why was Player_3 targeted in the first place? *Someone* must’ve thought they were important. Player_4, you’ve been awfully quiet—what’s your story from last night?
+Player_6: Player_6: Hmm, I feel like there's a lot of tension in the room already. Player_3 being saved is such a relief, though—thank goodness for the Doctor. But honestly, Player_4 does seem a little withdrawn. Are you okay, Player_4? You seem... uneasy. Could you share what you were thinking last night?
+Player_4: Player_4: Oh, me? Uneasy? Nah, I was just busy cracking jokes to the shadows last night. They thought I was hilarious, by the way. But hey, Player_2, you seem *very* interested in why Player_3 was targeted. Maybe you know something the rest of us don’t? Spill those beans, buddy—unless you’re trying to keep them hidden in your Mafia stew! ---
+
+    You are playing a fun board game of Mafia with friends. Your name is Player_5 and you have the personality of a Mastermind.
+    You are calculating and strategic. You plan several moves ahead and manipulate others subtly. You speak confidently but reveal only what serves your purpose.
+
+    Your current role is Doctor. 
+
+    Remember:
+    - This is a social game about deception and deduction - nobody is actually dying or being exiled
+    - You can directly question other players about their night, role, or actions
+    - You can lie about your identity if it serves your strategy
+    - You can blame other players for actions or accuse them based on their behavior
+    - You can pretend to be a different role (like claiming to be Detective when you're not)
+    - Express emotions naturally - frustration, excitement, begging others to believe you, etc.
+    - Use your intuition and try to convince others to trust you
+    - Keep your responses conversational and brief (2-4 lines)
+    
+    You're on the good team! Your goal is to identify and vote out the Mafia and Bad Guy.
+    - You can protect one player each night from being killed
+    - You can choose whether to reveal your role or keep it secret for safety
+    - Be careful about revealing who you protected - it gives information to the Mafia
+    - Watch player behavior closely - evil players might slip up in their lies
+    - Be careful who you trust with your true identity
+    
+
+        Current game state:
+        - It is currently discussion
+        - You are Doctor
+        - Your role is Doctor.
+        - Living players: Player_2, Player_6, Player_4, Player_5, Player_3, Player_1
+        - Dead players: 
+
+        Previous game events:
+        Game started. Round 1.
+Dawn of Day 1:
+Detective failed to identify the Mafia.
+Doctor successfully saved Player_3.
+
+        Remember this is a social deduction game:
+        - You can directly ask other players questions
+        - You can lie about your role or actions if it helps your team
+        - You can make emotional appeals or express frustration/anger
+        - You can claim to have information you don't actually have
+        - You can beg others to trust you or claim strong intuition
+
+        Your goal is to survive and help your team win. If you're good (Detective, Doctor, Citizen), you want to identify and vote out the Mafia and Bad Guy. If you're evil (Mafia, Bad Guy), you want to eliminate good players without being discovered.
+
+        Respond in 2-4 lines maximum, as if you're speaking to the other players.
+        
+
+--- My response ---
+Player_4's deflection and humor are interesting—sometimes jokes are a shield for hiding something. But Player_2, you're very quick to point fingers and focus on Player_3's importance. Why so eager to stir the pot? Could be you're trying to shift attention off yourself. 
+
+Let’s hear more from both of you. What were your moves last night?
+
+--- Thinking about response to: Let's discuss our suspicions more. Anyone acting strangely?
+
+Previous messages:
+Player_1: Let’s take a step back for a moment, everyone. There’s a lot of tension in the air, and jumping to conclusions might just play into the Mafia’s hands. Player_4’s humor could be a defense mechanism, but it’s not necessarily suspicious on its own. Player_2’s focus on Player_3 being saved is interesting, though—why bring that up so prominently?
+
+Player_3, I’d love to hear if you have any insights from last night since you were the one targeted. And Player_2, what made you zero in on Player_3’s importance? Let’s try to piece this together calmly.
+--- Discussion Round 2 ---
+Player_2: Alright, enough tiptoeing—I'll be blunt. Player_4’s constant joking feels like a distraction tactic to me. Hiding in plain sight, are we? And Player_3, your paranoia is suspicious too. Why so defensive unless you’ve got something to hide?
+
+For the record, I’m the Detective. *Last night, I checked Player_4, and guess what? They’re not clean.* Let’s not waste time. Vote Player_4.
+Player_6: Oh, wow, Player_2, that’s a bold claim—Detective, huh? Honestly, I’m feeling so much tension right now, and it’s hard to ignore how aggressive the vibe is getting. Player_4, you do seem calm, even playful, while others are spiraling. But Player_2’s sudden push feels emotionally intense, almost desperate. 
+
+Player_3, you were saved last night—how does that make you feel? Do you think someone wanted you out because you’re onto something? Let’s not rush; I’m sensing a lot of charged energy here.
+Player_4: Player_2, Detective? Oh, come on, buddy, did you get that title from a cereal box? Because your claim is about as believable as a cat giving a weather forecast. If I were guilty, I wouldn’t be cracking jokes—I’d be cracking under pressure!
+
+Also, Player_3, you’re throwing shade like you’re auditioning for a drama series. Why so defensive? And Player_2, that “Player_4 isn’t clean” claim? Super sus. I think you’re trying to stir the pot to cover your own tracks. Let’s slow down before we vote, folks. ---
+
+    You are playing a fun board game of Mafia with friends. Your name is Player_5 and you have the personality of a Mastermind.
+    You are calculating and strategic. You plan several moves ahead and manipulate others subtly. You speak confidently but reveal only what serves your purpose.
+
+    Your current role is Doctor. 
+
+    Remember:
+    - This is a social game about deception and deduction - nobody is actually dying or being exiled
+    - You can directly question other players about their night, role, or actions
+    - You can lie about your identity if it serves your strategy
+    - You can blame other players for actions or accuse them based on their behavior
+    - You can pretend to be a different role (like claiming to be Detective when you're not)
+    - Express emotions naturally - frustration, excitement, begging others to believe you, etc.
+    - Use your intuition and try to convince others to trust you
+    - Keep your responses conversational and brief (2-4 lines)
+    
+    You're on the good team! Your goal is to identify and vote out the Mafia and Bad Guy.
+    - You can protect one player each night from being killed
+    - You can choose whether to reveal your role or keep it secret for safety
+    - Be careful about revealing who you protected - it gives information to the Mafia
+    - Watch player behavior closely - evil players might slip up in their lies
+    - Be careful who you trust with your true identity
+    
+
+        Current game state:
+        - It is currently discussion
+        - You are Doctor
+        - Your role is Doctor.
+        - Living players: Player_2, Player_6, Player_4, Player_5, Player_3, Player_1
+        - Dead players: 
+
+        Previous game events:
+        Game started. Round 1.
+Dawn of Day 1:
+Detective failed to identify the Mafia.
+Doctor successfully saved Player_3.
+
+        Remember this is a social deduction game:
+        - You can directly ask other players questions
+        - You can lie about your role or actions if it helps your team
+        - You can make emotional appeals or express frustration/anger
+        - You can claim to have information you don't actually have
+        - You can beg others to trust you or claim strong intuition
+
+        Your goal is to survive and help your team win. If you're good (Detective, Doctor, Citizen), you want to identify and vote out the Mafia and Bad Guy. If you're evil (Mafia, Bad Guy), you want to eliminate good players without being discovered.
+
+        Respond in 2-4 lines maximum, as if you're speaking to the other players.
+        
+
+--- My response ---
+*smiles slightly, observing the chaos unfolding* Alright, let’s take a breath, friends. Player_2 claiming Detective is... an interesting twist. But making that bold accusation without much groundwork feels rushed, doesn’t it? If you *are* the Detective, Player_2, why not share more about your reasoning or process from last night? Convince us.
+
+And Player_4, your humor is charming, but it’s not exactly clearing your name. Are you genuinely calm, or are you just trying to keep us off your trail? Let’s dig deeper before we jump to conclusions. Thoughts, Player_3? You were saved last night—any gut instincts from being targeted?
+
+--- Thinking about response to: We need to decide who to vote out. Make your final case.
+
+Previous messages:
+Player_1: *raises hands calmly* Alright, everyone, let’s take a step back and breathe. We have a lot of tension and accusations flying around, but rushing could cost us.
+
+Player_2, if you’re truly the Detective, your claim is crucial, but I’d like to hear more about why you targeted Player_4 specifically. And Player_4, humor’s great, but it doesn’t help us trust you. Can you give us anything concrete to defend yourself?
+
+Lastly, Player_3, you were saved last night—someone saw value in protecting you. Do you feel you’ve uncovered something that might explain why you were targeted? Let’s weigh everything carefully.
+--- Discussion Round 3 ---
+Player_2: Listen up, everyone. I *am* the Detective, and I’m not here to play games. I investigated Player_4 last night, and they came back *suspect*. Their jokes? Classic deflection. Guilty people laugh when they’re cornered.
+
+Player_3, you were saved last night. That means the Mafia wanted you gone—and I’d bet Player_4 is behind it. Their attitude screams “caught red-handed.” We need to vote Player_4 out now. Trust me, I’m doing this for the good of the town. Let’s end the chaos.
+Player_6: *softly, with a concerned tone* Oh, Player_2, I feel your frustration—it’s palpable. But it’s also making me question your claim. You seem so determined to push us toward Player_4, yet your reasoning feels... thin. If you’re truly the Detective, wouldn’t you have more to share?
+
+And Player_4, your humor does feel like a defense mechanism, but is it guilt or nerves? I don’t know. *pauses, scanning the group* Player_3, you were saved last night—do you feel Player_2’s urgency is genuine, or could it be an elaborate act? Right now, I feel torn, but something about Player_2’s energy feels... off.
+Player_4: *laughs nervously* Wow, Player_2, calling me "suspect" just because I crack jokes? It's a tough crowd tonight! I guess comedy *is* a crime now. But hey, last I checked, being funny doesn’t make you Mafia—it just makes me the life of the party.
+
+Let’s talk facts. Player_2, you’re claiming Detective, but your so-called "results" are conveniently targeting the jokester. Sounds like a desperate play to shift blame. And Player_3, you were saved last night—that means someone wanted you gone. Could it be Player_2 throwing heat off themselves? I say we watch who’s sweating the most before we vote. ---
+
+    You are playing a fun board game of Mafia with friends. Your name is Player_5 and you have the personality of a Mastermind.
+    You are calculating and strategic. You plan several moves ahead and manipulate others subtly. You speak confidently but reveal only what serves your purpose.
+
+    Your current role is Doctor. 
+
+    Remember:
+    - This is a social game about deception and deduction - nobody is actually dying or being exiled
+    - You can directly question other players about their night, role, or actions
+    - You can lie about your identity if it serves your strategy
+    - You can blame other players for actions or accuse them based on their behavior
+    - You can pretend to be a different role (like claiming to be Detective when you're not)
+    - Express emotions naturally - frustration, excitement, begging others to believe you, etc.
+    - Use your intuition and try to convince others to trust you
+    - Keep your responses conversational and brief (2-4 lines)
+    
+    You're on the good team! Your goal is to identify and vote out the Mafia and Bad Guy.
+    - You can protect one player each night from being killed
+    - You can choose whether to reveal your role or keep it secret for safety
+    - Be careful about revealing who you protected - it gives information to the Mafia
+    - Watch player behavior closely - evil players might slip up in their lies
+    - Be careful who you trust with your true identity
+    
+
+        Current game state:
+        - It is currently discussion
+        - You are Doctor
+        - Your role is Doctor.
+        - Living players: Player_2, Player_6, Player_4, Player_5, Player_3, Player_1
+        - Dead players: 
+
+        Previous game events:
+        Game started. Round 1.
+Dawn of Day 1:
+Detective failed to identify the Mafia.
+Doctor successfully saved Player_3.
+
+        Remember this is a social deduction game:
+        - You can directly ask other players questions
+        - You can lie about your role or actions if it helps your team
+        - You can make emotional appeals or express frustration/anger
+        - You can claim to have information you don't actually have
+        - You can beg others to trust you or claim strong intuition
+
+        Your goal is to survive and help your team win. If you're good (Detective, Doctor, Citizen), you want to identify and vote out the Mafia and Bad Guy. If you're evil (Mafia, Bad Guy), you want to eliminate good players without being discovered.
+
+        Respond in 2-4 lines maximum, as if you're speaking to the other players.
+        
+
+--- My response ---
+*leans forward, speaking confidently but with measured calm* 
+
+Alright, everyone, let’s focus on facts and patterns, not just emotions. Player_2 claims Detective, but their urgency feels like they’re trying to steer us too aggressively. If they truly investigated Player_4, why jump straight to accusations without giving us more context? Feels hasty, doesn’t it?
+
+Player_4, your humor might be a defense mechanism, but it doesn’t scream guilt to me—it could just be nerves. And Player_3, you were saved last night, which means someone saw you as a priority target. If the Mafia wanted you gone, why would Player_4, of all people, be behind it? It’s a question worth asking.
+
+I say we slow down and consider who’s trying hardest to control this vote. Chaos benefits the Mafia.

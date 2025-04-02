@@ -1,0 +1,63 @@
+{
+  "id": "ed12f358-39e6-4fe0-9c84-a33edc1d1468",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nDoctor successfully saved Player_3.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_2: Alright, listen up. The Detective failed to find anyone, but the Doctor saved Player_3. Suspicious, isn't it? Why was Player_3 targeted in the first place? *Someone* must\u2019ve thought they were important. Player_4, you\u2019ve been awfully quiet\u2014what\u2019s your story from last night?\nPlayer_6: Player_6: Hmm, I feel like there's a lot of tension in the room already. Player_3 being saved is such a relief, though\u2014thank goodness for the Doctor. But honestly, Player_4 does seem a little withdrawn. Are you okay, Player_4? You seem... uneasy. Could you share what you were thinking last night?\nPlayer_4: Player_4: Oh, me? Uneasy? Nah, I was just busy cracking jokes to the shadows last night. They thought I was hilarious, by the way. But hey, Player_2, you seem *very* interested in why Player_3 was targeted. Maybe you know something the rest of us don\u2019t? Spill those beans, buddy\u2014unless you\u2019re trying to keep them hidden in your Mafia stew!\nPlayer_5: Player_4's deflection and humor are interesting\u2014sometimes jokes are a shield for hiding something. But Player_2, you're very quick to point fingers and focus on Player_3's importance. Why so eager to stir the pot? Could be you're trying to shift attention off yourself. \n\nLet\u2019s hear more from both of you. What were your moves last night?\nPlayer_3: Player_3: Oh, wow, everyone\u2019s pointing fingers already? Why me, huh? Why was *I* the target? Is someone trying to silence me because I\u2019m onto something? Player_2, you seem *way* too invested in this whole \u201cPlayer_3 being important\u201d thing\u2014what\u2019s your angle? Are you trying to make me look guilty to cover up your own tracks? Or maybe Player_4\u2019s jokes are just a smokescreen. Too much laughing in the face of danger, don\u2019t you think? What\u2019s your *real* story, Player_4?\nPlayer_1: Let\u2019s take a step back for a moment, everyone. There\u2019s a lot of tension in the air, and jumping to conclusions might just play into the Mafia\u2019s hands. Player_4\u2019s humor could be a defense mechanism, but it\u2019s not necessarily suspicious on its own. Player_2\u2019s focus on Player_3 being saved is interesting, though\u2014why bring that up so prominently?\n\nPlayer_3, I\u2019d love to hear if you have any insights from last night since you were the one targeted. And Player_2, what made you zero in on Player_3\u2019s importance? Let\u2019s try to piece this together calmly.",
+  "points": {
+    "good_team": 2,
+    "evil_team": 0
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "97fb7a25-14b7-4f6d-a626-421ae1519647",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "6cee9b96-8652-4e59-ba35-a74c6681aede",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e05e1990-8cf3-4eb3-ac52-9a352c1a1199",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "22bfcb4d-ba26-4f03-a9ac-b38c40a3e339",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "dec0354a-9a3e-450a-b9fc-103d9d4597a3",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "40acd54a-582c-407d-81e5-c412cc611b3b",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

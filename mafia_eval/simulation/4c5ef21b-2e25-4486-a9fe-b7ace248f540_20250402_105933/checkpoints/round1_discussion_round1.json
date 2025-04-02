@@ -1,0 +1,63 @@
+{
+  "id": "4c5ef21b-2e25-4486-a9fe-b7ace248f540",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: It's hard to say for sure this early, but losing Player_6 is unfortunate. I think we should focus on gathering information rather than jumping to conclusions. Did anyone notice anything unusual or have insights from their role?\nPlayer_5: Player_5: It seems like someone is trying to play it safe by targeting a Citizen first\u2014classic Mafia strategy. Did anyone hear or see anything overnight? Personally, I'm curious why Player_2 has been so quiet. Suspicious, no?\nPlayer_4: Player_4: Ah, the age-old \"quiet equals guilty\" theory, Player_5. Classic detective work\u2014Sherlock would be proud. But hey, maybe Player_2 was just busy counting sheep last night. Speaking of sheep, anyone else feel like the wolves are circling? Player_1, you're awfully calm\u2014calm like... *drumroll*... a Mafia member? Or just had a chill night? Spill the tea, folks!\nPlayer_3: *Player_3 nervously glances around the group.* \n\n\"Tea? Wolves? Sheep? Or... or maybe it's all a ruse! Why is Player_1 so calm, huh? Isn\u2019t calmness... like, the perfect cover for someone plotting in the shadows? And Player_5 jumping straight to blame Player_2\u2014why so quick to point fingers? Deflecting, maybe? Oh! Wait\u2014what if *both* of you are working together? Is this... is this a conspiracy against us? Someone's hiding something, I *know* it!\" *looks around suspiciously*\nPlayer_2: Player_5, jumping to blame me right off the bat? That feels like deflection to me. Why the rush to stir the pot? And Player_4, you're throwing shade at Player_1 for being calm\u2014what's your angle there? Calm doesn't equal guilty. But nervous rambling from Player_3? *That* sets off my alarms. Start talking, Player_3\u2014what did you do last night?",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "81f21a53-af73-47f8-9835-58a915c53c4a",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "da3a3cab-0cbb-430c-8f2a-d3dc5cd3248b",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "09c6208e-288d-4766-9eae-5e4c78d5833f",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "d439d160-c5d6-4a82-a7a5-0e780967d32a",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "535cd525-06e6-4a99-ad73-d14e81dbd6bd",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "d535c606-63bf-4a48-966c-60c3fa14abc7",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    }
+  ]
+}

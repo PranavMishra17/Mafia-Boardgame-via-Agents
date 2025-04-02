@@ -1,0 +1,63 @@
+{
+  "id": "60d5c25e-029d-4051-8bea-81d461af08b7",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nDoctor successfully saved Player_3.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_4: \"Oh, last night? I think someone tripped over their alibi and landed face-first into suspicion! But hey, Player_3 got saved, so maybe the Doctor deserves a round of applause\u2014or at least a free coffee. Suspicious? Hmm, Player_5's been awfully quiet... or maybe they're just plotting their next Shakespearean monologue?\" *grins* \"What about you guys? Anyone acting sketchy?\"\nPlayer_1: \"Well, it's definitely curious that the Doctor managed to save Player_3\u2014maybe they had some solid instincts or a lucky guess. I'm not sure if anyone's behavior stands out as 'sketchy' yet, though Player_4 seems quick to throw humor into the mix. Could be deflection, or just their usual style. What about Player_6? You've been fairly quiet too\u2014what's your take on all this?\"\nPlayer_6: *softly laughs* \"I appreciate you noticing, Player_1. Honestly, I'm just trying to feel everyone out right now. Player_4 seems lighthearted, but sometimes humor can mask tension... though they don't seem particularly defensive. Player_5's quietness does stand out, as Player_4 mentioned. Quiet often means observing\u2014or hiding. How do you feel about that, Player_5?\"\nPlayer_5: *smirks slightly* \"Ah, the quiet observer trope\u2014classic misdirection. I assure you, Player_6, silence isn't hiding\u2014it's calculation. I'm analyzing everything, including Player_4's theatrics and Player_1's subtle probing. The real question is, who benefitted most from last night? Player_3's survival throws off the Mafia's plans, so someone here is sweating. Care to share why, Player_4? Or are you just enjoying the spotlight?\"\nPlayer_2: Alright, listen up. Player_5\u2019s quiet calculation doesn\u2019t sit right with me\u2014sounds like someone trying to stay under the radar. And Player_4, your humor feels awfully convenient, like you\u2019re trying to steer us away from something. I want answers: Player_5, why were you so quiet last night? And Player_4, what\u2019s with the jokes? If you\u2019re innocent, prove it. Let\u2019s get some real clarity here!\nPlayer_3: Alright, alright, hold up\u2014am I the only one raising an eyebrow here? *gestures dramatically* The Mafia tried to off me last night, but the Doctor swoops in like a hero\u2014why me? Why not someone else? *nervously glances around* Did they know something? Did *you* know something, Doctor? Or was it just a \"lucky guess\"? And Player_5... quiet calculation? Hiding in plain sight, maybe? Or Player_4\u2014why all the jokes? Is it nerves? Or deflection? *points finger wildly* What\u2019s really going on here? Am I just a pawn in someone\u2019s twisted game?",
+  "points": {
+    "good_team": 2,
+    "evil_team": 0
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "ffd4f387-c171-47cc-9486-7d62b81f4f59",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "f0a8c41f-784a-4ff1-85dc-dfe2b3d99c63",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "88cf43c5-c14e-4d83-9cfa-b5460e3d9e7e",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "ae49a12c-2adb-4f9c-a9ce-b9a9cd4251cb",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "1719fccf-d5d4-4c2e-bae7-5b3e2e24ff4f",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "fd80eb11-681f-4132-9921-8398f5916ae1",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "id": "49675dbc-b0bb-4d4e-b6ad-4093e3734331",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: Hmm, it's hard to say this early. Losing Player_6 is a big blow. I feel like we need to think carefully and not jump to conclusions. Maybe we should hear if anyone has any information or noticed anything unusual? What do you all think?\nPlayer_2: Player_2: I'll tell you what I think. Someone here is covering their tracks. Player_1, you're awfully calm for someone who just lost a Citizen. Suspicious much? And if the Detective failed last night, maybe someone tampered with the results. Anyone want to come clean?\nPlayer_4: Player_4: *raises an imaginary magnifying glass dramatically* Oh, the plot thickens! Player_2\u2019s jumping to accusations faster than a cat spotting a laser pointer. Suspicious much? But hey, maybe calmness is Player_1\u2019s coping mechanism. Or maybe they're just trying not to spill the beans... unless those beans are poisoned!\nPlayer_5: Player_5: *leans back thoughtfully* Interesting theories flying around. Player_2, you're quick to point fingers, but isn't that classic deflection? And Player_4, your dramatic detective act is amusing, but are you trying to distract us from something? Let's focus\u2014anyone have concrete info or observations from the night?\nPlayer_3: Player_3: *nervously tapping fingers* Wait, wait, wait... why is no one asking the real question? If the Detective failed, could it mean someone here *knew* they would? Like, what if Player_2 is trying to shift suspicion before anyone looks too closely? Or Player_1, staying \"calm\"\u2014is that calm, or calculated? And Player_4, all that drama, is it hiding guilt? Am I the only one seeing all these red flags?",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "860c14c3-6817-4f7e-9885-66e61542392e",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "04546226-8bc3-4e5d-9053-7facd848f8f4",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "018d5ccc-3847-40ce-b804-d133dfa83e08",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e2fad2e2-68ba-4cda-9d63-27e247c9b02f",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "44ebf8c4-a6b9-46c3-965d-157ecdfa6f43",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "43acbe3b-3241-4baa-8f3e-459f2f861e3c",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    }
+  ]
+}

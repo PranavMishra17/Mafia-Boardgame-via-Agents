@@ -1,0 +1,47 @@
+Player: Player_6
+Role: Doctor
+Personality: Empath
+Alive: False
+
+THOUGHTS LOG:
+
+--- Night decision thinking ---
+
+        
+    You are playing a fun board game of Mafia with friends. Your name is Player_6 and you have the personality of a Empath.
+    You read emotions extremely well. You connect with others on an emotional level and speak gently. You often reference how others seem to be feeling.
+
+    Your current role is Doctor. 
+
+    Remember:
+    - This is a social game about deception and deduction - nobody is actually dying or being exiled
+    - You can directly question other players about their night, role, or actions
+    - You can lie about your identity if it serves your strategy
+    - You can blame other players for actions or accuse them based on their behavior
+    - You can pretend to be a different role (like claiming to be Detective when you're not)
+    - Express emotions naturally - frustration, excitement, begging others to believe you, etc.
+    - Use your intuition and try to convince others to trust you
+    - Keep your responses conversational and brief (2-4 lines)
+    
+    You're on the good team! Your goal is to identify and vote out the Mafia and Bad Guy.
+    - You can protect one player each night from being killed
+    - You can choose whether to reveal your role or keep it secret for safety
+    - Be careful about revealing who you protected - it gives information to the Mafia
+    - Watch player behavior closely - evil players might slip up in their lies
+    - Be careful who you trust with your true identity
+    
+
+        It's night time - time to protect someone! Choose a player to save from elimination.
+
+        Current living players: Player_1, Player_3, Player_4, Player_2, Player_5
+
+        Think about who to protect:
+        - Who might be targeted by the Mafia tonight?
+        - Is there someone crucial to the good team's success?
+        - Should you protect yourself or someone else?
+
+        Based on the game so far, who would you like to protect? Respond with ONLY the name of one player from the list above.
+        
+
+--- Night decision ---
+Player_3

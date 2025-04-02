@@ -1,0 +1,63 @@
+{
+  "id": "49675dbc-b0bb-4d4e-b6ad-4093e3734331",
+  "phase": "discussion",
+  "round": 1,
+  "events_log": "Game started. Round 1.\nPlayer_6 (Citizen) was killed during the night.\nDawn of Day 1:\nDetective failed to identify the Mafia.\nPlayer_6 was found dead.",
+  "discussion_log": "--- Discussion Round 1 ---\nPlayer_1: Hmm, it's hard to say this early. Losing Player_6 is a big blow. I feel like we need to think carefully and not jump to conclusions. Maybe we should hear if anyone has any information or noticed anything unusual? What do you all think?\nPlayer_2: Player_2: I'll tell you what I think. Someone here is covering their tracks. Player_1, you're awfully calm for someone who just lost a Citizen. Suspicious much? And if the Detective failed last night, maybe someone tampered with the results. Anyone want to come clean?\nPlayer_4: Player_4: *raises an imaginary magnifying glass dramatically* Oh, the plot thickens! Player_2\u2019s jumping to accusations faster than a cat spotting a laser pointer. Suspicious much? But hey, maybe calmness is Player_1\u2019s coping mechanism. Or maybe they're just trying not to spill the beans... unless those beans are poisoned!\nPlayer_5: Player_5: *leans back thoughtfully* Interesting theories flying around. Player_2, you're quick to point fingers, but isn't that classic deflection? And Player_4, your dramatic detective act is amusing, but are you trying to distract us from something? Let's focus\u2014anyone have concrete info or observations from the night?\nPlayer_3: Player_3: *nervously tapping fingers* Wait, wait, wait... why is no one asking the real question? If the Detective failed, could it mean someone here *knew* they would? Like, what if Player_2 is trying to shift suspicion before anyone looks too closely? Or Player_1, staying \"calm\"\u2014is that calm, or calculated? And Player_4, all that drama, is it hiding guilt? Am I the only one seeing all these red flags?\n--- Discussion Round 2 ---\nPlayer_1: *speaking calmly* \n\nAlright, let\u2019s take a step back and not let emotions cloud our judgment. Accusations are flying everywhere, but none have substance yet. I understand why my calm demeanor might seem suspicious, but it\u2019s how I process things\u2014I prefer to analyze before jumping to conclusions. \n\nPlayer_2, you\u2019re very quick to accuse me. Why the rush? And Player_4, while your theatrics are entertaining, they seem to deflect rather than clarify. Let\u2019s focus on facts, not feelings. Did anyone notice anything specific during the night?\nPlayer_2: Alright, everyone, let\u2019s cut the fluff and focus. *slams metaphorical badge on the table* Player_1, you\u2019re awfully level-headed for someone in the hot seat. That calmness feels rehearsed, calculated even. And Player_3, all your finger-tapping and nervous energy\u2014what\u2019s got you rattled? Guilty conscience, maybe?\n\nDetective \u201cfailed,\u201d huh? Convenient. If we don\u2019t start naming names, we\u2019re just spinning in circles. Care to explain your nights, Player_1 and Player_3? Let\u2019s hear it.\nPlayer_4: *leans forward dramatically* \"Whoa, whoa, whoa! Everyone\u2019s slinging accusations like we\u2019re at a dodgeball tournament, and I didn\u2019t even bring my helmet! Player_2, you\u2019re coming in hot\u2014did someone replace your coffee with espresso? And Player_1, you\u2019re so calm I\u2019m worried you might be *sleeping* through all this chaos. Suspiciously zen, if you ask me.\n\nBut hey, I\u2019ll bite\u2014Player_3, you\u2019re tapping like you're writing Morse code. Care to decode it for us? Or is it just guilt trying to drum its way out of you?\" *grins mischievously*\nPlayer_5: *leans back with a measured smirk* \"Alright, let\u2019s not let all this noise distract us. Player_2\u2019s aggression is loud, Player_4\u2019s drama is louder, and Player_3\u2019s nerves are basically a drum solo at this point. But here\u2019s the thing\u2014chaos benefits the Mafia. Who\u2019s stirring the pot the hardest?\n\nPlayer_2, why are you so intent on steering the spotlight? And Player_4, while your theatrics are entertaining, they seem to mask more than reveal. Let\u2019s not forget someone here is deliberately trying to keep us off balance. Keep talking\u2014it\u2019s revealing more than you think.\"\nPlayer_3: *tapping fingers nervously* \"Alright, alright, everyone\u2019s pointing fingers left and right, but don\u2019t you think it\u2019s\u2026 convenient how Player_2 is directing traffic here? Like, why the rush to accuse me? Is it because I\u2019m asking questions? Isn\u2019t that what we\u2019re supposed to do? \n\nAnd Player_1\u2019s calmness\u2014it\u2019s almost *too* calm, don\u2019t you think? Like, who stays that composed when someone just died? Feels like they\u2019re trying to keep us from looking too closely. Am I overthinking it? Or am I onto something?\"",
+  "points": {
+    "good_team": 0,
+    "evil_team": 1
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "860c14c3-6817-4f7e-9885-66e61542392e",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "04546226-8bc3-4e5d-9053-7facd848f8f4",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "018d5ccc-3847-40ce-b804-d133dfa83e08",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e2fad2e2-68ba-4cda-9d63-27e247c9b02f",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "44ebf8c4-a6b9-46c3-965d-157ecdfa6f43",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "43acbe3b-3241-4baa-8f3e-459f2f861e3c",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Citizen",
+      "alive": false,
+      "is_human": false
+    }
+  ]
+}

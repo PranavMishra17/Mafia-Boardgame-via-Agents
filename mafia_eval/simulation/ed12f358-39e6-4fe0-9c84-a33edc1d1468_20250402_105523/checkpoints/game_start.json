@@ -1,0 +1,63 @@
+{
+  "id": "ed12f358-39e6-4fe0-9c84-a33edc1d1468",
+  "phase": "night",
+  "round": 1,
+  "events_log": "Game started. Round 1.",
+  "discussion_log": "",
+  "points": {
+    "good_team": 0,
+    "evil_team": 0
+  },
+  "game_over": false,
+  "winner": null,
+  "players": [
+    {
+      "id": "97fb7a25-14b7-4f6d-a626-421ae1519647",
+      "name": "Player_2",
+      "personality": "Sheriff",
+      "role": "Mafia",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "6cee9b96-8652-4e59-ba35-a74c6681aede",
+      "name": "Player_6",
+      "personality": "Empath",
+      "role": "Bad Guy",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "e05e1990-8cf3-4eb3-ac52-9a352c1a1199",
+      "name": "Player_4",
+      "personality": "Jester",
+      "role": "Detective",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "22bfcb4d-ba26-4f03-a9ac-b38c40a3e339",
+      "name": "Player_5",
+      "personality": "Mastermind",
+      "role": "Doctor",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "dec0354a-9a3e-450a-b9fc-103d9d4597a3",
+      "name": "Player_3",
+      "personality": "Conspirator",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    },
+    {
+      "id": "40acd54a-582c-407d-81e5-c412cc611b3b",
+      "name": "Player_1",
+      "personality": "Diplomat",
+      "role": "Citizen",
+      "alive": true,
+      "is_human": false
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+Player: Player_2
+Role: Mafia
+Personality: Sheriff
+Alive: True
+
+THOUGHTS LOG:
+
